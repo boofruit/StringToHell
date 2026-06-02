@@ -5,7 +5,7 @@ namespace StringToHell.Test.StringTest
 {
     public class MakeStringOnMouseTest : MonoBehaviour
     {
-       StringUnwind unwind;
+       public StringUnwind unwind;
         WebAnchor anchor;
         SpriteRenderer sr;
         Transform tf;
@@ -36,8 +36,8 @@ namespace StringToHell.Test.StringTest
             {
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 var anchorObj = anchor.PlaceAnchor(mousePos);
-                unwind = anchorObj.GetComponent<StringUnwind>();
-                unwind.StartThread(anchorObj.transform, this.gameObject);
+                
+                unwind.StartThread(anchorObj.GetComponent<Rigidbody2D>(), this.gameObject);
             }
             if ( Input.GetMouseButton(0))
             {

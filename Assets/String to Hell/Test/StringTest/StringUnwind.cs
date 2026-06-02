@@ -8,8 +8,8 @@ namespace StringToHell.Test.StringTest
     {
 
 
-        public Transform anchor;                 // Where rope starts
-        public Transform spawnpoint;             // Where rope starts
+        public Rigidbody2D anchor;                 // Where rope starts
+        public Vector2 spawnpoint;             // Where rope starts
         public GameObject segmentPrefab;         // Rope segment prefab
         public LineRenderer line;                // Visual rope
         public float segmentSpacing = 0.25f;     // Distance between segments
@@ -21,33 +21,36 @@ namespace StringToHell.Test.StringTest
         [SerializeField] int maxSegementsLength = 20;
         private float unwindTimer = 0f;
         bool isUnwinding = false;
+        Vector2 lastSpawnPoint;
 
         void Start()
         {
-          
+          anchor = GetComponent<Rigidbody2D>();
         }
-        public  void StartThread(Transform anchorTransform, GameObject spawnObject)
+        public  void StartThread(Rigidbody2D anchor, GameObject spawnObject)
         {
-            anchor = anchorTransform;
-            spawnpoint = spawnObject.transform;
+            this.anchor = anchor;
+            spawnpoint = spawnObject.transform.position;
+            lastSpawnPoint = spawnpoint;
             // Create first segment at anchor
-            GameObject first = Instantiate(segmentPrefab, anchor.position, Quaternion.identity);
-            segments.Add(first.transform);
+            //GameObject first = Instantiate(segmentPrefab, anchor.position, Quaternion.identity);
+            segments.Add(anchor.transform);
 
-            // Connect first segment to anchor
-            first.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
-            lastSegment = first.GetComponent<SpringJoint2D>();
-            lastSegment.distance = segmentSpacing;
-            lastSegment.frequency = frequency;
-            lastSegment.dampingRatio = dampingRatio;
+            //// Connect first segment to anchor
+            //first.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
+            //lastSegment = first.GetComponent<SpringJoint2D>();
+            //lastSegment.distance = segmentSpacing;
+            //lastSegment.frequency = frequency;
+            //lastSegment.dampingRatio = dampingRatio;
             isUnwinding = true;
         }
         public void StopThread()
         {
             isUnwinding = false;
-            var joint = spawnpoint.GetComponent<SpringJoint2D>();
-            joint.connectedBody = lastSegment.GetComponent<Rigidbody2D>();
+            var joint = this.GetComponent<SpringJoint2D>();
+                joint.connectedBody = segments[-1].GetComponent<Rigidbody2D>(); 
             joint.enabled = true;
+           
             //lastSegment.connectedBody = spawnpoint.GetComponent<Rigidbody2D>();
             //lastSegment.transform.position = spawnpoint.transform.position;
         }
@@ -68,18 +71,19 @@ namespace StringToHell.Test.StringTest
         public void AddSegment(Vector2 spawnPoint)
         {
             if (!isUnwinding || segments.Count >= maxSegementsLength) return;
-           
-               
+            if ((spawnPoint - lastSpawnPoint).magnitude < segmentSpacing) return;
+
             Transform last = segments[segments.Count - 1];
 
             Vector2 newPos = last.position - last.up * segmentSpacing;
 
-            GameObject seg = Instantiate(segmentPrefab, newPos, Quaternion.identity);
+            GameObject seg = Instantiate(segmentPrefab, spawnpoint, Quaternion.identity);
             segments.Add(seg.transform);
 
             SpringJoint2D dist = seg.GetComponent<SpringJoint2D>();
-            dist.connectedBody = last.GetComponent<Rigidbody2D>();
-                seg.transform.position = spawnPoint;
+            
+             dist.connectedBody = last.GetComponent<Rigidbody2D>(); 
+               
             lastSegment = dist;
 
 
@@ -97,6 +101,8 @@ namespace StringToHell.Test.StringTest
             dist.distance = segmentSpacing;
             dist.frequency = frequency;     
             dist.dampingRatio = dampingRatio; 
+            lastSpawnPoint = spawnPoint;
+          
         }
 
         void UpdateLineRenderer()
@@ -109,7 +115,7 @@ namespace StringToHell.Test.StringTest
             foreach(var seg in segments)
                 line.SetPosition(index++, seg.position);
 
-            line.SetPosition(index++, spawnpoint.position);
+            line.SetPosition(index++, spawnpoint);
 
             // Optional: tile texture based on rope length
             float totalLength = (line.positionCount - 1) * segmentSpacing;
