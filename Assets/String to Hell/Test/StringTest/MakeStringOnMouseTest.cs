@@ -27,8 +27,10 @@ namespace StringToHell.Test.StringTest
                 var anchorObj = webAnchor.PlaceAnchor(mousePos);
                 unwind = anchorObj.GetComponent<StringUnwind>();
                 unwind.StartThread(anchorObj.GetComponent<Rigidbody2D>(),this.gameObject);
-                lastWebAnchor.ConnectLine(anchorObj.gameObject);
-
+                if (lastWebAnchor != null)
+                {
+                    lastWebAnchor.ConnectLine(anchorObj);
+                }
             }
             if ( Input.GetMouseButton(0))
             {
