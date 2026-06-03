@@ -455,8 +455,7 @@ GameObject:
   - component: {fileID: 2063253768}
   - component: {fileID: 2063253767}
   - component: {fileID: 2063253769}
-  - component: {fileID: 2063253770}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: stringSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62ee84b1c180cf4ea6367332c47c4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.Test.StringTest.MakeStringOnMouseTest
-  unwind: {fileID: 0}
 --- !u!4 &2063253763
 Transform:
   m_ObjectHideFlags: 0
@@ -745,7 +743,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063253759}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
@@ -759,27 +757,6 @@ SpringJoint2D:
   m_Distance: 0.25
   m_DampingRatio: 1
   m_Frequency: 8
---- !u!114 &2063253770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063253759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0082dad78901fec46adeaea9dfdd54b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.Test.StringTest.StringUnwind
-  anchor: {fileID: 0}
-  spawnpoint: {x: 0, y: 0}
-  segmentPrefab: {fileID: 8276223906079929710, guid: c29b3fa61e112d748a4c53411d07df39, type: 3}
-  line: {fileID: 2063253766}
-  segmentSpacing: 0.25
-  unwindSpeed: 2
-  frequency: 8
-  dampingRatio: 0.8
-  maxSegementsLength: 20
 --- !u!1001 &1635471010781351368
 PrefabInstance:
   m_ObjectHideFlags: 0
