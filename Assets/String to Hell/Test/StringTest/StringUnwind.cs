@@ -10,7 +10,7 @@ namespace StringToHell.Test.StringTest
         Rigidbody2D anchor;
         // Where rope starts
         GameObject spawner;
-        Vector2 spawnpoint;             // Where rope starts
+        Vector2 spawnPoint;             // Where rope starts
         [SerializeField] GameObject segmentPrefab;         // Rope segment prefab
         [SerializeField] LineRenderer line;                // Visual rope
         [SerializeField] float segmentSpacing = 0.25f;     // Distance between segments
@@ -40,8 +40,8 @@ namespace StringToHell.Test.StringTest
             BaseJoint.enabled = true;
             BaseJoint.connectedBody = anchor;
             
-            spawnpoint = spawner.transform.position;
-            lastSpawnPoint = spawnpoint;
+            spawnPoint = spawner.transform.position;
+            lastSpawnPoint = spawnPoint;
             segments.Add(anchor.transform);
             isUnwinding = true;
         }
@@ -59,14 +59,15 @@ namespace StringToHell.Test.StringTest
         public void AddSegment(Vector2 spawnPoint)
         {
             if (!isUnwinding || segments.Count >= maxSegementsLength) return;
-            if ((spawnPoint - lastSpawnPoint).magnitude < segmentSpacing * 1.5f) return;
+            if ((spawnPoint - lastSpawnPoint).magnitude < segmentSpacing * 3f) return;
 
             Transform last = segments.LastOrDefault();
 
             Vector2 newPos = last.position - last.up * segmentSpacing;
 
-            GameObject seg = Instantiate(segmentPrefab, spawnpoint, Quaternion.identity);
+            GameObject seg = Instantiate(segmentPrefab, spawnPoint, Quaternion.identity);
             segments.Add(seg.transform);
+            //seg.transform.localPosition = newPos;
 
             SpringJoint2D dist = seg.GetComponent<SpringJoint2D>();
             

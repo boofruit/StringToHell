@@ -20,6 +20,7 @@ namespace StringToHell.InGame
         [SerializeField, Tooltip("")] float pullStrength = 10;
         [SerializeField, Tooltip("")] float snapStrength = 10;
         [SerializeField, Tooltip("")] float rotationSpeed = 2f;
+        [SerializeField, Tooltip("")] float WallSwitchTimer = 1f;
 
         [SerializeField, Tooltip("")] string[] wallTags;
 
@@ -143,7 +144,7 @@ namespace StringToHell.InGame
         }
         IEnumerator WaitForSwitch()
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(WallSwitchTimer);
             switchWalls = true;
         }
         //for every object your in contact with 

@@ -10,6 +10,9 @@ namespace StringToHell.Test.StringTest
         SpriteRenderer sr;
         Transform tf;
         StringUnwind lastWebAnchor;
+        Vector2 placementPos;
+        public bool ON_MOUSE = true;
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -17,14 +20,27 @@ namespace StringToHell.Test.StringTest
             sr = GetComponent<SpriteRenderer>();
             webAnchor = GetComponent<WebAnchor>();
         }
-      
+
+        Vector2 PlacementPos()
+        {
+            if (ON_MOUSE)
+            {
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                return mousePos;
+            }
+            else
+            {
+                return tf.position;
+            }
+        }
         // Update is called once per frame
         void Update()
         {
+           
             if (Input.GetMouseButtonDown(0))
             {
-                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                var anchorObj = webAnchor.PlaceAnchor(mousePos);
+               
+                var anchorObj = webAnchor.PlaceAnchor(PlacementPos());
                 unwind = anchorObj.GetComponent<StringUnwind>();
                 unwind.StartThread(anchorObj.GetComponent<Rigidbody2D>(),this.gameObject);
                 if (lastWebAnchor != null)
@@ -35,9 +51,12 @@ namespace StringToHell.Test.StringTest
             if ( Input.GetMouseButton(0))
             {
 
-                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                tf.position = mousePos;
-                unwind.AddSegment(mousePos);
+               
+               if (ON_MOUSE)
+                {
+                    tf.position = PlacementPos();
+                }
+                unwind.AddSegment(PlacementPos());
                 
             }
 

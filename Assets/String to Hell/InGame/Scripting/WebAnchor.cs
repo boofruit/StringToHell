@@ -10,8 +10,7 @@ namespace StringToHell.Test.StringTest
 
         public GameObject PlaceAnchor(Vector2 position)
         {
-            var createObj = Instantiate(Anchor);
-            createObj.transform.position = position;
+            var createObj = Instantiate(Anchor, position, Quaternion.identity);
             return createObj;
         }
 
