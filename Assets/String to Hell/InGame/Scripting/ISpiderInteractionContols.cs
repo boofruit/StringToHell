@@ -6,8 +6,10 @@ namespace StringToHell.InGame
     {
         bool Clinging { get; }
         Vector2 SurfaceNormal { get; }
+        bool Puff { get; }
+        int JumpsLeft { get; }
+        Vector2 ForceDirection { get; }
 
-        void Dive(float divePower, float windMultiplier);
-        void Jump(Vector2 direction, float jumpPower);
+        void Jumpcalc(int Jmp);
     }
 }

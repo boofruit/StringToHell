@@ -4,7 +4,8 @@ namespace StringToHell.InGame
 {
     public class SpiderMovementController : MonoBehaviour
     {
-        ISpiderInteractionContols SpiderIC;
+        ISpiderInteractionContols spiderPosition;
+        IDirectionAndRotation dRot;
         IMovement movement;
         IMovementInput input;
         IVelocityController velocityController;
@@ -22,7 +23,8 @@ namespace StringToHell.InGame
       
         private void Awake()
         {
-            SpiderIC = GetComponent<ISpiderInteractionContols>();
+            spiderPosition = GetComponent<ISpiderInteractionContols>();
+            dRot = GetComponent<IDirectionAndRotation>();
             movement = GetComponent<IMovement>();
             input = GetComponent<IMovementInput>();
             velocityController = GetComponent<IVelocityController>();
@@ -41,24 +43,27 @@ namespace StringToHell.InGame
            
         private void Update()
         {
-            if (input.IsJump)
+           
+            
+            if (!spiderPosition.Clinging)
             {
-                SpiderIC.Jump(movement.JumpDirection(input.Move), jumpPower);
-            }
-            if (input.IsDiving.y < 0 && !SpiderIC.Clinging)
-            {
-                SpiderIC.Dive(DivePower, windResistanceMultiplier);
-            }
-            if (!SpiderIC.Clinging)
-            {
+                if (input.IsDiving == spiderPosition.ForceDirection && input.IsDiving.magnitude < 9)
+                {
+                    movement.Dive(spiderPosition.ForceDirection, DivePower, windResistanceMultiplier);
+                }
+                dRot.AirRotation();
                 movement.AirMovement(input.Move, airSpeed);
             }
-            if(SpiderIC.Clinging)
+            if(spiderPosition.Clinging)
             {
                 movement.WallMovement(input.Move, moveSpeed);
+                if (input.IsJump)
+                {
+                    movement.Jump(movement.JumpDirection(input.Move), jumpPower);
+                }
             
             }
-            movement.ChangeDirection(input.Move);
+            dRot.ChangeDirection(input.Move);
         }
     }
 }

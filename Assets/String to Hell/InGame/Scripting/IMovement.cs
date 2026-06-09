@@ -7,11 +7,11 @@ namespace StringToHell.InGame
       //  Vector2 SurfaceNormal { get; }
 
         void AirMovement(Vector2 controllerInput, float airSpeed);
-        void ChangeDirection(Vector2 newDirection);
         Vector2 JumpDirection(Vector2 controllerInput);
-        void RotateBody(float rotationSpeed);
-        void RotateInstant(Vector2 normal);
         void WallMovement(Vector2 controllerInput, float moveSpeed);
+
+        void Jump(Vector2 direction, float jumpPower);
+        void Dive(Vector2 diveDirection, float divePower, float windMultiplier);
     }
     public readonly struct MovementParameter
     {

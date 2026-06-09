@@ -8,6 +8,7 @@ namespace StringToHell.InGame
 {
     public class SpiderInteractionContols : MonoBehaviour, ISpiderInteractionContols
     {
+        IDirectionAndRotation dR;
         IMovement mC;
         TagCheck tagC;
 
@@ -28,14 +29,20 @@ namespace StringToHell.InGame
         public Vector2 SurfaceNormal => surfaceNormal;
         bool switchWalls = true;
         bool puff;
-        
+        public bool Puff => puff;
+        Vector2 forceDirection = new Vector2(0, -1);
+        public Vector2 ForceDirection => forceDirection;
         static int MaxJumps = 1;
-        int JumpsLeft = 1;
-        private float g;
+        int jumpsLeft = 1;
+        public int JumpsLeft => jumpsLeft;
+        int currentWalls = 0;
+        private float baseGravityMultiplier;
         private float baseDampening;
+        float gravity;
         Transform tf;
         bool clinging;
         public bool Clinging => clinging;
+        bool grounded;
         
         private void Awake()
         {
@@ -44,35 +51,22 @@ namespace StringToHell.InGame
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            JumpsLeft = MaxJumps;
+            jumpsLeft = MaxJumps;
             Debug.Log("Start?");
             rb = GetComponent<Rigidbody2D>();
             tf = transform;
-            g = rb.gravityScale;
+            baseGravityMultiplier = rb.gravityScale;
+            gravity = baseGravityMultiplier * 9.81f;
             baseDampening = rb.linearDamping;
             mC = GetComponent<IMovement>();
-
-        }
-      
-        public void Jump(Vector2 direction, float jumpPower)
-        {
-            if (Clinging && JumpsLeft > 0)
-            {
-                rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
-                Jumpcalc(-1);
-            }
-        }
-        public void Dive(float divePower, float windMultiplier)
-        {
-            rb.AddForce(new Vector2(0, -divePower * (puff ? windMultiplier : 1)), ForceMode2D.Force);
+            dR = GetComponent<IDirectionAndRotation>();
         }
 
-        void Jumpcalc(int Jmp)
+        public void Jumpcalc(int Jmp)
         {
             Jmp = Mathf.Abs(Jmp);
-            JumpsLeft -= Jmp;
+            jumpsLeft -= Jmp;
         }
-
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -81,6 +75,14 @@ namespace StringToHell.InGame
             {
                 puff = true; 
                 rb.linearVelocity *= WindStop;
+               var wind = entering.GetComponent<AreaEffector2D>();
+
+                if (wind.forceMagnitude > gravity)
+                {
+                    float angle = wind.forceAngle;
+                    float rad = angle * Mathf.Deg2Rad;
+                    forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * -1;
+                }
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
@@ -91,7 +93,8 @@ namespace StringToHell.InGame
                 surfaceNormal = normal;
                 if (switchWalls && !clinging)
                 {
-                    mC.RotateInstant(surfaceNormal);
+                    clinging = true;
+                    dR.RotateInstant(surfaceNormal);
                     switchWalls = false;
                     StartCoroutine(WaitForSwitch());
                     rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse);
@@ -105,7 +108,7 @@ namespace StringToHell.InGame
             if (tagC.CheckTags(wallTags, entering.tag))
             {
                     rb.gravityScale = antiGravity;
-                if (!clinging)
+                if (clinging && !grounded)
                 {
                     rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Force);
                 }
@@ -117,10 +120,11 @@ namespace StringToHell.InGame
             if (entering.CompareTag("Wind"))
             {
                 puff = false;
+                forceDirection = new Vector2(0, -1);
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-                rb.gravityScale = g;
+                rb.gravityScale = baseGravityMultiplier;
                 clinging = false;
             }
 
@@ -131,12 +135,13 @@ namespace StringToHell.InGame
 
             if (tagC.CheckTags(wallTags, touching.tag))
             {
+                currentWalls++;
                 clinging = true;
-                JumpsLeft = MaxJumps;
+                jumpsLeft = MaxJumps;
                 rb.linearVelocity *= WallStop;
                 if(switchWalls)
                 {
-                mC.RotateInstant(collision.GetContact(0).normal);
+                dR.RotateInstant(collision.GetContact(0).normal);
                     switchWalls = false;
                     StartCoroutine(WaitForSwitch());
                 }
@@ -160,12 +165,17 @@ namespace StringToHell.InGame
             Debug.Log("Stay" + surfaceNormal);
 
             var touching = collision.gameObject;
+
             if (tagC.CheckTags(wallTags, touching.tag))
             {
-                clinging = true;
-                mC.RotateBody(rotationSpeed);   
+                grounded = true;
+                if (currentWalls <= 1)
+                {
+                }
+                    dR.RotateBody(rotationSpeed);
+                
                 rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
-                JumpsLeft = MaxJumps;
+                jumpsLeft = MaxJumps;
                 if (puff)
                 {
                     rb.linearDamping = pullStrength;
@@ -179,7 +189,8 @@ namespace StringToHell.InGame
             var touching = collision.gameObject;
             if (tagC.CheckTags(wallTags, touching.tag))
             {
-                clinging = false;
+                currentWalls--;
+                grounded = false;
                 rb.linearDamping = baseDampening;
                 if (!switchWalls)
                 {
