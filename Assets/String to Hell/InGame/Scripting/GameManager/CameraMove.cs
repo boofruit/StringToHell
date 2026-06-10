@@ -27,12 +27,12 @@ namespace StringToHell.InGame.GameManager
                 {
                     if (GeometryUtility.TestPlanesAABB(planes, objectRenderer.bounds))
                     {
-                        Debug.Log(objectToCheck.name + " is in the camera's field of view.");
+                       // Debug.Log(objectToCheck.name + " is in the camera's field of view.");
                     }
                     else
                     {
                         MoveCam();
-                        Debug.Log(objectToCheck.name + " is NOT in the camera's field of view.");
+                        //Debug.Log(objectToCheck.name + " is NOT in the camera's field of view.");
                         await Task.Delay(1000);
                     }
                 }

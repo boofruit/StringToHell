@@ -10,11 +10,11 @@ namespace StringToHell.InGame
             {
                 if (tagToCheck == targetTag)
                 {
-                    Debug.Log("Tag matched: " + tagToCheck);
+                    //Debug.Log("Tag matched: " + tagToCheck);
                     return true;
                 }
             }
-            Debug.Log("Tag not matched: " + tagToCheck);
+            //Debug.Log("Tag not matched: " + tagToCheck);
             return false;
         }
 

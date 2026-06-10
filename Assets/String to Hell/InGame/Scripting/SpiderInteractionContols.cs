@@ -107,7 +107,8 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-                    rb.gravityScale = antiGravity;
+                clinging = true;
+                rb.gravityScale = antiGravity;
                 if (clinging && !grounded)
                 {
                     rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Force);
@@ -135,10 +136,10 @@ namespace StringToHell.InGame
 
             if (tagC.CheckTags(wallTags, touching.tag))
             {
+                grounded = true;
                 currentWalls++;
-                clinging = true;
                 jumpsLeft = MaxJumps;
-                rb.linearVelocity *= WallStop;
+              rb.linearVelocity *= WallStop;
                 if(switchWalls)
                 {
                 dR.RotateInstant(collision.GetContact(0).normal);
@@ -162,7 +163,7 @@ namespace StringToHell.InGame
 
             surfaceNormal = (sum / collision.contactCount).normalized;
            
-            Debug.Log("Stay" + surfaceNormal);
+            //Debug.Log("Stay" + surfaceNormal);
 
             var touching = collision.gameObject;
 

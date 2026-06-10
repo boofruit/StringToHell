@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2849505088840258069}
   - component: {fileID: 5133838340876010287}
   - component: {fileID: 3353789670573281105}
-  - component: {fileID: 6723703685804671795}
+  - component: {fileID: 5906687958643298137}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Ground
@@ -139,7 +139,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!61 &6723703685804671795
+--- !u!61 &5906687958643298137
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,4 +184,4 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.2
+  m_EdgeRadius: 0.5

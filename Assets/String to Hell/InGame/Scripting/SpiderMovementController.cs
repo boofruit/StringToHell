@@ -47,9 +47,13 @@ namespace StringToHell.InGame
             
             if (!spiderPosition.Clinging)
             {
-                if (input.IsDiving == spiderPosition.ForceDirection && input.IsDiving.magnitude < 9)
+                if ( input.IsDiving.magnitude > .9f)
                 {
-                    movement.Dive(spiderPosition.ForceDirection, DivePower, windResistanceMultiplier);
+                    movement.Dive(input.Move, spiderPosition.ForceDirection,  DivePower, windResistanceMultiplier);
+                }
+                if (input.IsDiving.magnitude > .9f)
+                {
+                   // movement.Float(spiderPosition.ForceDirection, DivePower);
                 }
                 dRot.AirRotation();
                 movement.AirMovement(input.Move, airSpeed);
@@ -61,9 +65,9 @@ namespace StringToHell.InGame
                 {
                     movement.Jump(movement.JumpDirection(input.Move), jumpPower);
                 }
+                  dRot.ChangeDirection(input.Move);
             
             }
-            dRot.ChangeDirection(input.Move);
         }
     }
 }
