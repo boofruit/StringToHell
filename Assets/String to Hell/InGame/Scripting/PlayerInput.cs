@@ -10,41 +10,57 @@ namespace StringToHell.InGame
 
         bool jump;
         Vector2 dive;
-        bool triggerOn;
-        bool triggerHold;
-        bool triggerOff;
+        bool spinnerOn;
+        bool spinnerHold;
+        bool spinnerOff;
+        bool cutWeb;
+        bool rewindString;
+        bool grab;
 
         public bool IsJump => jump;
         public Vector2 IsDiving => dive;
-        public bool IsTriggerOn => triggerOn;
-        public bool IsTriggerHold => triggerHold;
-        public bool IsTriggerOff => triggerOff;
+        public bool IsSpinnerOn => spinnerOn;
+        public bool IsSpinnerHold => spinnerHold;
+        public bool IsSpinnerOff => spinnerOff;
+        public bool IsCutWeb => cutWeb;
+        public bool IsRewindString => rewindString; 
+        public bool IsGrab => grab;
       
 
 
 
-        [SerializeField]
-        InputActionProperty moveActionProperty;
+        [SerializeField] InputActionProperty moveActionProperty;
       
-        [SerializeField] InputActionProperty triggerActionProperty;
+        [SerializeField] InputActionProperty webSpawnActionProperty;
 
         [SerializeField] InputActionProperty jumpActionProperty;
 
         [SerializeField] InputActionProperty diveActionProperty;
 
+        [SerializeField] InputActionProperty cutWebActionProperty;
+
+        [SerializeField] InputActionProperty rewindActionProperty;
+
+        [SerializeField] InputActionProperty grabActionProperty;
+
         InputAction moveAction;
         InputAction jumpAction;
-        InputAction triggerAction;
+        InputAction webSpawnAction;
+        InputAction cutWebAction;
+        InputAction rewindStringAction;
+        InputAction grabAction;
         InputAction diveAction;
 
         private void OnEnable()
         {
-            
+            grabAction = grabActionProperty.action;
             moveAction = moveActionProperty.action;
             jumpAction = jumpActionProperty.action;
             diveAction = diveActionProperty.action;
            
-            triggerAction = triggerActionProperty.action;
+            cutWebAction = cutWebActionProperty.action;
+            rewindStringAction = rewindActionProperty.action;
+            webSpawnAction = webSpawnActionProperty.action;
         }
 
        
@@ -53,11 +69,13 @@ namespace StringToHell.InGame
             jump = jumpAction.WasPressedThisFrame();
             move = moveAction.ReadValue<Vector2>();
             dive = diveAction.ReadValue<Vector2>();
+            grab = grabAction.WasPressedThisFrame();
 
-
-            triggerOn = triggerAction.WasPressedThisFrame();
-            triggerHold = triggerAction.IsPressed();
-            triggerOff = triggerAction.WasReleasedThisFrame();
+            spinnerOn = webSpawnAction.WasPressedThisFrame();
+            spinnerHold = webSpawnAction.IsPressed();
+            spinnerOff = webSpawnAction.WasReleasedThisFrame();
+            cutWeb = cutWebAction.IsPressed();
+            rewindString = rewindStringAction.IsPressed();
    
         }
 

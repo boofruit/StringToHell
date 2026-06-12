@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace StringToHell.Test.StringTest
+namespace StringToHell.InGame
 {
-    public class WebAnchor : MonoBehaviour
+    public class Web : MonoBehaviour, IWeb
     {
 
         [SerializeField] GameObject Anchor;

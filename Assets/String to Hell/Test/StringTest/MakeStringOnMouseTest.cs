@@ -1,24 +1,29 @@
 using UnityEngine;
-
+using StringToHell.InGame;
 
 namespace StringToHell.Test.StringTest
 {
     public class MakeStringOnMouseTest : MonoBehaviour
     {
-        StringUnwind unwind;
-        WebAnchor webAnchor;
+        UnwindSilk unwind;
+        Web webAnchor;
         SpriteRenderer sr;
         Transform tf;
-        StringUnwind lastWebAnchor;
+        UnwindSilk lastWebAnchor;
         Vector2 placementPos;
         public bool ON_MOUSE = true;
+
+        [SerializeField] float segmentSpacing = 0.25f;     // Distance between segments
+        [SerializeField] float frequency = 8f;              // Elasticity strength
+        [SerializeField] float dampingRatio = 0.6f;        // Reduces wobble
+        [SerializeField] int maxSegementsLength = 20;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             tf = transform;
             sr = GetComponent<SpriteRenderer>();
-            webAnchor = GetComponent<WebAnchor>();
+            webAnchor = GetComponent<Web>();
         }
 
         Vector2 PlacementPos()
@@ -41,8 +46,8 @@ namespace StringToHell.Test.StringTest
             {
                
                 var anchorObj = webAnchor.PlaceAnchor(PlacementPos());
-                unwind = anchorObj.GetComponent<StringUnwind>();
-                unwind.StartThread(anchorObj.GetComponent<Rigidbody2D>(),this.gameObject);
+                unwind = anchorObj.GetComponent<UnwindSilk>();
+                unwind.StartThread(anchorObj.GetComponent<Rigidbody2D>(),this.gameObject,GetComponent<SpringJoint2D>());
                 if (lastWebAnchor != null)
                 {
                     lastWebAnchor.ConnectLine(anchorObj);
@@ -56,7 +61,7 @@ namespace StringToHell.Test.StringTest
                 {
                     tf.position = PlacementPos();
                 }
-                unwind.AddSegment(PlacementPos());
+                unwind.AddSegment(PlacementPos(), segmentSpacing, maxSegementsLength, frequency, dampingRatio);
                 
             }
 

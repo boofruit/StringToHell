@@ -5,7 +5,7 @@ namespace StringToHell.InGame
     public class SpiderMovementController : MonoBehaviour
     {
         ISpiderInteractionContols spiderPosition;
-        IDirectionAndRotation dRot;
+        IDirectionAndRotation RotationControls;
         IMovement movement;
         IMovementInput input;
         IVelocityController velocityController;
@@ -24,7 +24,7 @@ namespace StringToHell.InGame
         private void Awake()
         {
             spiderPosition = GetComponent<ISpiderInteractionContols>();
-            dRot = GetComponent<IDirectionAndRotation>();
+            RotationControls = GetComponent<IDirectionAndRotation>();
             movement = GetComponent<IMovement>();
             input = GetComponent<IMovementInput>();
             velocityController = GetComponent<IVelocityController>();
@@ -55,7 +55,7 @@ namespace StringToHell.InGame
                 {
                    // movement.Float(spiderPosition.ForceDirection, DivePower);
                 }
-                dRot.AirRotation();
+                RotationControls.AirRotation();
                 movement.AirMovement(input.Move, airSpeed);
             }
             if(spiderPosition.Clinging)
@@ -65,7 +65,7 @@ namespace StringToHell.InGame
                 {
                     movement.Jump(movement.JumpDirection(input.Move), jumpPower);
                 }
-                  dRot.ChangeDirection(input.Move);
+                  RotationControls.ChangeDirection(input.Move);
             
             }
         }
