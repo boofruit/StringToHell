@@ -11,7 +11,7 @@ namespace StringToHell.InGame
         void WallMovement(Vector2 controllerInput, float moveSpeed);
 
         void Jump(Vector2 direction, float jumpPower);
-        void Float(Vector2 diveDirection, float divePower);
+        void Float(Vector2 diveDirection, Vector2 inputDirection, float divePower);
         void Dive(Vector2 diveDirection, Vector2 inputDirection, float divePower, float windMultiplier);
     }
     public readonly struct MovementParameter

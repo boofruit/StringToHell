@@ -14,7 +14,7 @@ namespace StringToHell.InGame
         IMovement movement;
         
         IVelocityController velocityController;
-
+        [SerializeField] float slingForce = 5f;
         [SerializeField] float segmentSpacing = 0.25f;     // Distance between segments
         [SerializeField] float frequency = 8f;              // Elasticity strength
         [SerializeField] float dampingRatio = 0.6f;        // Reduces wobble
@@ -37,8 +37,9 @@ namespace StringToHell.InGame
         {
             
 
-            if (spiderPosition.Clinging)
+            if (spiderPosition.Clinging || spiderPosition.Grounded)
             {
+                
                 if (input.IsSpinnerOn)
                 {
                     var anchorObj = web.PlaceAnchor(tf.position);
@@ -54,7 +55,7 @@ namespace StringToHell.InGame
             {
                 return;
             }
-            silk.UpdateLineRenderer(segmentSpacing);
+            
             if (input.IsSpinnerHold)
             {
                 silk.AddSegment(tf.position, segmentSpacing, maxSegementsLength, frequency, dampingRatio);
@@ -67,10 +68,15 @@ namespace StringToHell.InGame
             if (input.IsCutWeb)
             {
                 silk.CutThread();
+                silk = null;
             }
-            if (!spiderPosition.Clinging)
+            if (input.IsGrab || input.IsJump)
             {
-
+               
+                if (!spiderPosition.Clinging)
+                {
+                    silk.BungieSling(slingForce);
+                }
             }
         }
     }

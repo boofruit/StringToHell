@@ -20,12 +20,16 @@ namespace StringToHell.InGame
         bool lineExtinguished = false;
         public bool LineExtinguished => lineExtinguished;
         Vector2 lastSpawnPoint;
-
+        float spacing;
 
 
         void Start()
         {
             anchor = GetComponent<Rigidbody2D>();
+        }
+        void Update()
+        {
+            UpdateLineRenderer();
         }
         public void StartThread(Rigidbody2D newAnchor, GameObject newSpawner, SpringJoint2D baseJoint)
         {
@@ -47,6 +51,7 @@ namespace StringToHell.InGame
             isUnwinding = false;
         }
 
+
         public void AddSegment(Vector2 spawnPoint, float segmentSpacing, int maxSegementsLength, float frequency, float dampingRatio)
         {
             if (!isUnwinding || segments.Count >= maxSegementsLength) return;
@@ -67,10 +72,19 @@ namespace StringToHell.InGame
             //// Distance joint for elasticity
             dist.autoConfigureDistance = false;
             dist.distance = segmentSpacing;
+            spacing = segmentSpacing;
             dist.frequency = frequency;
             dist.dampingRatio = dampingRatio;
             lastSpawnPoint = spawnPoint;
 
+        }
+
+        public void BungieSling(float slingForce)
+        {
+            var PlayerRB = BaseJoint.GetComponent<Rigidbody2D>();
+            Vector2 slingDirection = (Vector2)(segments.LastOrDefault()?.position - BaseJoint.anchor );
+            slingForce *= slingDirection.magnitude - spacing;
+            PlayerRB.AddForce(slingDirection * slingForce, ForceMode2D.Impulse);
         }
         public void CutThread()
         {
@@ -93,10 +107,9 @@ namespace StringToHell.InGame
                 lastSegment.transform.position = WebJoint.transform.position;
             }
             lineExtinguished = true;
-
         }
 
-        public void UpdateLineRenderer(float segmentSpacing)
+        public void UpdateLineRenderer()
         {
             if (segments == null) return;
             line.positionCount = segments.Count;
@@ -106,7 +119,7 @@ namespace StringToHell.InGame
                 line.SetPosition(index++, seg.position);
             }
             // Optional: tile texture based on rope length
-            float totalLength = (line.positionCount) * segmentSpacing;
+            float totalLength = (line.positionCount) * spacing;
             line.material.mainTextureScale = new Vector2(totalLength, 1);
         }
     }

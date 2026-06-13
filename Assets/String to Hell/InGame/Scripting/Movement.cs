@@ -47,13 +47,13 @@ namespace StringToHell.InGame
         //        rb.velocity *= (1 - windResistanceMultiplier);
         //    }
         //}
-        public void Float(Vector2 diveDirection, float divePower)
+        public void Float(Vector2 diveDirection, Vector2 inputDirection, float divePower)
         {
             
-            if (SpiderPositon.Puff && !floating)
+            if (SpiderPositon.Puff && !floating && IsWithinAngle(diveDirection, inputDirection, 45f))
             {
-               //rb.linearVelocity *= 0f;
-                rb.AddForce(-diveDirection * (divePower/4f), ForceMode2D.Impulse);
+                rb.linearVelocity = inputDirection;
+                rb.AddForce(diveDirection * (divePower), ForceMode2D.Impulse);
                 canDive = true;
                 floating = true;
             }
@@ -61,12 +61,14 @@ namespace StringToHell.InGame
 
         public void Dive(Vector2 diveDirection, Vector2 inputDirection, float divePower, float windMultiplier)
         {
+            if (inputDirection != new Vector2(0, -1)) { inputDirection *= -1; }
             if (canDive && IsWithinAngle(diveDirection,inputDirection, 45f))
             {
                 if (!SpiderPositon.Puff)
                 {
                 rb.linearVelocity *= 0f;
                 }
+                
                 rb.AddForce(diveDirection * divePower * (SpiderPositon.Puff ? windMultiplier : 1), ForceMode2D.Impulse);
                 canDive = false;
                 floating = false;

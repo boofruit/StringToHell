@@ -43,6 +43,7 @@ namespace StringToHell.InGame
         bool clinging;
         public bool Clinging => clinging;
         bool grounded;
+        public bool Grounded => grounded;
         
         private void Awake()
         {
@@ -68,6 +69,15 @@ namespace StringToHell.InGame
             jumpsLeft -= Jmp;
         }
 
+        public void ClingSwitch()
+        {
+            if (grounded || clinging == true)
+            {
+                clinging = !clinging;
+                
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             var entering = collision.gameObject;
@@ -81,7 +91,7 @@ namespace StringToHell.InGame
                 {
                     float angle = wind.forceAngle;
                     float rad = angle * Mathf.Deg2Rad;
-                    forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * -1;
+                    forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) ;
                 }
             }
             if (tagC.CheckTags(wallTags, entering.tag))
@@ -107,12 +117,16 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-                clinging = true;
-                rb.gravityScale = antiGravity;
-                if (clinging && !grounded)
+                if (clinging)
                 {
-                    rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Force);
+                    rb.gravityScale = antiGravity;
+                    if (!grounded)
+                    {
+                        rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Force);
+                    }
                 }
+                else { rb.gravityScale = baseGravityMultiplier; }
+                
             }
         }
         private void OnTriggerExit2D(Collider2D collision)

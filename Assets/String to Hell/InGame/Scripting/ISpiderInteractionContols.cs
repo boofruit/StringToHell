@@ -9,7 +9,9 @@ namespace StringToHell.InGame
         bool Puff { get; }
         int JumpsLeft { get; }
         Vector2 ForceDirection { get; }
+        bool Grounded { get; }
 
+        void ClingSwitch();
         void Jumpcalc(int Jmp);
     }
 }

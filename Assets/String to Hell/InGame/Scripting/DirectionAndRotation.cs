@@ -120,9 +120,11 @@ namespace StringToHell.InGame
             currentInputDirection = InputDirection(newDirection);
             if (newDirection != Vector2.zero)
             {
-                if (!SpiderPositon.Clinging)
-                { return; }
+                if (SpiderPositon.Clinging|| SpiderPositon.Grounded)
+                { 
                 sr.localScale = new Vector2((currentInputDirection == Direction.Left) ? -1 : 1, 1);
+
+                }
             }
         }
     }

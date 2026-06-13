@@ -15,6 +15,7 @@ namespace StringToHell.InGame
         [SerializeField, Tooltip("")] public float maxSpeed = 6f;
         [SerializeField, Tooltip("")] float jumpPower = 1;
         [SerializeField, Tooltip("")] private float DivePower = 1f;
+        [SerializeField, Tooltip("")] private float FloatPower = .5f;
         [SerializeField, Range(.0001f, 1f), Tooltip("")] float windResistanceMultiplier = .2f;
 
         float moveSpeedChangeRate = 4f;
@@ -53,17 +54,25 @@ namespace StringToHell.InGame
                 }
                 if (input.IsDiving.magnitude > .9f)
                 {
-                   // movement.Float(spiderPosition.ForceDirection, DivePower);
+                    movement.Float(input.Move, spiderPosition.ForceDirection, FloatPower);
                 }
+                if(!spiderPosition.Grounded)
+                {
                 RotationControls.AirRotation();
                 movement.AirMovement(input.Move, airSpeed);
+                }
             }
-            if(spiderPosition.Clinging)
+            if(spiderPosition.Grounded|| spiderPosition.Clinging)
             {
                 movement.WallMovement(input.Move, moveSpeed);
+                if (input.IsGrab)
+                {
+                    spiderPosition.ClingSwitch();
+                }
                 if (input.IsJump)
                 {
                     movement.Jump(movement.JumpDirection(input.Move), jumpPower);
+                    spiderPosition.ClingSwitch();
                 }
                   RotationControls.ChangeDirection(input.Move);
             
