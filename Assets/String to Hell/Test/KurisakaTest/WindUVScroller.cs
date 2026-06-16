@@ -3,6 +3,7 @@ using static UnityEngine.InputManagerEntry;
 
 public class WindUVScroller : MonoBehaviour
 {
+    [Header("AreaEffector2DのforceMagnitudeに対する比率")]
     [SerializeField, Range(0.001f, 0.04f)] private float windPowerRate = 0.01f;
     [SerializeField] private QuadWind[] winds;
 
@@ -44,9 +45,12 @@ public class WindUVScroller : MonoBehaviour
 [System.Serializable]
 public class QuadWind
 {
+    [Header("項目名(動作には影響なし)")]
     public string elementName;
+    [Header("Quadオブジェクトをセット")]
     public MeshRenderer quad;
     public Material Mat{ get; set; }
+    [Header("Wind Powerに対する比率")]
     public float moveRate = 0.5f;
     [Header("α値をゼロにしないよう注意")]
     public Color color = Color.gray3;
