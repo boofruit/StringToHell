@@ -47,7 +47,7 @@ namespace StringToHell.InGame
         public void StopThread()
         {
             if(segments ==  null) return;
-            segments.Add(BaseJoint.transform);
+            segments.Add(spawner.transform);
             isUnwinding = false;
         }
 
@@ -79,17 +79,44 @@ namespace StringToHell.InGame
 
         }
 
+        //public void BungieSling(float slingForce)
+        //{
+        //    var PlayerRB = BaseJoint.GetComponent<Rigidbody2D>();
+        //    Vector2 slingDirection = (Vector2)(BaseJoint.anchor - BaseJoint.connectedBody.position  );
+        //    slingForce *= slingDirection.magnitude - spacing;
+        //    PlayerRB.AddForce(slingDirection * slingForce, ForceMode2D.Impulse);
+        //}
         public void BungieSling(float slingForce)
         {
-            var PlayerRB = BaseJoint.GetComponent<Rigidbody2D>();
-            Vector2 slingDirection = (Vector2)(segments.LastOrDefault()?.position - BaseJoint.anchor );
-            slingForce *= slingDirection.magnitude - spacing;
-            PlayerRB.AddForce(slingDirection * slingForce, ForceMode2D.Impulse);
+            if (isUnwinding || lineExtinguished) return;
+            Rigidbody2D rb = BaseJoint.GetComponent<Rigidbody2D>();
+            int SegementsPower = segments.Count -1;
+            // Convert anchor to world space
+            Vector2 worldAnchor = BaseJoint.transform.TransformPoint(BaseJoint.anchor);
+
+            // Direction from player to anchor
+            Vector2 direction = worldAnchor - anchor.position;
+
+            float distance = direction.magnitude;
+
+            // Normalize direction so it only represents direction, not magnitude
+            Vector2 normalizedDirection = direction.normalized *-1;
+
+            // How far past the rest length (spacing) the spring is stretched
+            float stretch = (distance / SegementsPower) - spacing ;
+
+            if (stretch <= 0f)
+                return; // No tension, no force
+
+            // Scale force by stretch amount
+            float finalForce = slingForce * stretch;
+
+            rb.AddForce(normalizedDirection * finalForce, ForceMode2D.Impulse);
         }
         public void CutThread()
         {
             if (segments == null) return;
-            segments.Remove(BaseJoint.transform);
+            segments.Remove(spawner.transform);
             BaseJoint.connectedBody = null;
             BaseJoint.enabled = false;
             lineExtinguished = true;

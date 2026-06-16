@@ -19,11 +19,15 @@ namespace StringToHell.InGame
         [SerializeField] float frequency = 8f;              // Elasticity strength
         [SerializeField] float dampingRatio = 0.6f;        // Reduces wobble
         [SerializeField] int maxSegementsLength = 20;
-
+        SpringJoint2D BaseSpring;
         Transform tf;
 
         private void Awake()
         {
+            BaseSpring = GetComponentInParent<SpringJoint2D>();
+            BaseSpring.distance = segmentSpacing;
+            BaseSpring.frequency = frequency;
+            BaseSpring.dampingRatio = dampingRatio;
             web = GetComponent<IWeb>();
             tf = GetComponentInParent<Transform>();
             spiderPosition = GetComponentInParent<ISpiderInteractionContols>();
@@ -44,7 +48,7 @@ namespace StringToHell.InGame
                 {
                     var anchorObj = web.PlaceAnchor(tf.position);
                     silk = anchorObj.GetComponent<IUnwindSilk>();
-                    silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), this.gameObject, GetComponentInParent<SpringJoint2D>());
+                    silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), this.gameObject, BaseSpring) ;
                     if (lastWeb != null)
                     {
                         lastWeb.ConnectLine(anchorObj);
@@ -70,12 +74,11 @@ namespace StringToHell.InGame
                 silk.CutThread();
                 silk = null;
             }
-            if (input.IsGrab || input.IsJump)
+            if (spiderPosition.Clinging)
             {
-               
-                if (!spiderPosition.Clinging)
+                if (input.IsGrab || input.IsJump)
                 {
-                    silk.BungieSling(slingForce);
+                  silk.BungieSling(slingForce);
                 }
             }
         }

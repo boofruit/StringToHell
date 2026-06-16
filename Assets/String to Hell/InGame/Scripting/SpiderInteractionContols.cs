@@ -96,19 +96,20 @@ namespace StringToHell.InGame
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
+                currentWalls++;
                 Vector3 closest = collision.ClosestPoint(transform.position);
 
                 // Compute the "normal" from that point to your object
                 Vector3 normal = (transform.position - closest).normalized;
                 surfaceNormal = normal;
-                if (switchWalls && !clinging)
+                if (switchWalls || !clinging)
                 {
-                    clinging = true;
                     dR.RotateInstant(surfaceNormal);
                     switchWalls = false;
                     StartCoroutine(WaitForSwitch());
                     rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse);
                 }
+                clinging = true;
             }
            
         }
@@ -138,9 +139,14 @@ namespace StringToHell.InGame
                 forceDirection = new Vector2(0, -1);
             }
             if (tagC.CheckTags(wallTags, entering.tag))
-            {
+            {  
+                if (currentWalls <= 1 && !grounded)
+                {
+                   
+                    clinging = false;
+                }
                 rb.gravityScale = baseGravityMultiplier;
-                clinging = false;
+                currentWalls--;
             }
 
         }
@@ -151,7 +157,6 @@ namespace StringToHell.InGame
             if (tagC.CheckTags(wallTags, touching.tag))
             {
                 grounded = true;
-                currentWalls++;
                 jumpsLeft = MaxJumps;
               rb.linearVelocity *= WallStop;
                 if(switchWalls)
@@ -187,13 +192,16 @@ namespace StringToHell.InGame
                 if (currentWalls <= 1)
                 {
                 }
-                    dR.RotateBody(rotationSpeed);
-                
-                rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
+                dR.RotateBody(rotationSpeed);
                 jumpsLeft = MaxJumps;
-                if (puff)
+                if (clinging)
                 {
-                    rb.linearDamping = pullStrength;
+                    rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
+                    if (puff)
+                    {
+                        rb.linearDamping = pullStrength;
+                    }
+
                 }
             }
         }
@@ -204,7 +212,7 @@ namespace StringToHell.InGame
             var touching = collision.gameObject;
             if (tagC.CheckTags(wallTags, touching.tag))
             {
-                currentWalls--;
+               
                 grounded = false;
                 rb.linearDamping = baseDampening;
                 if (!switchWalls)
