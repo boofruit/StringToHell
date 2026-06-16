@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.InputManagerEntry;
 
 public class WindUVScroller : MonoBehaviour
 {
@@ -20,7 +19,7 @@ public class WindUVScroller : MonoBehaviour
         for (int i = 0; i < winds.Length; i++)
         {
             winds[i].Mat = winds[i].quad.material;
-            winds[i].color = winds[i].color;
+            winds[i].Mat.color = winds[i].color;
         }
     }
 
