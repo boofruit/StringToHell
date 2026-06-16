@@ -5,6 +5,7 @@ namespace StringToHell.InGame
     public class SpiderMovementController : MonoBehaviour
     {
         ISpiderInteractionContols spiderPosition;
+        IUnwindSilk silk;
         IDirectionAndRotation RotationControls;
         IMovement movement;
         IMovementInput input;
@@ -18,12 +19,15 @@ namespace StringToHell.InGame
         [SerializeField, Tooltip("")] private float FloatPower = .5f;
         [SerializeField, Range(.0001f, 1f), Tooltip("")] float windResistanceMultiplier = .2f;
 
+        [SerializeField, Tooltip("")] float slingForce = 5f;
+
         float moveSpeedChangeRate = 4f;
 
         MovementParameter movementParameter;
       
         private void Awake()
         {
+            silk = GetComponentInChildren<IUnwindSilk>();
             spiderPosition = GetComponent<ISpiderInteractionContols>();
             RotationControls = GetComponent<IDirectionAndRotation>();
             movement = GetComponent<IMovement>();
@@ -65,14 +69,14 @@ namespace StringToHell.InGame
             if(spiderPosition.Grounded|| spiderPosition.Clinging)
             {
                 movement.WallMovement(input.Move, moveSpeed);
-                if (input.IsGrab)
+                if (input.IsGrab || input.IsJump)
                 {
                     spiderPosition.ClingSwitch();
+                    silk.BungieSling(slingForce);
                 }
                 if (input.IsJump)
                 {
                     movement.Jump(movement.JumpDirection(input.Move), jumpPower);
-                    spiderPosition.ClingSwitch();
                 }
                   RotationControls.ChangeDirection(input.Move);
             

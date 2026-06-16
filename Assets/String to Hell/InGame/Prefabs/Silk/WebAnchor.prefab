@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6018072483903055622}
   - component: {fileID: -3486305023177529710}
   - component: {fileID: 8312371378589168418}
-  - component: {fileID: 4943637510209561455}
   - component: {fileID: -8140927655504694803}
+  - component: {fileID: 4906890699695733196}
   m_Layer: 7
-  m_Name: StringSpawnAndAnchor
+  m_Name: WebAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232,20 +232,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &4943637510209561455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326297103096884235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3b11d34a94e23544a0e8cc3d5796da6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.Test.StringTest.StringUnwind
-  segmentPrefab: {fileID: 8276223906079929710, guid: c29b3fa61e112d748a4c53411d07df39, type: 3}
-  line: {fileID: 8312371378589168418}
 --- !u!233 &-8140927655504694803
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -272,3 +258,19 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &4906890699695733196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326297103096884235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b74613eae421a4aa8d96d9f939b374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.StringManager
+  line: {fileID: 8312371378589168418}
+  Segments: []
+  textureTilingMultiplier: 1
+  spacing: 0

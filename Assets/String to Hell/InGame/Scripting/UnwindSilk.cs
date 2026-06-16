@@ -5,7 +5,7 @@ namespace StringToHell.InGame
 {
     public class UnwindSilk : MonoBehaviour, IUnwindSilk
     {
-
+        Transform tf;
         Rigidbody2D anchor;
         // Where rope starts
         GameObject spawner;
@@ -16,25 +16,34 @@ namespace StringToHell.InGame
         private List<Transform> segments = new List<Transform>();
         SpringJoint2D BaseJoint;
 
+        StringManager stringManager;
         bool isUnwinding = false;
         bool lineExtinguished = false;
         public bool LineExtinguished => lineExtinguished;
         Vector2 lastSpawnPoint;
-        float spacing;
+        float segmentSpacing;
 
 
         void Start()
         {
-            anchor = GetComponent<Rigidbody2D>();
+            tf = transform;
+            BaseJoint = GetComponentInParent<SpringJoint2D>();
         }
-        void Update()
+        
+        void Extinguish()
         {
-            UpdateLineRenderer();
+            lineExtinguished = true;
+            segments.Clear();
         }
-        public void StartThread(Rigidbody2D newAnchor, GameObject newSpawner, SpringJoint2D baseJoint)
+
+        public void StartThread(Rigidbody2D newAnchor, SpringJoint2D baseJoint, float spacing)
         {
+            segmentSpacing = spacing;
+            lineExtinguished = false;
             anchor = newAnchor;
-            spawner = newSpawner;
+            stringManager = anchor.GetComponent<StringManager>();
+            stringManager.spacing = spacing;
+            spawner = this.gameObject;
             BaseJoint = baseJoint;
             BaseJoint.enabled = true;
             BaseJoint.connectedBody = anchor;
@@ -42,27 +51,32 @@ namespace StringToHell.InGame
             spawnPoint = spawner.transform.position;
             lastSpawnPoint = spawnPoint;
             segments.Add(anchor.transform);
+            stringManager.Segments.Add(anchor.transform);
             isUnwinding = true;
         }
         public void StopThread()
         {
             if(segments ==  null) return;
             segments.Add(spawner.transform);
+            stringManager.Segments.Add(spawner.transform);
             isUnwinding = false;
         }
 
 
-        public void AddSegment(Vector2 spawnPoint, float segmentSpacing, int maxSegementsLength, float frequency, float dampingRatio)
+        public void AddSegment( int maxSegementsLength, float frequency, float dampingRatio)
         {
             if (!isUnwinding || segments.Count >= maxSegementsLength) return;
+            spawnPoint = tf.position;
             if ((spawnPoint - lastSpawnPoint).magnitude < segmentSpacing * 3f) return;
-
+           
             Transform last = segments.LastOrDefault();
 
             Vector2 newPos = last.position - last.up * segmentSpacing;
 
             GameObject seg = Instantiate(segmentPrefab, spawnPoint, Quaternion.identity);
             segments.Add(seg.transform);
+            stringManager.Segments.Add(seg.transform);
+            seg.transform.SetParent(anchor.transform, true);
             //seg.transform.localPosition = newPos;
 
             SpringJoint2D dist = seg.GetComponent<SpringJoint2D>();
@@ -72,7 +86,6 @@ namespace StringToHell.InGame
             //// Distance joint for elasticity
             dist.autoConfigureDistance = false;
             dist.distance = segmentSpacing;
-            spacing = segmentSpacing;
             dist.frequency = frequency;
             dist.dampingRatio = dampingRatio;
             lastSpawnPoint = spawnPoint;
@@ -103,7 +116,7 @@ namespace StringToHell.InGame
             Vector2 normalizedDirection = direction.normalized *-1;
 
             // How far past the rest length (spacing) the spring is stretched
-            float stretch = (distance / SegementsPower) - spacing ;
+            float stretch = (distance / SegementsPower) - segmentSpacing ;
 
             if (stretch <= 0f)
                 return; // No tension, no force
@@ -117,14 +130,16 @@ namespace StringToHell.InGame
         {
             if (segments == null) return;
             segments.Remove(spawner.transform);
+            stringManager.Segments.Remove(spawner.transform);
             BaseJoint.connectedBody = null;
             BaseJoint.enabled = false;
-            lineExtinguished = true;
+            Extinguish();
         }
         public void ConnectLine(GameObject WebJoint)
         {
             if (lineExtinguished) return;
-            segments.Remove(BaseJoint.transform);
+            segments.Remove(spawner.transform);
+            stringManager.Segments.Remove(spawner.transform);
             var lastSegment = segments.LastOrDefault()?.GetComponent<Rigidbody2D>();
             if (lastSegment != null)
             {
@@ -133,7 +148,7 @@ namespace StringToHell.InGame
                 hingeJoint.connectedBody = lastSegment;
                 lastSegment.transform.position = WebJoint.transform.position;
             }
-            lineExtinguished = true;
+            Extinguish();
         }
 
         public void UpdateLineRenderer()
@@ -146,7 +161,7 @@ namespace StringToHell.InGame
                 line.SetPosition(index++, seg.position);
             }
             // Optional: tile texture based on rope length
-            float totalLength = (line.positionCount) * spacing;
+            float totalLength = (line.positionCount) * segmentSpacing;
             line.material.mainTextureScale = new Vector2(totalLength, 1);
         }
     }

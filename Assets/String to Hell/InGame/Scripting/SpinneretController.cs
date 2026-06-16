@@ -14,7 +14,7 @@ namespace StringToHell.InGame
         IMovement movement;
         
         IVelocityController velocityController;
-        [SerializeField] float slingForce = 5f;
+        
         [SerializeField] float segmentSpacing = 0.25f;     // Distance between segments
         [SerializeField] float frequency = 8f;              // Elasticity strength
         [SerializeField] float dampingRatio = 0.6f;        // Reduces wobble
@@ -28,6 +28,7 @@ namespace StringToHell.InGame
             BaseSpring.distance = segmentSpacing;
             BaseSpring.frequency = frequency;
             BaseSpring.dampingRatio = dampingRatio;
+            silk = GetComponent<IUnwindSilk>();
             web = GetComponent<IWeb>();
             tf = GetComponentInParent<Transform>();
             spiderPosition = GetComponentInParent<ISpiderInteractionContols>();
@@ -47,8 +48,7 @@ namespace StringToHell.InGame
                 if (input.IsSpinnerOn)
                 {
                     var anchorObj = web.PlaceAnchor(tf.position);
-                    silk = anchorObj.GetComponent<IUnwindSilk>();
-                    silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), this.gameObject, BaseSpring) ;
+                    silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), BaseSpring, segmentSpacing) ;
                     if (lastWeb != null)
                     {
                         lastWeb.ConnectLine(anchorObj);
@@ -62,7 +62,7 @@ namespace StringToHell.InGame
             
             if (input.IsSpinnerHold)
             {
-                silk.AddSegment(tf.position, segmentSpacing, maxSegementsLength, frequency, dampingRatio);
+                silk.AddSegment(maxSegementsLength, frequency, dampingRatio);
             }
             if (input.IsSpinnerOff)
             {
@@ -78,7 +78,7 @@ namespace StringToHell.InGame
             {
                 if (input.IsGrab || input.IsJump)
                 {
-                  silk.BungieSling(slingForce);
+                 // silk.BungieSling(slingForce);
                 }
             }
         }
