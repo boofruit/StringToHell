@@ -188,6 +188,8 @@ MonoBehaviour:
     quad: {fileID: 8897990070598506036}
     moveRate: 0.25
     color: {r: 0.34901962, g: 0.5686275, b: 0.49803925, a: 1}
+  amplitude: 0.001
+  amplitudeSpeed: 1
 --- !u!82 &1676934808633366838
 AudioSource:
   m_ObjectHideFlags: 0

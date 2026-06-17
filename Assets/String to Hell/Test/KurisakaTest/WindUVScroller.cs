@@ -35,7 +35,7 @@ public class WindUVScroller : MonoBehaviour
     {
         passingTime += Time.deltaTime;
         var move = windDir * windPower * Time.deltaTime;
-        move.y = Mathf.Sin(passingTime * amplitudeSpeed + difference) * 0.001f;
+        move.y = Mathf.Sin(passingTime * amplitudeSpeed + difference) * amplitude;
         //Debug.Log("windDir" + windDir);
         for (int i = 0; i < winds.Length; i++)
         {
