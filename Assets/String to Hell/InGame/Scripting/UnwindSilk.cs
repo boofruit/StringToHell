@@ -18,8 +18,8 @@ namespace StringToHell.InGame
 
         StringManager stringManager;
         bool isUnwinding = false;
-        bool lineExtinguished = false;
-        public bool LineExtinguished => lineExtinguished;
+        bool lineConnnected = false;
+        public bool LineConnected => lineConnnected;
         Vector2 lastSpawnPoint;
         float segmentSpacing;
 
@@ -32,20 +32,24 @@ namespace StringToHell.InGame
         
         void Extinguish()
         {
-            lineExtinguished = true;
+            lineConnnected = false;
+            segments.Remove(spawner.transform);
+            stringManager.Segments.Remove(spawner.transform);
+            BaseJoint.connectedBody = null;
+            BaseJoint.enabled = false;
             segments.Clear();
         }
 
         public void StartThread(Rigidbody2D newAnchor, SpringJoint2D baseJoint, float spacing)
         {
             segmentSpacing = spacing;
-            lineExtinguished = false;
+            lineConnnected = true;
             anchor = newAnchor;
             stringManager = anchor.GetComponent<StringManager>();
             stringManager.spacing = spacing;
             spawner = this.gameObject;
             BaseJoint = baseJoint;
-            BaseJoint.enabled = true;
+            //BaseJoint.enabled = true;
             BaseJoint.connectedBody = anchor;
 
             spawnPoint = spawner.transform.position;
@@ -56,18 +60,19 @@ namespace StringToHell.InGame
         }
         public void StopThread()
         {
-            if(segments ==  null) return;
+            if(segments.Count == 0) return;
             segments.Add(spawner.transform);
             stringManager.Segments.Add(spawner.transform);
+            BaseJoint.enabled = true;
             isUnwinding = false;
         }
 
 
-        public void AddSegment( int maxSegementsLength, float frequency, float dampingRatio)
+        public void AddSegment( int maxSegementsLength, float frequency, float dampingRatio, float spacingMultiplier)
         {
-            if (!isUnwinding || segments.Count >= maxSegementsLength || segments == null) return;
+            if (!isUnwinding || segments.Count >= maxSegementsLength || segments.Count == 0) return;
             spawnPoint = tf.position;
-            if ((spawnPoint - lastSpawnPoint).magnitude < segmentSpacing * 3f) return;
+            if ((spawnPoint - lastSpawnPoint).magnitude < segmentSpacing * spacingMultiplier) return;
            
             Transform last = segments.LastOrDefault();
 
@@ -83,6 +88,7 @@ namespace StringToHell.InGame
 
             dist.connectedBody = last.GetComponent<Rigidbody2D>();
             BaseJoint.connectedBody = segments.LastOrDefault()?.GetComponent<Rigidbody2D>();
+            BaseJoint.enabled = true;
             //// Distance joint for elasticity
             dist.autoConfigureDistance = false;
             dist.distance = segmentSpacing;
@@ -101,8 +107,8 @@ namespace StringToHell.InGame
         //}
         public void BungieSling(float slingForce)
         {
-            if ( segments == null || anchor == null) return;
-            if (isUnwinding || lineExtinguished) return;
+            if (segments.Count == 0 || anchor == null) return;
+            if (isUnwinding || !lineConnnected) return;
             Rigidbody2D rb = BaseJoint.GetComponent<Rigidbody2D>();
             int SegementsPower = segments.Count -1;
             // Convert anchor to world space
@@ -124,23 +130,19 @@ namespace StringToHell.InGame
 
             // Scale force by stretch amount
             float finalForce = slingForce * stretch;
-
+            rb.linearDamping = 1;
+            //rb.linearVelocity *= 0f;
             rb.AddForce(normalizedDirection * finalForce, ForceMode2D.Impulse);
         }
         public void CutThread()
         {
-            if (segments == null) return;
-            segments.Remove(spawner.transform);
-            stringManager.Segments.Remove(spawner.transform);
-            BaseJoint.connectedBody = null;
-            BaseJoint.enabled = false;
+            if (segments.Count == 0) return;
             Extinguish();
         }
         public void ConnectLine(GameObject WebJoint)
         {
-            if (lineExtinguished || segments == null) return;
-            segments.Remove(spawner.transform);
-            stringManager.Segments.Remove(spawner.transform);
+            if (!lineConnnected || segments.Count == 0) return;
+            
             var lastSegment = segments.LastOrDefault()?.GetComponent<Rigidbody2D>();
             if (lastSegment != null)
             {
@@ -154,7 +156,7 @@ namespace StringToHell.InGame
 
         public void UpdateLineRenderer()
         {
-            if (segments == null) return;
+            if (segments.Count == 0) return;
             line.positionCount = segments.Count;
             int index = 0;
             foreach (var seg in segments)

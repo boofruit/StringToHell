@@ -4,7 +4,7 @@ namespace StringToHell.InGame
 {
     public interface ISpiderInteractionContols
     {
-        bool Clinging { get; }
+        bool Clinging { get; set; }
         Vector2 SurfaceNormal { get; }
         bool Puff { get; }
         int JumpsLeft { get; }

@@ -19,6 +19,7 @@ namespace StringToHell.InGame
         [SerializeField] float frequency = 8f;              // Elasticity strength
         [SerializeField] float dampingRatio = 0.6f;        // Reduces wobble
         [SerializeField] int maxSegementsLength = 20;
+        [SerializeField] float spacingMultiplier = 1.5f;
         SpringJoint2D BaseSpring;
         Transform tf;
 
@@ -48,26 +49,26 @@ namespace StringToHell.InGame
                 if (input.IsSpinnerOn)
                 {
                     var anchorObj = web.PlaceAnchor(tf.position);
+                    silk.ConnectLine(anchorObj);
                     silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), BaseSpring, segmentSpacing) ;
-                    if (lastWeb != null)
-                    {
-                        lastWeb.ConnectLine(anchorObj);
-                    }
+                   
+                   
+                    web.LastString = anchorObj;
+                    
                 }
             }
-            if (silk== null)
-            {
-                return;
-            }
+            //if (silk== null)
+            //{
+            //    return;
+            //}
             
             if (input.IsSpinnerHold)
             {
-                silk.AddSegment(maxSegementsLength, frequency, dampingRatio);
+                silk.AddSegment(maxSegementsLength, frequency, dampingRatio, spacingMultiplier);
             }
             if (input.IsSpinnerOff)
             {
                 silk.StopThread();
-                lastWeb = silk;
             }
             if (input.IsCutWeb)
             {

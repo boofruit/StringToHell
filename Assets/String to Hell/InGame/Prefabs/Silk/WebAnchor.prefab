@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8312371378589168418}
   - component: {fileID: -8140927655504694803}
   - component: {fileID: 4906890699695733196}
+  - component: {fileID: 2339845951737357125}
   m_Layer: 7
   m_Name: WebAnchor
   m_TagString: Untagged
@@ -274,3 +275,17 @@ MonoBehaviour:
   Segments: []
   textureTilingMultiplier: 1
   spacing: 0
+--- !u!114 &2339845951737357125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326297103096884235}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b11d34a94e23544a0e8cc3d5796da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.UnwindSilk
+  segmentPrefab: {fileID: 8276223906079929710, guid: c29b3fa61e112d748a4c53411d07df39, type: 3}
+  line: {fileID: 0}

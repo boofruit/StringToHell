@@ -8,7 +8,7 @@ namespace StringToHell.InGame
 
         void AirMovement(Vector2 controllerInput, float airSpeed);
         Vector2 JumpDirection(Vector2 controllerInput);
-        void WallMovement(Vector2 controllerInput, float moveSpeed);
+        void WallMovement(Vector2 controllerInput, float moveSpeed, float pullStrength);
 
         void Jump(Vector2 direction, float jumpPower);
         void Float(Vector2 diveDirection, Vector2 inputDirection, float divePower);

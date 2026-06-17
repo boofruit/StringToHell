@@ -27,8 +27,9 @@ namespace StringToHell.InGame
                 floating = false;
             }
         }
-        public void WallMovement(Vector2 controllerInput, float moveSpeed)
+        public void WallMovement(Vector2 controllerInput, float moveSpeed, float pullStrength)
         {
+            moveSpeed += pullStrength;
             // Project input onto the surface plane
             Vector2 move = controllerInput - Vector2.Dot(controllerInput, SpiderPositon.SurfaceNormal) * SpiderPositon.SurfaceNormal;
             tf.Translate(move * moveSpeed * Time.deltaTime, moveMode);

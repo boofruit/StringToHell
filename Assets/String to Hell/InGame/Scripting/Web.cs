@@ -8,6 +8,9 @@ namespace StringToHell.InGame
         [SerializeField] GameObject Anchor;
         [SerializeField, Tooltip("")] float threadLength = 10;
 
+       
+        public GameObject LastString { get; set; }
+
         public GameObject PlaceAnchor(Vector2 position)
         {
             var createObj = Instantiate(Anchor, position, Quaternion.identity);

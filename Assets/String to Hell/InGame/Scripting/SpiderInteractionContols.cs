@@ -9,6 +9,7 @@ namespace StringToHell.InGame
     public class SpiderInteractionContols : MonoBehaviour, ISpiderInteractionContols
     {
         IDirectionAndRotation dR;
+        IUnwindSilk silk;
         IMovement mC;
         TagCheck tagC;
 
@@ -40,8 +41,8 @@ namespace StringToHell.InGame
         private float baseDampening;
         float gravity;
         Transform tf;
-        bool clinging;
-        public bool Clinging => clinging;
+       public bool Clinging { get; set; }
+       // public bool Clinging => clinging;
         bool grounded;
         public bool Grounded => grounded;
         
@@ -61,6 +62,7 @@ namespace StringToHell.InGame
             baseDampening = rb.linearDamping;
             mC = GetComponent<IMovement>();
             dR = GetComponent<IDirectionAndRotation>();
+            silk = GetComponentInChildren<IUnwindSilk>();
         }
 
         public void Jumpcalc(int Jmp)
@@ -71,9 +73,9 @@ namespace StringToHell.InGame
 
         public void ClingSwitch()
         {
-            if (grounded || clinging == true)
+            if (grounded || Clinging == true)
             {
-                clinging = !clinging;
+                Clinging = !Clinging;
                 
             }
         }
@@ -102,14 +104,14 @@ namespace StringToHell.InGame
                 // Compute the "normal" from that point to your object
                 Vector3 normal = (transform.position - closest).normalized;
                 surfaceNormal = normal;
-                if (switchWalls || !clinging)
+                if (switchWalls || !Clinging)
                 {
                     dR.RotateInstant(surfaceNormal);
                     switchWalls = false;
                     StartCoroutine(WaitForSwitch());
                     rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse);
                 }
-                clinging = true;
+                Clinging = true;
             }
            
         }
@@ -118,7 +120,7 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-                if (clinging)
+                if (Clinging)
                 {
                     rb.gravityScale = antiGravity;
                     if (!grounded)
@@ -143,7 +145,7 @@ namespace StringToHell.InGame
                 if (currentWalls <= 1 && !grounded)
                 {
                    
-                    clinging = false;
+                    Clinging = false;
                 }
                 rb.gravityScale = baseGravityMultiplier;
                 currentWalls--;
@@ -157,6 +159,7 @@ namespace StringToHell.InGame
             if (tagC.CheckTags(wallTags, touching.tag))
             {
                 grounded = true;
+                Clinging = true;
                 jumpsLeft = MaxJumps;
               rb.linearVelocity *= WallStop;
                 if(switchWalls)
@@ -194,15 +197,16 @@ namespace StringToHell.InGame
                 }
                 dR.RotateBody(rotationSpeed);
                 jumpsLeft = MaxJumps;
-                if (clinging)
+                if (Clinging)
                 {
                     rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
-                    if (puff)
+                    if (puff || silk.LineConnected)
                     {
                         rb.linearDamping = pullStrength;
                     }
-
+                   
                 }
+                else { rb.linearDamping = baseDampening; }
             }
         }
 

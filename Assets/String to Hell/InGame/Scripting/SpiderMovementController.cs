@@ -15,9 +15,11 @@ namespace StringToHell.InGame
         [SerializeField, Tooltip("")]public float airSpeed = 5f;
         [SerializeField, Tooltip("")] public float maxSpeed = 6f;
         [SerializeField, Tooltip("")] float jumpPower = 1;
-        [SerializeField, Tooltip("")] private float DivePower = 1f;
-        [SerializeField, Tooltip("")] private float FloatPower = .5f;
+        [SerializeField, Tooltip("")] private float divePower = 1f;
+        [SerializeField, Tooltip("")] private float floatPower = .5f;
         [SerializeField, Range(.0001f, 1f), Tooltip("")] float windResistanceMultiplier = .2f;
+
+        [SerializeField, Tooltip("")] float pullStrength = 10;
 
         [SerializeField, Tooltip("")] float slingForce = 5f;
 
@@ -54,11 +56,11 @@ namespace StringToHell.InGame
             {
                 if ( input.IsDiving.magnitude > .9f)
                 {
-                    movement.Dive(input.Move, spiderPosition.ForceDirection,  DivePower, windResistanceMultiplier);
+                    movement.Dive(input.Move, spiderPosition.ForceDirection,  divePower, windResistanceMultiplier);
                 }
                 if (input.IsDiving.magnitude > .9f)
                 {
-                    movement.Float(input.Move, spiderPosition.ForceDirection, FloatPower);
+                    movement.Float(input.Move, spiderPosition.ForceDirection, floatPower);
                 }
                 if(!spiderPosition.Grounded)
                 {
@@ -68,11 +70,16 @@ namespace StringToHell.InGame
             }
             if(spiderPosition.Grounded|| spiderPosition.Clinging)
             {
-                movement.WallMovement(input.Move, moveSpeed);
+                movement.WallMovement(input.Move, moveSpeed, 
+                    silk.LineConnected && spiderPosition.Clinging ||
+                    spiderPosition.Puff && spiderPosition.Clinging ? pullStrength: 0 );
                 if (input.IsGrab || input.IsJump)
                 {
                     spiderPosition.ClingSwitch();
-                    silk.BungieSling(slingForce);
+                    if (!spiderPosition.Clinging)
+                    {
+                        silk.BungieSling(slingForce);
+                    }
                 }
                 if (input.IsJump)
                 {
