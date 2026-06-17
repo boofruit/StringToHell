@@ -72,7 +72,6 @@ namespace StringToHell.InGame
             if (input.IsCutWeb)
             {
                 silk.CutThread();
-                silk = null;
             }
             if (spiderPosition.Clinging)
             {

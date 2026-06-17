@@ -65,7 +65,7 @@ namespace StringToHell.InGame
 
         public void AddSegment( int maxSegementsLength, float frequency, float dampingRatio)
         {
-            if (!isUnwinding || segments.Count >= maxSegementsLength) return;
+            if (!isUnwinding || segments.Count >= maxSegementsLength || segments == null) return;
             spawnPoint = tf.position;
             if ((spawnPoint - lastSpawnPoint).magnitude < segmentSpacing * 3f) return;
            
@@ -101,6 +101,7 @@ namespace StringToHell.InGame
         //}
         public void BungieSling(float slingForce)
         {
+            if ( segments == null || anchor == null) return;
             if (isUnwinding || lineExtinguished) return;
             Rigidbody2D rb = BaseJoint.GetComponent<Rigidbody2D>();
             int SegementsPower = segments.Count -1;
@@ -137,7 +138,7 @@ namespace StringToHell.InGame
         }
         public void ConnectLine(GameObject WebJoint)
         {
-            if (lineExtinguished) return;
+            if (lineExtinguished || segments == null) return;
             segments.Remove(spawner.transform);
             stringManager.Segments.Remove(spawner.transform);
             var lastSegment = segments.LastOrDefault()?.GetComponent<Rigidbody2D>();

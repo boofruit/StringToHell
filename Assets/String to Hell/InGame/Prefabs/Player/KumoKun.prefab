@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 6201589775702029216}
   - component: {fileID: 9081457593511733779}
   - component: {fileID: 2540144789293616905}
+  - component: {fileID: 1941679202362806241}
   m_Layer: 0
   m_Name: Spinneret
   m_TagString: Untagged
@@ -241,11 +242,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb44e53633c86145a56404e08be2543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.SpinneretController
-  slingForce: 25
   segmentSpacing: 0.25
   frequency: 4
   dampingRatio: 0.4
   maxSegementsLength: 20
+--- !u!114 &1941679202362806241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514759795621056409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b11d34a94e23544a0e8cc3d5796da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.UnwindSilk
+  segmentPrefab: {fileID: 8276223906079929710, guid: c29b3fa61e112d748a4c53411d07df39, type: 3}
+  line: {fileID: 0}
 --- !u!1 &2914202641807977905
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +588,7 @@ MonoBehaviour:
   DivePower: 15
   FloatPower: 5
   windResistanceMultiplier: 0.4
+  slingForce: 10
 --- !u!114 &5226045692710587036
 MonoBehaviour:
   m_ObjectHideFlags: 0
