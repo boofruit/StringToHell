@@ -5,10 +5,18 @@ public class WindUVScroller : MonoBehaviour
     [Header("AreaEffector2DのforceMagnitudeに対する比率")]
     [SerializeField, Range(0.001f, 0.04f)] private float windPowerRate = 0.01f;
     [SerializeField] private QuadWind[] winds;
+    [Header("縦向きの風か？")]
+    [SerializeField] private bool isVerticalWind;
+    [Header("風の縦振幅量")]
+    [SerializeField, Range(0, 0.01f)] private float amplitude = 0.0005f;
+    [Header("風の縦振幅速度")]
+    [SerializeField, Range(0, 10f)] private float amplitudeSpeed = 1f;
 
     private float windPower;
     private Vector2 windDir;
     private AreaEffector2D wind;
+    private float passingTime;
+    private float difference;
 
     void Start()
     { 
@@ -21,12 +29,26 @@ public class WindUVScroller : MonoBehaviour
             winds[i].Mat = winds[i].quad.material;
             winds[i].Mat.color = winds[i].color;
         }
+
+        difference = Random.value;
     }
 
     void Update()
     {
+        passingTime += Time.deltaTime;
         var move = windDir * windPower * Time.deltaTime;
 
+        float shake = Mathf.Sin(passingTime * amplitudeSpeed + difference) * amplitude;
+        if (isVerticalWind)
+        {
+            move.x = shake * 0.25f;
+        }
+        else
+        {
+            move.y = shake;
+        }
+        
+        //Debug.Log("windDir" + windDir);
         for (int i = 0; i < winds.Length; i++)
         {
             winds[i].Mat.mainTextureOffset += move * winds[i].moveRate;
