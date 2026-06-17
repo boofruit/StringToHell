@@ -5,8 +5,10 @@ public class WindUVScroller : MonoBehaviour
     [Header("AreaEffector2DのforceMagnitudeに対する比率")]
     [SerializeField, Range(0.001f, 0.04f)] private float windPowerRate = 0.01f;
     [SerializeField] private QuadWind[] winds;
+    [Header("縦向きの風か？")]
+    [SerializeField] private bool isVerticalWind;
     [Header("風の縦振幅量")]
-    [SerializeField, Range(0, 0.01f)] private float amplitude = 0.001f;
+    [SerializeField, Range(0, 0.01f)] private float amplitude = 0.0005f;
     [Header("風の縦振幅速度")]
     [SerializeField, Range(0, 10f)] private float amplitudeSpeed = 1f;
 
@@ -35,7 +37,17 @@ public class WindUVScroller : MonoBehaviour
     {
         passingTime += Time.deltaTime;
         var move = windDir * windPower * Time.deltaTime;
-        move.y = Mathf.Sin(passingTime * amplitudeSpeed + difference) * amplitude;
+
+        float shake = Mathf.Sin(passingTime * amplitudeSpeed + difference) * amplitude;
+        if (isVerticalWind)
+        {
+            move.x = shake * 0.25f;
+        }
+        else
+        {
+            move.y = shake;
+        }
+        
         //Debug.Log("windDir" + windDir);
         for (int i = 0; i < winds.Length; i++)
         {
