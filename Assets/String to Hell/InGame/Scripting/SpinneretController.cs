@@ -31,7 +31,7 @@ namespace StringToHell.InGame
             BaseSpring.dampingRatio = dampingRatio;
             silk = GetComponent<IUnwindSilk>();
             web = GetComponent<IWeb>();
-            tf = GetComponentInParent<Transform>();
+            tf = GetComponent<Transform>();
             spiderPosition = GetComponentInParent<ISpiderInteractionContols>();
             RotationControls = GetComponentInParent<IDirectionAndRotation>();
             movement = GetComponentInParent<IMovement>();
@@ -50,7 +50,7 @@ namespace StringToHell.InGame
                 {
                     var anchorObj = web.PlaceAnchor(tf.position);
                     silk.ConnectLine(anchorObj);
-                    silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), BaseSpring, segmentSpacing) ;
+                    silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), segmentSpacing) ;
                    
                    
                     web.LastString = anchorObj;

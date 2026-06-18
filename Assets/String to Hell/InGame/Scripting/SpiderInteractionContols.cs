@@ -64,7 +64,13 @@ namespace StringToHell.InGame
             dR = GetComponent<IDirectionAndRotation>();
             silk = GetComponentInChildren<IUnwindSilk>();
         }
-
+        private void OnJointBreak2D(Joint2D joint)
+        {
+            //if( joint.enabled ) {return; }
+            joint.enabled = false;
+            joint.connectedBody = null;
+            silk.Extinguish();
+        }
         public void Jumpcalc(int Jmp)
         {
             Jmp = Mathf.Abs(Jmp);

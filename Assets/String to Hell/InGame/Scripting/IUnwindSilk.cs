@@ -7,10 +7,11 @@ namespace StringToHell.InGame
         bool LineConnected { get; }
 
         void AddSegment(int maxSegementsLength, float frequency, float dampingRatio, float spacingMultiplier);
-        void BungieSling(float slingForce);
+        void BungieSling(float slingForce, float minTension, float maxPower);
         void ConnectLine(GameObject WebJoint);
         void CutThread();
-        void StartThread(Rigidbody2D newAnchor, SpringJoint2D baseJoint, float spacing);
+        void Extinguish();
+        void StartThread(Rigidbody2D newAnchor, float spacing);
         void StopThread();
       
     }

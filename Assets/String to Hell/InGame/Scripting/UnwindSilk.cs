@@ -27,32 +27,30 @@ namespace StringToHell.InGame
         void Start()
         {
             tf = transform;
+            spawner = this.gameObject;
             BaseJoint = GetComponentInParent<SpringJoint2D>();
         }
-        
-        void Extinguish()
+        public void Extinguish()
         {
             lineConnnected = false;
-            segments.Remove(spawner.transform);
+            //segments.Remove(spawner.transform);
             stringManager.Segments.Remove(spawner.transform);
-            BaseJoint.connectedBody = null;
-            BaseJoint.enabled = false;
+            
             segments.Clear();
+            isUnwinding = false;
         }
 
-        public void StartThread(Rigidbody2D newAnchor, SpringJoint2D baseJoint, float spacing)
+        public void StartThread(Rigidbody2D newAnchor, float spacing)
         {
             segmentSpacing = spacing;
             lineConnnected = true;
             anchor = newAnchor;
             stringManager = anchor.GetComponent<StringManager>();
             stringManager.spacing = spacing;
-            spawner = this.gameObject;
-            BaseJoint = baseJoint;
-            //BaseJoint.enabled = true;
+            BaseJoint.enabled = false;
             BaseJoint.connectedBody = anchor;
 
-            spawnPoint = spawner.transform.position;
+            spawnPoint = tf.position;
             lastSpawnPoint = spawnPoint;
             segments.Add(anchor.transform);
             stringManager.Segments.Add(anchor.transform);
@@ -61,7 +59,7 @@ namespace StringToHell.InGame
         public void StopThread()
         {
             if(segments.Count == 0) return;
-            segments.Add(spawner.transform);
+           // segments.Add(spawner.transform);
             stringManager.Segments.Add(spawner.transform);
             BaseJoint.enabled = true;
             isUnwinding = false;
@@ -105,12 +103,12 @@ namespace StringToHell.InGame
         //    slingForce *= slingDirection.magnitude - spacing;
         //    PlayerRB.AddForce(slingDirection * slingForce, ForceMode2D.Impulse);
         //}
-        public void BungieSling(float slingForce)
+        public void BungieSling(float slingForce, float minTension, float maxPower)
         {
             if (segments.Count == 0 || anchor == null) return;
             if (isUnwinding || !lineConnnected) return;
             Rigidbody2D rb = BaseJoint.GetComponent<Rigidbody2D>();
-            int SegementsPower = segments.Count -1;
+            int SegementsPower = segments.Count;
             // Convert anchor to world space
             Vector2 worldAnchor = BaseJoint.transform.TransformPoint(BaseJoint.anchor);
 
@@ -124,24 +122,27 @@ namespace StringToHell.InGame
 
             // How far past the rest length (spacing) the spring is stretched
             float stretch = (distance / SegementsPower) - segmentSpacing ;
-
-            if (stretch <= 0f)
-                return; // No tension, no force
+           
+            
 
             // Scale force by stretch amount
-            float finalForce = slingForce * stretch;
+            float finalForce = Mathf.Clamp( slingForce * stretch, minTension, maxPower);
+            if (finalForce <= minTension)
+                return; // No tension, no force
             rb.linearDamping = 1;
             //rb.linearVelocity *= 0f;
             rb.AddForce(normalizedDirection * finalForce, ForceMode2D.Impulse);
         }
         public void CutThread()
         {
-            if (segments.Count == 0) return;
+            if (!lineConnnected || segments.Count == 0) return;
+            BaseJoint.connectedBody = null;
+            BaseJoint.enabled = false;
             Extinguish();
         }
         public void ConnectLine(GameObject WebJoint)
         {
-            if (!lineConnnected || segments.Count == 0) return;
+            if (!lineConnnected || segments.Count == 0 || isUnwinding) return;
             
             var lastSegment = segments.LastOrDefault()?.GetComponent<Rigidbody2D>();
             if (lastSegment != null)

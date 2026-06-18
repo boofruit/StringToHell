@@ -197,7 +197,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spinneret
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.Test.StringTest.WebAnchor
   Anchor: {fileID: 326297103096884235, guid: f37041b319bfae14aa9f879640f9d6bc, type: 3}
-  threadLength: 10
+  maxWebs: 6
 --- !u!114 &2540144789293616905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,11 +242,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb44e53633c86145a56404e08be2543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.SpinneretController
-  segmentSpacing: 0.1
-  frequency: 4
-  dampingRatio: 0.8
-  maxSegementsLength: 20
-  spacingMultiplier: 5
+  segmentSpacing: 0.05
+  frequency: 5
+  dampingRatio: 1
+  maxSegementsLength: 10
+  spacingMultiplier: 25
 --- !u!114 &1941679202362806241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,7 +523,7 @@ SpringJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: 10000
+  m_BreakForce: 75
   m_BreakTorque: Infinity
   m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   WindStop: 0.5
   antiGravity: 0.5
   gripStrength: 20
-  pullStrength: 1
+  pullStrength: 5
   snapStrength: 10
   rotationSpeed: 3
   WallSwitchTimer: 0.5
@@ -591,6 +591,8 @@ MonoBehaviour:
   windResistanceMultiplier: 0.4
   pullStrength: 1
   slingForce: 10
+  minSlingTension: 5
+  maxSlingForce: 50
 --- !u!114 &5226045692710587036
 MonoBehaviour:
   m_ObjectHideFlags: 0

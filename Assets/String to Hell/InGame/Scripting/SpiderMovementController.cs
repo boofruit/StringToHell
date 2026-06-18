@@ -22,6 +22,8 @@ namespace StringToHell.InGame
         [SerializeField, Tooltip("")] float pullStrength = 10;
 
         [SerializeField, Tooltip("")] float slingForce = 5f;
+        [SerializeField, Tooltip("")] float minSlingTension = .5f;
+        [SerializeField, Tooltip("")] float maxSlingForce = 100f;
 
         float moveSpeedChangeRate = 4f;
 
@@ -78,7 +80,7 @@ namespace StringToHell.InGame
                     spiderPosition.ClingSwitch();
                     if (!spiderPosition.Clinging)
                     {
-                        silk.BungieSling(slingForce);
+                        silk.BungieSling(slingForce, minSlingTension, maxSlingForce);
                     }
                 }
                 if (input.IsJump)
