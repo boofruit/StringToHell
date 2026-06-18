@@ -5110,41 +5110,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1051058023054791200, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: m_BreakForce
-      value: 75
-      objectReference: {fileID: 0}
     - target: {fileID: 1378942484816008247, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: StartCheckpoint
       value: 
       objectReference: {fileID: 1469663732}
-    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: frequency
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: dampingRatio
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: segmentSpacing
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: spacingMultiplier
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: maxSegementsLength
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 5153542357159673093, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: m_Name
       value: KumoKun
-      objectReference: {fileID: 0}
-    - target: {fileID: 6909642864948464372, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: pullStrength
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
