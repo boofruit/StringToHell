@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 5135185341662655789}
   - component: {fileID: 2073218871170521594}
   - component: {fileID: 9068248765084498450}
+  - component: {fileID: 7619617318510220542}
   m_Layer: 3
   m_Name: KumoKun
   m_TagString: Player
@@ -726,6 +727,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d2fb02c51ad1a4898d70158946f6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.DirectionAndRotation
+--- !u!81 &7619617318510220542
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153542357159673093}
+  m_Enabled: 1
 --- !u!1 &5920759894860704509
 GameObject:
   m_ObjectHideFlags: 0
