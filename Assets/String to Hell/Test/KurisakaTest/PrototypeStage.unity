@@ -629,67 +629,6 @@ Transform:
   - {fileID: 286296722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &153773574
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1351304511490928013, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_Name
-      value: stringSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1351304511490928013, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.67103
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.81002
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553235966805951116, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f56e3c1acc5d5fd48975b7038aa3d796, type: 3}
 --- !u!1 &184482569
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,27 +3079,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &586671528 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2514759795621056409, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-  m_PrefabInstance: {fileID: 8402938829528695492}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &586671534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 586671528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb44e53633c86145a56404e08be2543, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.SpinneretController
-  segmentSpacing: 0.25
-  frequency: 8
-  dampingRatio: 0.8
-  maxSegementsLength: 20
 --- !u!1 &590934114
 GameObject:
   m_ObjectHideFlags: 0
@@ -10007,22 +9925,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1051058023054791200, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1378942484816008247, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: StartCheckpoint
       value: 
       objectReference: {fileID: 1469663732}
-    - target: {fileID: 2977294102036948814, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: FloatPower
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977294102036948814, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: windResistanceMultiplier
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 3289878131779029142, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -10030,18 +9936,6 @@ PrefabInstance:
     - target: {fileID: 5153542357159673093, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: m_Name
       value: KumoKun
-      objectReference: {fileID: 0}
-    - target: {fileID: 6201589775702029216, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6201589775702029216, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081457593511733779, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3289878131779029142, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
@@ -10054,9 +9948,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5153542357159673093, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6958011683405758550}
-    - targetCorrespondingSourceObject: {fileID: 2514759795621056409, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 586671534}
   m_SourcePrefab: {fileID: 100100000, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -10079,6 +9970,5 @@ SceneRoots:
   - {fileID: 1500733587}
   - {fileID: 1628485495}
   - {fileID: 70669742}
-  - {fileID: 153773574}
   - {fileID: 141656506}
   - {fileID: 1679413520}

@@ -242,11 +242,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb44e53633c86145a56404e08be2543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.SpinneretController
-  segmentSpacing: 0.05
+  segmentSpacing: 1
   frequency: 5
   dampingRatio: 1
   maxSegementsLength: 10
-  spacingMultiplier: 25
+  spacingMultiplier: 2
 --- !u!114 &1941679202362806241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   WindStop: 0.5
   antiGravity: 0.5
   gripStrength: 20
-  pullStrength: 5
+  clingDampening: 2
   snapStrength: 10
   rotationSpeed: 3
   WallSwitchTimer: 0.5

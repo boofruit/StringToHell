@@ -10,6 +10,7 @@ TagManager:
   - ReloadObj
   - Wind
   - Companion
+  - Silk
   layers:
   - Default
   - TransparentFX

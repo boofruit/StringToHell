@@ -60,7 +60,7 @@ namespace StringToHell.InGame.GameManager
         {
             objectToCheck = GameObject.FindWithTag("Player");
             tf = transform;
-            playerTf = GameObject.FindWithTag("Player").transform;
+            playerTf = objectToCheck.transform;
             cam = Camera.main;
             screenHeight = cam.orthographicSize * 2f;
             screenWidth = screenHeight * cam.aspect;
