@@ -98,6 +98,7 @@ namespace StringToHell.InGame
             {
                 rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
                 SpiderPositon.Jumpcalc(-1);
+               
             }
         }
 

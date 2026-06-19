@@ -19,7 +19,7 @@ namespace StringToHell.InGame
          [SerializeField, Tooltip("")] float WindStop = .5f;
         [SerializeField, Tooltip("")] float antiGravity = 0;
         [SerializeField, Tooltip("")] float gripStrength = 10;
-        [SerializeField, Tooltip("")] float pullStrength = 10;
+        [SerializeField, Tooltip("")] float clingDampening = 10;
         [SerializeField, Tooltip("")] float snapStrength = 10;
         [SerializeField, Tooltip("")] float rotationSpeed = 2f;
         [SerializeField, Tooltip("")] float WallSwitchTimer = 1f;
@@ -148,7 +148,7 @@ namespace StringToHell.InGame
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {  
-                if (currentWalls <= 1 && !grounded)
+                if ( !grounded)
                 {
                    
                     Clinging = false;
@@ -165,7 +165,7 @@ namespace StringToHell.InGame
             if (tagC.CheckTags(wallTags, touching.tag))
             {
                 grounded = true;
-                Clinging = true;
+                //Clinging = true;
                 jumpsLeft = MaxJumps;
               rb.linearVelocity *= WallStop;
                 if(switchWalls)
@@ -208,7 +208,7 @@ namespace StringToHell.InGame
                     rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
                     if (puff || silk.LineConnected)
                     {
-                        rb.linearDamping = pullStrength;
+                        rb.linearDamping = clingDampening;
                     }
                    
                 }

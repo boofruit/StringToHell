@@ -70,25 +70,36 @@ namespace StringToHell.InGame
                 movement.AirMovement(input.Move, airSpeed);
                 }
             }
-            if(spiderPosition.Grounded|| spiderPosition.Clinging)
+            if (spiderPosition.Grounded || spiderPosition.Clinging)
             {
-                movement.WallMovement(input.Move, moveSpeed, 
+                movement.WallMovement(input.Move, moveSpeed,
                     silk.LineConnected && spiderPosition.Clinging ||
-                    spiderPosition.Puff && spiderPosition.Clinging ? pullStrength: 0 );
-                if (input.IsGrab || input.IsJump)
+                    spiderPosition.Puff && spiderPosition.Clinging ? pullStrength : 0);
+               
+            if (input.IsGrab || input.IsJump)
                 {
-                    spiderPosition.ClingSwitch();
-                    if (!spiderPosition.Clinging)
+                  
+                    if (spiderPosition.Clinging && silk.LineConnected)
                     {
+                        spiderPosition.Clinging = false;
                         silk.BungieSling(slingForce, minSlingTension, maxSlingForce);
+                       
                     }
+                    if (input.IsJump)
+                    {
+                        spiderPosition.Clinging = false;
+                        movement.Jump(movement.JumpDirection(input.Move), jumpPower);
+
+                    }
+                    
+                   else if (input.IsGrab)
+                    {
+                        spiderPosition.ClingSwitch();
+                    }
+
                 }
-                if (input.IsJump)
-                {
-                    movement.Jump(movement.JumpDirection(input.Move), jumpPower);
-                }
-                  RotationControls.ChangeDirection(input.Move);
-            
+                RotationControls.ChangeDirection(input.Move);
+
             }
         }
     }
