@@ -57,11 +57,7 @@ namespace StringToHell.InGame
                     
                 }
             }
-            //if (silk== null)
-            //{
-            //    return;
-            //}
-            
+
             if (input.IsSpinnerHold)
             {
                 silk.AddSegment(maxSegementsLength, frequency, dampingRatio, spacingMultiplier);

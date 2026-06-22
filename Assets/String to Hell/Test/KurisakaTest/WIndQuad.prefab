@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 98959563401550524}
   - component: {fileID: 7566561506677746872}
   - component: {fileID: 1676934808633366838}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WIndQuad
-  m_TagString: Untagged
+  m_TagString: Wind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 72.1274, y: 18.5149, z: 0}
-  m_LocalScale: {x: 25, y: 10, z: 1}
+  m_LocalScale: {x: 15.3125, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9164651110712380625}
@@ -108,10 +108,10 @@ AreaEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3967
   m_UseGlobalAngle: 0
-  m_ForceAngle: 180
-  m_ForceMagnitude: 40
+  m_ForceAngle: 90
+  m_ForceMagnitude: 30
   m_ForceVariation: 0
   m_ForceTarget: 0
   m_LinearDamping: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12040f80dc595d14cbf853a64cdacd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindUVScroller
-  windPowerRate: 0.01
+  windPowerRate: 0.0306
   winds:
   - elementName: Parent Quad
     quad: {fileID: 5849700926986304984}
@@ -188,6 +188,7 @@ MonoBehaviour:
     quad: {fileID: 8897990070598506036}
     moveRate: 0.25
     color: {r: 0.34901962, g: 0.5686275, b: 0.49803925, a: 1}
+  isVerticalWind: 1
   amplitude: 0.0005
   amplitudeSpeed: 1
 --- !u!82 &1676934808633366838
@@ -307,7 +308,7 @@ GameObject:
   - component: {fileID: 9164651110712380625}
   - component: {fileID: 6685247933832826391}
   - component: {fileID: 8044344443864566151}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ChildQuad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +398,7 @@ GameObject:
   - component: {fileID: 9154260196182207026}
   - component: {fileID: 1222949410244387925}
   - component: {fileID: 8897990070598506036}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ChildQuad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

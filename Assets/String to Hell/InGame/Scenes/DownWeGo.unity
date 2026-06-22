@@ -1471,7 +1471,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &519420030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1551,7 +1551,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1589,7 +1589,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 580563cec901e664c8915cc7f373ec67, type: 3}
   m_Name: 
@@ -1603,7 +1603,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b61ccf60a5d52d9438c329a418c4f3d4, type: 3}
   m_Name: 
@@ -5114,6 +5114,30 @@ PrefabInstance:
       propertyPath: StartCheckpoint
       value: 
       objectReference: {fileID: 1469663732}
+    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: frequency
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: dampingRatio
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: segmentSpacing
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: spacingMultiplier
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540144789293616905, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: maxSegementsLength
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977294102036948814, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: pullStrength
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5153542357159673093, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: m_Name
       value: KumoKun

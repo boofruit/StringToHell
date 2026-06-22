@@ -79,12 +79,7 @@ namespace StringToHell.InGame
             if (input.IsGrab || input.IsJump)
                 {
                   
-                    if (spiderPosition.Clinging && silk.LineConnected)
-                    {
-                        spiderPosition.Clinging = false;
-                        silk.BungieSling(slingForce, minSlingTension, maxSlingForce);
-                       
-                    }
+                   
                     if (input.IsJump)
                     {
                         spiderPosition.Clinging = false;
@@ -95,6 +90,12 @@ namespace StringToHell.InGame
                    else if (input.IsGrab)
                     {
                         spiderPosition.ClingSwitch();
+                    }
+                    if (!spiderPosition.Clinging && silk.LineConnected)
+                    {
+
+                        silk.BungieSling(slingForce, minSlingTension, maxSlingForce);
+
                     }
 
                 }
