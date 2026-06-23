@@ -104,23 +104,23 @@ namespace StringToHell.InGame
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-                currentWalls++;
                 Vector3 closest = collision.ClosestPoint(transform.position);
 
                 // Compute the "normal" from that point to your object
                 Vector3 normal = (transform.position - closest).normalized;
-                surfaceNormal = normal;
 
                 if(WhenPlayerLeave(normal))
                 {
                     Debug.Log("プレイヤーへの方向とプレイヤーの物理方向がだいたい一緒なので無視！");
                     return;
                 }
+                currentWalls++;
+                surfaceNormal = normal;
 
                 if (switchWalls || !Clinging)
                 {
-                    dR.RotateInstant(surfaceNormal);
-                    switchWalls = false;
+                    //dR.RotateInstant(surfaceNormal);
+                    //switchWalls = false;
                     StartCoroutine(WaitForSwitch());
                     Debug.Log("cling");
                    // rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse); //problem child
@@ -143,9 +143,15 @@ namespace StringToHell.InGame
             {
                 if (Clinging)
                 {
+                    
                     rb.gravityScale = antiGravity;
                     if (!grounded)
                     {
+                        Vector3 closest = collision.ClosestPoint(transform.position);
+
+                        // Compute the "normal" from that point to your object
+                        Vector3 normal = (transform.position - closest).normalized;
+                        surfaceNormal = normal;
                         rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Force);
                     }
                 }
@@ -185,7 +191,7 @@ namespace StringToHell.InGame
               rb.linearVelocity *= WallStop;
                 if(switchWalls)
                 {
-                dR.RotateInstant(collision.GetContact(0).normal);
+                    dR.RotateInstant(collision.GetContact(0).normal);
                     switchWalls = false;
                     StartCoroutine(WaitForSwitch());
                 }

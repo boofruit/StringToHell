@@ -24,7 +24,7 @@ TagManager:
   - Companion
   - Ground
   - Wind
-  - 
+  - HardSilk
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: Wind
     uniqueID: 2063913383
+    locked: 0
+  - name: Ground
+    uniqueID: 1298097027
     locked: 0
   m_RenderingLayers:
   - Default

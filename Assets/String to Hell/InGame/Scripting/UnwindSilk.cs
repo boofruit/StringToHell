@@ -32,16 +32,17 @@ namespace StringToHell.InGame
         }
         public void Extinguish()
         {
-            lineConnnected = false;
             //segments.Remove(spawner.transform);
             stringManager.Segments.Remove(spawner.transform);
             
             segments.Clear();
             isUnwinding = false;
+            lineConnnected = false;
         }
 
         public void StartThread(Rigidbody2D newAnchor, float spacing)
         {
+            if(lineConnnected) { return; }
             segmentSpacing = spacing;
             lineConnnected = true;
             anchor = newAnchor;
