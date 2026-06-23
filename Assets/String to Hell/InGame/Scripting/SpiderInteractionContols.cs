@@ -110,6 +110,13 @@ namespace StringToHell.InGame
                 // Compute the "normal" from that point to your object
                 Vector3 normal = (transform.position - closest).normalized;
                 surfaceNormal = normal;
+
+                if(WhenPlayerLeave(normal))
+                {
+                    Debug.Log("プレイヤーへの方向とプレイヤーの物理方向がだいたい一緒なので無視！");
+                    return;
+                }
+
                 if (switchWalls || !Clinging)
                 {
                     dR.RotateInstant(surfaceNormal);
@@ -122,6 +129,13 @@ namespace StringToHell.InGame
             }
            
         }
+
+        private bool WhenPlayerLeave(Vector2 toPlayerDir)
+        {
+            bool sameDir = Vector2.Dot(toPlayerDir, rb.linearVelocity) > 0;
+            return sameDir;
+        }
+
         private void OnTriggerStay2D(Collider2D collision)
         {
             var entering = collision.gameObject;
