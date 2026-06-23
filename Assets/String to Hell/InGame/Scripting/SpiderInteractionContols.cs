@@ -115,7 +115,7 @@ namespace StringToHell.InGame
                     dR.RotateInstant(surfaceNormal);
                     switchWalls = false;
                     StartCoroutine(WaitForSwitch());
-                    rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse);
+                   // rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse); //problem child
                 }
                 Clinging = true;
             }
@@ -205,7 +205,7 @@ namespace StringToHell.InGame
                 jumpsLeft = MaxJumps;
                 if (Clinging)
                 {
-                    rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
+                   rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
                     if (puff || silk.LineConnected)
                     {
                         rb.linearDamping = clingDampening;
