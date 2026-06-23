@@ -115,6 +115,7 @@ namespace StringToHell.InGame
                     dR.RotateInstant(surfaceNormal);
                     switchWalls = false;
                     StartCoroutine(WaitForSwitch());
+                    Debug.Log("cling");
                    // rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse); //problem child
                 }
                 Clinging = true;

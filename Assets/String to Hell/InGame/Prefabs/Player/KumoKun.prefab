@@ -563,9 +563,9 @@ MonoBehaviour:
   WallStop: 0.5
   WindStop: 0.5
   antiGravity: 0.5
-  gripStrength: 20
+  gripStrength: 30
   clingDampening: 2
-  snapStrength: 10
+  snapStrength: 30
   rotationSpeed: 3
   WallSwitchTimer: 0.5
   wallTags:
@@ -586,7 +586,7 @@ MonoBehaviour:
   moveSpeed: 5
   airSpeed: 2
   maxSpeed: 6
-  jumpPower: 20
+  jumpPower: 15
   divePower: 10
   floatPower: 3
   windResistanceMultiplier: 0.4
