@@ -1,57 +1,55 @@
 using UnityEngine;
 
-public class WindUVScroller : MonoBehaviour
+public class WindScroller : MonoBehaviour
 {
-    [Header("AreaEffector2DのforceMagnitudeに対する比率")]
-    [SerializeField, Range(0.001f, 0.04f)] private float windPowerRate = 0.01f;
-    [SerializeField] private QuadWind[] winds;
+    [System.Serializable]
+    public class WindLayer
+    {
+        public SpriteRenderer renderer;
+        public float moveRate = 1f;
+        [HideInInspector] public Material mat;
+    }
 
-    private float windPower;
-    private Vector2 windDir;
-    private AreaEffector2D wind;
+    public WindLayer[] winds;
+
+    // 風エフェクター（Area Effector 2D）
+    private AreaEffector2D effector;
+
+    [Header("エフェクターのForceMagnitudeに対するスクロール速度比率")]
+    public float ratioSpeedToMagnitude = 0.02f;
 
     void Start()
-    { 
-        wind = GetComponent<AreaEffector2D>();
-        windDir = AngleToDir(wind);
-        windPower = wind.forceMagnitude * windPowerRate;
+    {
+        effector = GetComponent<AreaEffector2D>();
 
-        foreach(var w in winds)
+        foreach (var w in winds)
         {
-            w.Mat = w.quad.material;
-            w.Mat.color = w.color;
+            if (w.renderer != null)
+            {
+                w.mat = w.renderer.material;
+            }
         }
     }
 
     void Update()
     {
-        var move = windDir * windPower * Time.deltaTime;
+        if (effector == null) return;
 
-        //Debug.Log("windDir" + windDir);
+        // Effector の角度（degree）をラジアンに変換
+        float rad = effector.forceAngle * Mathf.Deg2Rad;
+
+        // Effector の方向ベクトルを作成
+        Vector2 forceDir = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
+
+        // スクロール方向を決定
+        Vector2 scrollDir = -forceDir * ratioSpeedToMagnitude * effector.forceMagnitude * Time.deltaTime;
+
         foreach (var w in winds)
         {
-            w.Mat.mainTextureOffset += move * w.moveRate;
+            if (w.mat != null)
+            {
+                w.mat.mainTextureOffset += scrollDir * w.moveRate;
+            }
         }
     }
-
-    Vector2 AngleToDir(AreaEffector2D ae2d)
-    {
-        float angle = ae2d.forceAngle;
-        float rad = angle * Mathf.Deg2Rad;
-        return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * -1;
-    }
-}
-
-[System.Serializable]
-public class QuadWind
-{
-    [Header("項目名(動作には影響なし)")]
-    public string elementName;
-    [Header("Quadオブジェクトをセット")]
-    public MeshRenderer quad;
-    public Material Mat{ get; set; }
-    [Header("Wind Powerに対する比率")]
-    public float moveRate = 0.5f;
-    [Header("α値をゼロにしないよう注意")]
-    public Color color = Color.gray3;
 }
