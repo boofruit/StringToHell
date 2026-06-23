@@ -178,7 +178,7 @@ MonoBehaviour:
   winds:
   - elementName: Parent Quad
     quad: {fileID: 5849700926986304984}
-    moveRate: 1
+    moveRate: 0.75
     color: {r: 0.8207547, g: 0.57033175, b: 0.49942148, a: 1}
   - elementName: Child 1
     quad: {fileID: 8044344443864566151}
@@ -186,11 +186,8 @@ MonoBehaviour:
     color: {r: 0.6745098, g: 0.5686275, b: 0.49803925, a: 1}
   - elementName: Child 2
     quad: {fileID: 8897990070598506036}
-    moveRate: 0.25
+    moveRate: 0.35
     color: {r: 0.34901962, g: 0.5686275, b: 0.49803925, a: 1}
-  isVerticalWind: 1
-  amplitude: 0.0005
-  amplitudeSpeed: 1
 --- !u!82 &1676934808633366838
 AudioSource:
   m_ObjectHideFlags: 0
