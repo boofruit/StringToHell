@@ -185,7 +185,8 @@ MonoBehaviour:
   - renderer: {fileID: 576106241515436648}
     moveRate: 0.35
     mat: {fileID: 0}
-  speedRate: 0.02
+  gizmosColor: {r: 0, g: 1, b: 0, a: 1}
+  ratioSpeedToMagnitude: 0.02
 --- !u!82 &1676934808633366838
 AudioSource:
   m_ObjectHideFlags: 0

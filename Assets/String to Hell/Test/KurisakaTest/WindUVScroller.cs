@@ -11,6 +11,7 @@ public class WindScroller : MonoBehaviour
     }
 
     public WindLayer[] winds;
+    public Color gizmosColor = Color.green;
 
     // 風エフェクター（Area Effector 2D）
     private AreaEffector2D effector;
@@ -51,5 +52,16 @@ public class WindScroller : MonoBehaviour
                 w.mat.mainTextureOffset += scrollDir * w.moveRate;
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = gizmosColor;
+        var sr = GetComponent<SpriteRenderer>();
+        var size = sr == null? Vector3.zero : sr.sprite.bounds.size;
+        size.x *= transform.localScale.x;
+        size.y *= transform.localScale.y;
+        size.z *= transform.localScale.z;
+        Gizmos.DrawWireCube(transform.position, size);
     }
 }
