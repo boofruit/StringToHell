@@ -278,6 +278,8 @@ MonoBehaviour:
   Segments: []
   textureTilingMultiplier: 1
   spacing: 0
+  windForce: 0
+  maxWindForce: 19.62
 --- !u!68 &5591287513541311596
 EdgeCollider2D:
   m_ObjectHideFlags: 0

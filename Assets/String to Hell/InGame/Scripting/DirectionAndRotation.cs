@@ -31,13 +31,11 @@ namespace StringToHell.InGame
             float rotationZ = 0f;
             if (velocity.magnitude > 1f)
             {
-                if (currentInputDirection == Direction.Left)
-                { rotationZ = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg + 180f; }
-                else
-                { rotationZ = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg; }
+                bool leftFacing = false;
+                if (currentInputDirection == Direction.Left) {leftFacing = true;}
+                rotationZ = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg + (leftFacing? 180f: 0f); 
             }
             sr.rotation = Quaternion.Euler(0, 0, rotationZ); // Keep only Z rotation
-
         }
         public void RotateInstant(Vector2 normal)
         {
@@ -49,13 +47,11 @@ namespace StringToHell.InGame
             if (IsReverse(oldDirection, newDirection))
             {
                 currentInputDirection = currentInputDirection == Direction.Left ? Direction.Right : Direction.Left;
-                //newDirection = currentInputDirection;
                 sr.localScale = new Vector2((currentInputDirection == Direction.Left) ? -1 : 1, 1);
             }
         }
         public void RotateBody(float rotationSpeed)
         {
-            // if ( !spiderCon.Clinging){ direction = rb.linearVelocity; }
             float rotationZ = Mathf.Atan2(SpiderPositon.SurfaceNormal.y, SpiderPositon.SurfaceNormal.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRot = Quaternion.Euler(0, 0, rotationZ); // Keep only Z rotation
             sr.rotation = Quaternion.Lerp(sr.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime);

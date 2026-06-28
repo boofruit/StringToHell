@@ -97,6 +97,7 @@ namespace StringToHell.InGame
 
                 if (wind.forceMagnitude > gravity)
                 {
+                    //Takes the force direction from the wind
                     float angle = wind.forceAngle;
                     float rad = angle * Mathf.Deg2Rad;
                     forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) ;

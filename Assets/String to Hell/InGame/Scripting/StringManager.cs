@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UnityEngine.Rendering.HableCurve;
 
@@ -12,6 +13,8 @@ namespace StringToHell.InGame
         public List<Transform> Segments;
         public float textureTilingMultiplier = 1f;
         public float spacing;
+        public float windForce;
+        public float maxWindForce;
 
         void Update()
         {
@@ -38,6 +41,31 @@ namespace StringToHell.InGame
             // Optional: tile texture based on rope length
             float totalLength = (line.positionCount) * spacing;
             line.material.mainTextureScale = new Vector2(totalLength * textureTilingMultiplier, 1);
+        }
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            var entering = collision.gameObject;
+            if (entering.CompareTag("SilkWind"))
+            {
+
+                var wind = entering.GetComponentInParent<AreaEffector2D>();
+                float angle = wind.forceAngle;
+                float rad = angle * Mathf.Deg2Rad;
+
+                var forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+                float force = Mathf.Clamp( wind.forceMagnitude,0f, maxWindForce);
+               foreach( var seg in Segments)
+                {
+                    if (seg.CompareTag("Player")|| seg == Segments.FirstOrDefault())
+                    {
+                        continue;
+                    }
+                    Vector2 effectorVelocity = forceDirection * force * Time.fixedDeltaTime;
+                    seg.GetComponent<Rigidbody2D>().linearVelocity += effectorVelocity;
+                }
+                  
+                
+            }
         }
     }
 }

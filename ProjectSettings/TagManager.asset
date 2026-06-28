@@ -11,6 +11,7 @@ TagManager:
   - Wind
   - Companion
   - Silk
+  - SilkWind
   layers:
   - Default
   - TransparentFX
