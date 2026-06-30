@@ -22,7 +22,11 @@ namespace StringToHell.InGame
         public bool LineConnected => lineConnnected;
         Vector2 lastSpawnPoint;
         float segmentSpacing;
-
+        bool tugging = false;
+        public bool Tugging => tugging;
+        Vector2 slingDirection;
+        public Vector2 SlingDirection => slingDirection;
+        float bungieForce;
 
         void Start()
         {
@@ -36,6 +40,7 @@ namespace StringToHell.InGame
             stringManager.Segments.Remove(spawner.transform);
             
             segments.Clear();
+            tugging = false;
             isUnwinding = false;
             lineConnnected = false;
         }
@@ -104,12 +109,11 @@ namespace StringToHell.InGame
         //    slingForce *= slingDirection.magnitude - spacing;
         //    PlayerRB.AddForce(slingDirection * slingForce, ForceMode2D.Impulse);
         //}
-        public void BungieSling(float slingForce, float minTension, float maxPower)
+        public void CalculateStrech(float slingForce, float minTension, float maxPower)
         {
-            if (segments.Count == 0 || anchor == null) return;
-            if (isUnwinding || !lineConnnected) return;
-            Rigidbody2D rb = BaseJoint.GetComponent<Rigidbody2D>();
-            int SegementsPower = segments.Count;
+            if(!lineConnnected || isUnwinding) return;
+        
+        int SegementsPower = segments.Count;
             // Convert anchor to world space
             Vector2 worldAnchor = BaseJoint.transform.TransformPoint(BaseJoint.anchor);
 
@@ -119,20 +123,33 @@ namespace StringToHell.InGame
             float distance = direction.magnitude;
 
             // Normalize direction so it only represents direction, not magnitude
-            Vector2 normalizedDirection = direction.normalized *-1;
+            slingDirection = direction.normalized * -1;
 
             // How far past the rest length (spacing) the spring is stretched
-            float stretch = (distance / SegementsPower) - segmentSpacing ;
-           
-            
-
+            float stretch = (distance / SegementsPower) - segmentSpacing;
             // Scale force by stretch amount
-            float finalForce = Mathf.Clamp( slingForce * stretch, minTension, maxPower);
-            if (finalForce <= minTension)
+            float finalForce = Mathf.Clamp(slingForce * stretch, minTension, maxPower);
+            if (finalForce > minTension) { 
+                tugging = true; 
+                bungieForce = finalForce;
+            }
+            else { tugging = false; }
+            
+        }
+        public void BungieSling()
+        {
+            if (segments.Count == 0 || anchor == null) return;
+            if (isUnwinding || !lineConnnected) return;
+            Rigidbody2D rb = BaseJoint.GetComponent<Rigidbody2D>();
+
+            if (!tugging)
                 return; // No tension, no force
             rb.linearDamping = 1;
             //rb.linearVelocity *= 0f;
-            rb.AddForce(normalizedDirection * finalForce, ForceMode2D.Impulse);
+            rb.AddForce(slingDirection * bungieForce, ForceMode2D.Impulse);
+            bungieForce = 0;
+            slingDirection = Vector2.zero;
+            tugging = false;
         }
         public void CutThread()
         {

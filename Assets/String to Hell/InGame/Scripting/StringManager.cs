@@ -45,10 +45,10 @@ namespace StringToHell.InGame
         private void OnTriggerStay2D(Collider2D collision)
         {
             var entering = collision.gameObject;
-            if (entering.CompareTag("SilkWind"))
+            if (entering.CompareTag("Wind"))
             {
 
-                var wind = entering.GetComponentInParent<AreaEffector2D>();
+                var wind = entering.GetComponent<AreaEffector2D>();
                 float angle = wind.forceAngle;
                 float rad = angle * Mathf.Deg2Rad;
 

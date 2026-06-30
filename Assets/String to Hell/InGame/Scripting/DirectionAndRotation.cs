@@ -8,6 +8,7 @@ namespace StringToHell.InGame
         Transform sr;
         Rigidbody2D rb;
         ISpiderInteractionContols SpiderPositon;
+        IUnwindSilk silk;
 
         void Awake() => rb = GetComponent<Rigidbody2D>();
 
@@ -15,6 +16,7 @@ namespace StringToHell.InGame
         {
             SpiderPositon = GetComponent<ISpiderInteractionContols>();
             sr = GetComponentInChildren<SpriteRenderer>().transform;
+            silk = GetComponentInChildren<IUnwindSilk>();
         }
         bool IsReverse(Direction oldDirection, Direction newDirection)
         {
@@ -113,14 +115,27 @@ namespace StringToHell.InGame
         }
         public void ChangeDirection(Vector2 newDirection)
         {
+            
+            
             currentInputDirection = InputDirection(newDirection);
             if (newDirection != Vector2.zero)
             {
-                if (SpiderPositon.Clinging|| SpiderPositon.Grounded)
-                { 
-                sr.localScale = new Vector2((currentInputDirection == Direction.Left) ? -1 : 1, 1);
+                Direction dir = InputDirection(-silk.SlingDirection);
+                if (silk.Tugging && SpiderPositon.Clinging && currentInputDirection == dir)
+                    {
+                       
+                        Debug.Log("Tugging");
+                        sr.localScale = new Vector2((currentInputDirection == Direction.Right) ? -1 : 1, 1);
+                        
+                    }
 
-                }
+                    else
+                    {
+                    Debug.Log("normal input direction");
+                        sr.localScale = new Vector2((currentInputDirection == Direction.Left) ? -1 : 1, 1);
+
+                    }
+                
             }
         }
     }

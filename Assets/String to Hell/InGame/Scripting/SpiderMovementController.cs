@@ -76,6 +76,10 @@ namespace StringToHell.InGame
                     silk.LineConnected && spiderPosition.Clinging ||
                     spiderPosition.Puff && spiderPosition.Clinging ? pullStrength : 0);
                
+                if (spiderPosition.Clinging)
+                {
+                    silk.CalculateStrech(slingForce, minSlingTension, maxSlingForce);
+                }
             if (input.IsGrab || input.IsJump)
                 {
                   
@@ -94,7 +98,7 @@ namespace StringToHell.InGame
                     if (!spiderPosition.Clinging)
                     {
 
-                        silk.BungieSling(slingForce, minSlingTension, maxSlingForce);
+                        silk.BungieSling();
 
                     }
 
