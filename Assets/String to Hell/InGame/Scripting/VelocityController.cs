@@ -5,6 +5,8 @@ namespace StringToHell.InGame
 
     public class VelocityController : MonoBehaviour, IVelocityController
     {
+        IUnwindSilk silk;
+
         Rigidbody2D TargetRB;
         bool needUpdateVelocity = false;
         Vector2 currentVelocity = Vector2.zero;
@@ -28,13 +30,20 @@ namespace StringToHell.InGame
             }
         }
 
+        
 
         void Awake()
         {
+            silk = GetComponentInChildren<IUnwindSilk>();
             TargetRB = GetComponent<Rigidbody2D>();
         }
 
+        public void SpiderReset()
+        {
+            TargetRB.linearVelocity = Vector2.zero;
+            silk.CutThread();
 
+        }
         void FixedUpdate()
         {
             if (needUpdateVelocity && inheritRbVelocity)

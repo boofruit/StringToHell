@@ -86,7 +86,7 @@ namespace StringToHell.InGame
                    
                     if (input.IsJump)
                     {
-                 
+                 //circlecast
                         movement.Jump(movement.JumpDirection(input.Move), jumpPower);
                         if(silk.LineConnected) { spiderPosition.Clinging = false; }
                     }

@@ -42,7 +42,8 @@ namespace StringToHell.InGame
             segments.Clear();
             tugging = false;
             isUnwinding = false;
-            lineConnnected = false;
+            lineConnnected = false; 
+           // Debug.Log("Extinguished");
         }
 
         public void StartThread(Rigidbody2D newAnchor, float spacing)
@@ -64,11 +65,12 @@ namespace StringToHell.InGame
         }
         public void StopThread()
         {
-            if(segments.Count == 0) return;
+            if(segments.Count == 0|| !lineConnnected || !isUnwinding) return;
            // segments.Add(spawner.transform);
             stringManager.Segments.Add(spawner.transform);
             BaseJoint.enabled = true;
             isUnwinding = false;
+           // Debug.Log("Holding Thread");
         }
 
 
