@@ -10,6 +10,7 @@ namespace StringToHell.InGame
         int JumpsLeft { get; }
         Vector2 ForceDirection { get; }
         bool Grounded { get; }
+        bool Clingable { get; }
 
         bool CheckifGrounded();
         void ClingSwitch();

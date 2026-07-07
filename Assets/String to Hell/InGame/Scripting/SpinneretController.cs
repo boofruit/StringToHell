@@ -43,11 +43,12 @@ namespace StringToHell.InGame
         {
             
 
-            if (spiderPosition.Clinging || spiderPosition.Grounded)
+            if (spiderPosition.Clingable)
             {
                 
                 if (input.IsSpinnerOn)
                 {
+                    spiderPosition.Clinging = true;
                     var anchorObj = web.PlaceAnchor(tf.position);
                     silk.ConnectLine(anchorObj);
                     silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), segmentSpacing) ;
@@ -70,13 +71,7 @@ namespace StringToHell.InGame
             {
                 silk.CutThread();
             }
-            if (spiderPosition.Clinging)
-            {
-                if (input.IsGrab || input.IsJump)
-                {
-                 // silk.BungieSling(slingForce);
-                }
-            }
+         
         }
     }
 }

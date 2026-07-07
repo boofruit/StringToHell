@@ -43,8 +43,10 @@ namespace StringToHell.InGame
         private float baseDampening;
         float gravity;
         Transform tf;
-       public bool Clinging { get; set; }
-       // public bool Clinging => clinging;
+       public bool Clinging { get; set; } = false;
+        bool clingable;
+        public bool Clingable => clingable;
+        // public bool Clinging => clinging;
         bool grounded;
         public bool Grounded => grounded;
         float legsLength;
@@ -83,11 +85,7 @@ namespace StringToHell.InGame
 
         public void ClingSwitch()
         {
-            if (grounded || Clinging == true)
-            {
                 Clinging = !Clinging;
-                
-            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -130,7 +128,7 @@ namespace StringToHell.InGame
                     Debug.Log("cling");
                    // rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse); //problem child
                 }
-                Clinging = true;
+                clingable = true;
             }
            
         }
@@ -146,7 +144,7 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-                Debug.DrawRay(transform.position, -surfaceNormal * GroundCheckRadius, Color.red);
+                
                 if (Clinging)
                 {
                    if (mC.Jumping) { return; }
@@ -182,11 +180,9 @@ namespace StringToHell.InGame
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {  
-                if ( !grounded)
-                {
-                   
-                    Clinging = false;
-                }
+            
+                    clingable = false;
+                
                 rb.gravityScale = baseGravityMultiplier;
                 currentWalls--;
             }
@@ -233,16 +229,12 @@ namespace StringToHell.InGame
             {
                 if (mC.Jumping) { return; }
                 grounded = true;
-                if (currentWalls <= 1)
-                {
-                }
+                clingable = true;
                 dR.RotateBody(rotationSpeed);
                 jumpsLeft = MaxJumps;
                 if (Clinging)
                 {
                   rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
-                    
-                   
                 }
                
             }

@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.07524917, g: 0.61249936, b: 0.8396226, a: 0.9019608}
+  m_Color: {r: 0.6719473, g: 0.8626576, b: 0.9433962, a: 0.9019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 1941679202362806241}
   m_Layer: 0
   m_Name: Spinneret
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,10 +242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb44e53633c86145a56404e08be2543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.SpinneretController
-  segmentSpacing: 1
+  segmentSpacing: 0.25
   frequency: 5
-  dampingRatio: 1
-  maxSegementsLength: 10
+  dampingRatio: 0.8
+  maxSegementsLength: 40
   spacingMultiplier: 2
 --- !u!114 &1941679202362806241
 MonoBehaviour:
@@ -343,7 +343,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 0.50980395}
+  m_Color: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0.50980395}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -434,7 +434,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
+  m_Color: {r: 0.009433985, g: 0.009433985, b: 0.009433985, a: 0.50980395}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -462,6 +462,8 @@ GameObject:
   - component: {fileID: 2073218871170521594}
   - component: {fileID: 9068248765084498450}
   - component: {fileID: 7619617318510220542}
+  - component: {fileID: 460182335865331850}
+  - component: {fileID: 6623785238860500577}
   m_Layer: 3
   m_Name: KumoKun
   m_TagString: Player
@@ -524,7 +526,7 @@ SpringJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: 75
+  m_BreakForce: 50
   m_BreakTorque: Infinity
   m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 0
@@ -546,6 +548,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190d845e88ec48a4a9cadacc529e25e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheckpointTags:
+  - CheckPoint
+  ReloadTags:
+  - ReloadObj
   checkPoint: {x: 0, y: 0, z: 0}
   StartCheckpoint: {fileID: 0}
 --- !u!114 &6909642864948464372
@@ -561,13 +567,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpiderCon
   WallStop: 0.5
-  WindStop: 0.5
-  antiGravity: 0.5
-  gripStrength: 30
-  clingDampening: 2
-  snapStrength: 30
+  WindStop: 0.75
+  antiGravity: 0
+  gripStrength: 15
+  clingDampening: 0
+  snapStrength: 15
   rotationSpeed: 3
   WallSwitchTimer: 0.5
+  GroundCheckRadius: 0.5
   wallTags:
   - Ground
   - Platform
@@ -589,11 +596,11 @@ MonoBehaviour:
   jumpPower: 15
   divePower: 10
   floatPower: 3
-  windResistanceMultiplier: 0.4
-  pullStrength: 1
-  slingForce: 10
+  windResistanceMultiplier: 0.16
+  pullStrength: 0
+  slingForce: 30
   minSlingTension: 5
-  maxSlingForce: 50
+  maxSlingForce: 60
 --- !u!114 &5226045692710587036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,6 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementController
   moveMode: 1
+  jumpingDuration: 0
 --- !u!114 &5135185341662655789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,6 +743,41 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5153542357159673093}
   m_Enabled: 1
+--- !u!95 &460182335865331850
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153542357159673093}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6623785238860500577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153542357159673093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0527bf90f514742944e49a369b41f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.VelocityController
+  inheritRbVelocity: 1
 --- !u!1 &5920759894860704509
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,9 +790,10 @@ GameObject:
   - component: {fileID: 1541092792132063820}
   - component: {fileID: 533179372520980022}
   - component: {fileID: 5018468356186674549}
+  - component: {fileID: 547495294209414552}
   m_Layer: 3
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -929,6 +973,43 @@ SpriteMask:
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
   m_MaskSource: 0
+--- !u!70 &547495294209414552
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5920759894860704509}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 2.31, y: 1.9}
+  m_Direction: 1
 --- !u!1 &8863745934365681880
 GameObject:
   m_ObjectHideFlags: 0

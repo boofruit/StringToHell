@@ -88,13 +88,13 @@ namespace StringToHell.InGame
                     diveQueued = true;
                 }
 
-                if (!spiderPosition.Grounded)
+                if (!spiderPosition.Clingable)
                 {
                     RotationControls.AirRotation();
                     movement.AirMovement(input.Move, airSpeed);
                 }
             }
-            if (spiderPosition.Grounded || spiderPosition.Clinging)
+            if (spiderPosition.Clingable)
             {
                 movement.WallMovement(input.Move, moveSpeed,
                     silk.LineConnected && spiderPosition.Clinging ||
@@ -118,7 +118,7 @@ namespace StringToHell.InGame
                 if (input.IsGrab)
                 {
                     spiderPosition.ClingSwitch();
-                    if (!spiderPosition.Clinging && silk.LineConnected)
+                    if (spiderPosition.Clingable && !spiderPosition.Clinging && silk.LineConnected)
                     {
                         slingjumpQueued = true;
                     }

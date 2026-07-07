@@ -25,8 +25,8 @@ namespace StringToHell.InGame
         }
         void Update()
         {
-            if (spiderPosition.Clinging)
-            {
+            if (spiderPosition.Clingable && !spiderPosition.Puff || spiderPosition.Clinging && spiderPosition.Clingable)
+            { 
                 canDive = true;
                 floating = false;
             }
