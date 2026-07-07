@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace StringToHell.InGame
 {
     public interface IMovement
     {
-      //  Vector2 SurfaceNormal { get; }
+        bool Jumping { get; }
+
+        //  Vector2 SurfaceNormal { get; }
 
         void AirMovement(Vector2 controllerInput, float airSpeed);
         Vector2 JumpDirection(Vector2 controllerInput);
@@ -13,6 +16,7 @@ namespace StringToHell.InGame
         void Jump(Vector2 direction, float jumpPower);
         void Float(Vector2 diveDirection, Vector2 inputDirection, float divePower);
         void Dive(Vector2 diveDirection, Vector2 inputDirection, float divePower, float windMultiplier);
+        IEnumerator MidJump(float waitTime);
     }
     public readonly struct MovementParameter
     {

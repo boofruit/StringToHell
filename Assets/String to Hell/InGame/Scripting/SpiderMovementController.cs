@@ -10,9 +10,9 @@ namespace StringToHell.InGame
         IMovement movement;
         IMovementInput input;
         IVelocityController velocityController;
-      //  [SerializeField, Tooltip("")]float rotationSpeedChangeRate = 10f;
+        //  [SerializeField, Tooltip("")]float rotationSpeedChangeRate = 10f;
         [SerializeField, Tooltip("")] float moveSpeed = 10f;
-        [SerializeField, Tooltip("")]public float airSpeed = 5f;
+        [SerializeField, Tooltip("")] public float airSpeed = 5f;
         [SerializeField, Tooltip("")] public float maxSpeed = 6f;
         [SerializeField, Tooltip("")] float jumpPower = 1;
         [SerializeField, Tooltip("")] private float divePower = 1f;
@@ -31,7 +31,7 @@ namespace StringToHell.InGame
         float moveSpeedChangeRate = 4f;
 
         MovementParameter movementParameter;
-      
+
         private void Awake()
         {
             silk = GetComponentInChildren<IUnwindSilk>();
@@ -59,6 +59,10 @@ namespace StringToHell.InGame
             if (jumpQueued)
             {
                 movement.Jump(movement.JumpDirection(input.Move), jumpPower);
+                if (!spiderPosition.Clinging && silk.LineConnected)
+                {
+                    slingjumpQueued = true;
+                }
                 jumpQueued = false;
             }
             if (slingjumpQueued)
@@ -75,19 +79,19 @@ namespace StringToHell.InGame
         }
         private void Update()
         {
-           
-            
+
+
             if (!spiderPosition.Clinging)
             {
-                if ( input.IsDiving.magnitude > .9f)
+                if (input.IsDiving.magnitude > .9f)
                 {
                     diveQueued = true;
                 }
-              
-                if(!spiderPosition.Grounded)
+
+                if (!spiderPosition.Grounded)
                 {
-                RotationControls.AirRotation();
-                movement.AirMovement(input.Move, airSpeed);
+                    RotationControls.AirRotation();
+                    movement.AirMovement(input.Move, airSpeed);
                 }
             }
             if (spiderPosition.Grounded || spiderPosition.Clinging)
@@ -95,36 +99,33 @@ namespace StringToHell.InGame
                 movement.WallMovement(input.Move, moveSpeed,
                     silk.LineConnected && spiderPosition.Clinging ||
                     spiderPosition.Puff && spiderPosition.Clinging ? pullStrength : 0);
-               
+
                 if (spiderPosition.Clinging && silk.LineConnected)
                 {
                     silk.CalculateStrech(slingForce, minSlingTension, maxSlingForce);
                 }
-            if (input.IsGrab || input.IsJump)
+
+                if (input.IsJump)
                 {
-                  
-                   
-                    if (input.IsJump)
+                    //circlecast
+                    if (spiderPosition.CheckifGrounded())
                     {
-                        //circlecast
-                        if (spiderPosition.CheckifGrounded())
-                        {
-                            jumpQueued = true;
-                        }
+                        jumpQueued = true;
                     }
-                    
-                   else if (input.IsGrab)
-                    {
-                        spiderPosition.ClingSwitch();
-                    }
+                }
+
+
+                if (input.IsGrab)
+                {
+                    spiderPosition.ClingSwitch();
                     if (!spiderPosition.Clinging && silk.LineConnected)
                     {
                         slingjumpQueued = true;
-                        
-
                     }
-
                 }
+
+
+
                 RotationControls.ChangeDirection(input.Move);
 
             }

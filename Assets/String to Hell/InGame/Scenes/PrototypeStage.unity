@@ -37001,6 +37001,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2977294102036948814, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: pullStrength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977294102036948814, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: maxSlingForce
       value: 60
       objectReference: {fileID: 0}
@@ -37042,7 +37046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6909642864948464372, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: clingDampening
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6909642864948464372, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: GroundCheckRadius

@@ -1,6 +1,7 @@
 using NUnit.Framework.Internal;
 using StringToHell.InGame;
 using UnityEngine;
+using System.Collections;
 namespace StringToHell.InGame
 {
     public class Movement : MonoBehaviour, IMovement
@@ -8,11 +9,13 @@ namespace StringToHell.InGame
         Transform tf;
         Rigidbody2D rb;
         [SerializeField] Space moveMode = Space.Self;
+        [SerializeField, Tooltip("")] float jumpingDuration = .5f;
 
         ISpiderInteractionContols spiderPosition;
         bool canDive = true;
         bool floating = false;
-        
+        bool jumping = false;
+        public bool Jumping => jumping;
         void Awake() => rb = GetComponent<Rigidbody2D>();
 
         void Start()
@@ -98,9 +101,11 @@ namespace StringToHell.InGame
             rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
             spiderPosition.Jumpcalc(-1);
             spiderPosition.Clinging = false;
+            jumping = true;
+            StartCoroutine(MidJump(jumpingDuration));
         }
        
-public Vector2 JumpDirection(Vector2 controllerInput)
+    public Vector2 JumpDirection(Vector2 controllerInput)
         {
             // If no input, jump straight out from the surface; otherwise, average normal and input
             if (controllerInput == Vector2.zero)
@@ -108,5 +113,13 @@ public Vector2 JumpDirection(Vector2 controllerInput)
             else
                 return (spiderPosition.SurfaceNormal + controllerInput).normalized ;
         }       
+    
+    public IEnumerator MidJump(float waitTime)
+        {
+            
+            yield return new WaitForSeconds(waitTime);
+            jumping = false;
+            // Additional logic can be added here if needed after the wait
+        }
     }
 }

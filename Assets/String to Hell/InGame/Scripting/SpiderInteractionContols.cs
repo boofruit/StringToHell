@@ -149,9 +149,9 @@ namespace StringToHell.InGame
                 Debug.DrawRay(transform.position, -surfaceNormal * GroundCheckRadius, Color.red);
                 if (Clinging)
                 {
-                    
+                   if (mC.Jumping) { return; }
                     rb.gravityScale = antiGravity;
-                    if (!grounded)
+                    if (!grounded )
                     {
                         Vector3 closest = collision.ClosestPoint(transform.position);
 
@@ -160,8 +160,15 @@ namespace StringToHell.InGame
                         surfaceNormal = normal;
                         rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Force);
                     }
+                    if (puff || silk.LineConnected)
+                    {
+                        rb.linearDamping = clingDampening;
+                    }
                 }
-                else { rb.gravityScale = baseGravityMultiplier; }
+                else {
+                    rb.gravityScale = baseGravityMultiplier;
+                    rb.linearDamping = baseDampening;
+                }
                 
             }
         }
@@ -224,6 +231,7 @@ namespace StringToHell.InGame
 
             if (tagC.CheckTags(wallTags, touching.tag))
             {
+                if (mC.Jumping) { return; }
                 grounded = true;
                 if (currentWalls <= 1)
                 {
@@ -233,13 +241,10 @@ namespace StringToHell.InGame
                 if (Clinging)
                 {
                   rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
-                    if (puff || silk.LineConnected)
-                    {
-                        rb.linearDamping = clingDampening;
-                    }
+                    
                    
                 }
-                else { rb.linearDamping = baseDampening; }
+               
             }
         }
 
