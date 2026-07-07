@@ -275,7 +275,19 @@ namespace StringToHell.InGame
             //}
             return isGrounded;
         }
-      
+
+        private void OnDrawGizmos()
+        {
+            float radius = legsLength;
+            float distance = GroundCheckRadius;
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, radius);
+            Vector3 endPos = (Vector2)transform.position + -surfaceNormal.normalized * distance;
+            Gizmos.DrawWireSphere(endPos, radius);
+            Gizmos.DrawLine(transform.position, endPos);
+        }
+
     }
 }
 
