@@ -11,6 +11,7 @@ namespace StringToHell.InGame
         Vector2 ForceDirection { get; }
         bool Grounded { get; }
 
+        bool CheckifGrounded();
         void ClingSwitch();
         void Jumpcalc(int Jmp);
     }

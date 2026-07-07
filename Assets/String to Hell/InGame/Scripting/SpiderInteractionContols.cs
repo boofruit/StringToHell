@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 namespace StringToHell.InGame
@@ -23,6 +24,7 @@ namespace StringToHell.InGame
         [SerializeField, Tooltip("")] float snapStrength = 10;
         [SerializeField, Tooltip("")] float rotationSpeed = 2f;
         [SerializeField, Tooltip("")] float WallSwitchTimer = 1f;
+        [SerializeField, Tooltip("")] float GroundCheckRadius = 0.5f;
 
         [SerializeField, Tooltip("")] string[] wallTags;
 
@@ -142,6 +144,7 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (tagC.CheckTags(wallTags, entering.tag))
             {
+                Debug.DrawRay(transform.position, -surfaceNormal* GroundCheckRadius, Color.red);
                 if (Clinging)
                 {
                     
@@ -238,6 +241,7 @@ namespace StringToHell.InGame
             }
         }
 
+     
 
         private void OnCollisionExit2D(Collision2D collision)
         {
@@ -254,8 +258,22 @@ namespace StringToHell.InGame
             }
 
         }
+        public bool CheckifGrounded()
+        {
+            bool isGrounded = Physics2D.CircleCast(transform.position, GroundCheckRadius, -surfaceNormal, LayerMask.GetMask("Ground"));
+            if (isGrounded)
+            {
+                grounded = true;
+                jumpsLeft = MaxJumps;
+                Debug.Log("Grounded");
+            }
+            else
+            {
+                grounded = false;
+            }
+            return isGrounded;
+        }
 
-    }
-
+}
 }
 

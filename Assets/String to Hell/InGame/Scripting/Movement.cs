@@ -94,7 +94,7 @@ namespace StringToHell.InGame
 
         public void Jump(Vector2 direction, float jumpPower)
         {
-            if ( SpiderPositon.JumpsLeft > 0)
+            if ( SpiderPositon.CheckifGrounded())
             {
                 rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
                 SpiderPositon.Jumpcalc(-1);
