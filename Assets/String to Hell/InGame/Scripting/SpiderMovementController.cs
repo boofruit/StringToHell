@@ -25,6 +25,7 @@ namespace StringToHell.InGame
         [SerializeField, Tooltip("")] float minSlingTension = .5f;
         [SerializeField, Tooltip("")] float maxSlingForce = 100f;
 
+        bool jumpQueued = false;
         float moveSpeedChangeRate = 4f;
 
         MovementParameter movementParameter;
@@ -49,7 +50,16 @@ namespace StringToHell.InGame
         //{
         //    movementParameter = new MovementParameter(moveSpeed);
         //}
-           
+        private void FixedUpdate()
+        {
+            // this took a lot of trial and error to get right, but it works now. The jump is queued in the Update method, and then executed
+            // in FixedUpdate to ensure that it happens at the right time in the physics cycle.   
+            if (jumpQueued)
+            {
+                movement.Jump(movement.JumpDirection(input.Move), jumpPower);
+                jumpQueued = false;
+            }
+        }
         private void Update()
         {
            
@@ -76,7 +86,7 @@ namespace StringToHell.InGame
                     silk.LineConnected && spiderPosition.Clinging ||
                     spiderPosition.Puff && spiderPosition.Clinging ? pullStrength : 0);
                
-                if (spiderPosition.Clinging)
+                if (spiderPosition.Clinging && silk.LineConnected)
                 {
                     silk.CalculateStrech(slingForce, minSlingTension, maxSlingForce);
                 }
@@ -86,9 +96,11 @@ namespace StringToHell.InGame
                    
                     if (input.IsJump)
                     {
-                 //circlecast
-                        movement.Jump(movement.JumpDirection(input.Move), jumpPower);
-                        if(silk.LineConnected) { spiderPosition.Clinging = false; }
+                        //circlecast
+                        if (spiderPosition.CheckifGrounded())
+                        {
+                            jumpQueued = true;
+                        }
                     }
                     
                    else if (input.IsGrab)

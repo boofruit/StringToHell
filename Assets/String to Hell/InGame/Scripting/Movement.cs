@@ -12,6 +12,7 @@ namespace StringToHell.InGame
         ISpiderInteractionContols spiderPosition;
         bool canDive = true;
         bool floating = false;
+        
         void Awake() => rb = GetComponent<Rigidbody2D>();
 
         void Start()
@@ -94,15 +95,12 @@ namespace StringToHell.InGame
 
         public void Jump(Vector2 direction, float jumpPower)
         {
-            if ( spiderPosition.CheckifGrounded())
-            {
-                rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
-                spiderPosition.Jumpcalc(-1);
-                spiderPosition.Clinging = false;
-            }
+            rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
+            spiderPosition.Jumpcalc(-1);
+            spiderPosition.Clinging = false;
         }
-
-        public Vector2 JumpDirection(Vector2 controllerInput)
+       
+public Vector2 JumpDirection(Vector2 controllerInput)
         {
             // If no input, jump straight out from the surface; otherwise, average normal and input
             if (controllerInput == Vector2.zero)

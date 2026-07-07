@@ -232,7 +232,7 @@ namespace StringToHell.InGame
                 jumpsLeft = MaxJumps;
                 if (Clinging)
                 {
-                   rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
+                  rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
                     if (puff || silk.LineConnected)
                     {
                         rb.linearDamping = clingDampening;
