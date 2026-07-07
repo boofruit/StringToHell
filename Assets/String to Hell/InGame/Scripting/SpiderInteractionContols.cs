@@ -47,9 +47,11 @@ namespace StringToHell.InGame
        // public bool Clinging => clinging;
         bool grounded;
         public bool Grounded => grounded;
+        float legsLength;
         
         private void Awake()
         {
+            legsLength = GetComponentInChildren<SpriteRenderer>().bounds.extents.y + 0.1f;
             tagC = GetComponent<TagCheck>();
         }
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -144,7 +146,7 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-                Debug.DrawRay(transform.position, -surfaceNormal* GroundCheckRadius, Color.red);
+                Debug.DrawRay(transform.position, -surfaceNormal * GroundCheckRadius, Color.red);
                 if (Clinging)
                 {
                     
@@ -260,20 +262,20 @@ namespace StringToHell.InGame
         }
         public bool CheckifGrounded()
         {
-            bool isGrounded = Physics2D.CircleCast(transform.position, GroundCheckRadius, -surfaceNormal, LayerMask.GetMask("Ground"));
-            if (isGrounded)
-            {
-                grounded = true;
-                jumpsLeft = MaxJumps;
-                Debug.Log("Grounded");
-            }
-            else
-            {
-                grounded = false;
-            }
+            bool isGrounded = Physics2D.CircleCast(transform.position, legsLength, -surfaceNormal,GroundCheckRadius, LayerMask.GetMask("Ground"));
+            //if (isGrounded)
+            //{
+            //    grounded = true;
+            //    jumpsLeft = MaxJumps;
+            //    Debug.Log("Grounded");
+            //}
+            //else
+            //{
+            //    grounded = false;
+            //}
             return isGrounded;
         }
-
-}
+      
+    }
 }
 
