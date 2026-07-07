@@ -9,19 +9,19 @@ namespace StringToHell.InGame
         Rigidbody2D rb;
         [SerializeField] Space moveMode = Space.Self;
 
-        ISpiderInteractionContols SpiderPositon;
+        ISpiderInteractionContols spiderPosition;
         bool canDive = true;
         bool floating = false;
         void Awake() => rb = GetComponent<Rigidbody2D>();
 
         void Start()
         {
-            SpiderPositon = GetComponent<ISpiderInteractionContols>();
+            spiderPosition = GetComponent<ISpiderInteractionContols>();
             tf = transform;
         }
         void Update()
         {
-            if (SpiderPositon.Clinging)
+            if (spiderPosition.Clinging)
             {
                 canDive = true;
                 floating = false;
@@ -31,7 +31,7 @@ namespace StringToHell.InGame
         {
             moveSpeed += pullStrength;
             // Project input onto the surface plane
-            Vector2 move = controllerInput - Vector2.Dot(controllerInput, SpiderPositon.SurfaceNormal) * SpiderPositon.SurfaceNormal;
+            Vector2 move = controllerInput - Vector2.Dot(controllerInput, spiderPosition.SurfaceNormal) * spiderPosition.SurfaceNormal;
             tf.Translate(move * moveSpeed * Time.deltaTime, moveMode);
         }
 
@@ -51,7 +51,7 @@ namespace StringToHell.InGame
         public void Float(Vector2 diveDirection, Vector2 inputDirection, float divePower)
         {
             
-            if (SpiderPositon.Puff && !floating && IsWithinAngle(diveDirection, inputDirection, 45f))
+            if (spiderPosition.Puff && !floating && IsWithinAngle(diveDirection, inputDirection, 45f))
             {
                 rb.linearVelocity = inputDirection;
                 rb.AddForce(diveDirection * (divePower), ForceMode2D.Impulse);
@@ -65,12 +65,12 @@ namespace StringToHell.InGame
             if (inputDirection != new Vector2(0, -1)) { inputDirection *= -1; }
             if (canDive && IsWithinAngle(diveDirection,inputDirection, 45f))
             {
-                if (!SpiderPositon.Puff)
+                if (!spiderPosition.Puff)
                 {
                 rb.linearVelocity *= 0f;
                 }
                 
-                rb.AddForce(diveDirection * divePower * (SpiderPositon.Puff ? windMultiplier : 1), ForceMode2D.Impulse);
+                rb.AddForce(diveDirection * divePower * (spiderPosition.Puff ? windMultiplier : 1), ForceMode2D.Impulse);
                 canDive = false;
                 floating = false;
             }
@@ -94,11 +94,11 @@ namespace StringToHell.InGame
 
         public void Jump(Vector2 direction, float jumpPower)
         {
-            if ( SpiderPositon.CheckifGrounded())
+            if ( spiderPosition.CheckifGrounded())
             {
                 rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
-                SpiderPositon.Jumpcalc(-1);
-               
+                spiderPosition.Jumpcalc(-1);
+                spiderPosition.Clinging = false;
             }
         }
 
@@ -106,9 +106,9 @@ namespace StringToHell.InGame
         {
             // If no input, jump straight out from the surface; otherwise, average normal and input
             if (controllerInput == Vector2.zero)
-                return SpiderPositon.SurfaceNormal;
+                return spiderPosition.SurfaceNormal;
             else
-                return (SpiderPositon.SurfaceNormal + controllerInput).normalized ;
+                return (spiderPosition.SurfaceNormal + controllerInput).normalized ;
         }       
     }
 }
