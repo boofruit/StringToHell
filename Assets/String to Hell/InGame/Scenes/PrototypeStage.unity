@@ -36916,6 +36916,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.009433985
       objectReference: {fileID: 0}
+    - target: {fileID: 1003941126892400896, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: m_LinearDamping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003941126892400896, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1051058023054791200, guid: 8bd80d5b8e56fd546a976cecaf7cbb8b, type: 3}
       propertyPath: m_BreakForce
       value: 50

@@ -26,6 +26,8 @@ namespace StringToHell.InGame
         [SerializeField, Tooltip("")] float maxSlingForce = 100f;
 
         bool jumpQueued = false;
+        bool slingjumpQueued = false;
+        bool diveQueued = false;
         float moveSpeedChangeRate = 4f;
 
         MovementParameter movementParameter;
@@ -59,6 +61,17 @@ namespace StringToHell.InGame
                 movement.Jump(movement.JumpDirection(input.Move), jumpPower);
                 jumpQueued = false;
             }
+            if (slingjumpQueued)
+            {
+                silk.BungieSling();
+                slingjumpQueued = false;
+            }
+            if (diveQueued)
+            {
+                movement.Dive(input.Move, spiderPosition.ForceDirection, divePower, windResistanceMultiplier);
+                movement.Float(input.Move, spiderPosition.ForceDirection, floatPower);
+                diveQueued = false;
+            }
         }
         private void Update()
         {
@@ -68,12 +81,9 @@ namespace StringToHell.InGame
             {
                 if ( input.IsDiving.magnitude > .9f)
                 {
-                    movement.Dive(input.Move, spiderPosition.ForceDirection,  divePower, windResistanceMultiplier);
+                    diveQueued = true;
                 }
-                if (input.IsDiving.magnitude > .9f)
-                {
-                    movement.Float(input.Move, spiderPosition.ForceDirection, floatPower);
-                }
+              
                 if(!spiderPosition.Grounded)
                 {
                 RotationControls.AirRotation();
@@ -107,10 +117,10 @@ namespace StringToHell.InGame
                     {
                         spiderPosition.ClingSwitch();
                     }
-                    if (!spiderPosition.Clinging)
+                    if (!spiderPosition.Clinging && silk.LineConnected)
                     {
-
-                        silk.BungieSling();
+                        slingjumpQueued = true;
+                        
 
                     }
 
