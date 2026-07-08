@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 namespace StringToHell.InGame
 {
-    public class PlayerInput : MonoBehaviour, IMovementInput
+    public class PlayerInput : MonoBehaviour, IMovementInput, IUiInput
     {
         Vector2 move;
         public Vector2 Move => move;
@@ -16,6 +16,7 @@ namespace StringToHell.InGame
         bool cutWeb;
         bool rewindString;
         bool grab;
+        bool openMenu;
 
         public bool IsJump => jump;
         public Vector2 IsDiving => dive;
@@ -23,14 +24,14 @@ namespace StringToHell.InGame
         public bool IsSpinnerHold => spinnerHold;
         public bool IsSpinnerOff => spinnerOff;
         public bool IsCutWeb => cutWeb;
-        public bool IsRewindString => rewindString; 
+        public bool IsRewindString => rewindString;
         public bool IsGrab => grab;
-      
+        public bool IsOpenMenu => openMenu;
 
 
 
         [SerializeField] InputActionProperty moveActionProperty;
-      
+
         [SerializeField] InputActionProperty webSpawnActionProperty;
 
         [SerializeField] InputActionProperty jumpActionProperty;
@@ -43,6 +44,8 @@ namespace StringToHell.InGame
 
         [SerializeField] InputActionProperty grabActionProperty;
 
+        [SerializeField] InputActionProperty openMenuActionProperty;
+
         InputAction moveAction;
         InputAction jumpAction;
         InputAction webSpawnAction;
@@ -50,6 +53,8 @@ namespace StringToHell.InGame
         InputAction rewindStringAction;
         InputAction grabAction;
         InputAction diveAction;
+        InputAction openMenuAction;
+
 
         private void OnEnable()
         {
@@ -57,26 +62,28 @@ namespace StringToHell.InGame
             moveAction = moveActionProperty.action;
             jumpAction = jumpActionProperty.action;
             diveAction = diveActionProperty.action;
-           
+
             cutWebAction = cutWebActionProperty.action;
             rewindStringAction = rewindActionProperty.action;
             webSpawnAction = webSpawnActionProperty.action;
+            openMenuAction = openMenuActionProperty.action;
         }
 
-       
+
         private void Update()
         {
             jump = jumpAction.WasPressedThisFrame();
             move = moveAction.ReadValue<Vector2>();
             dive = diveAction.ReadValue<Vector2>();
             grab = grabAction.WasPressedThisFrame();
+            openMenu = openMenuAction.WasPressedThisFrame();
 
             spinnerOn = webSpawnAction.WasPressedThisFrame();
             spinnerHold = webSpawnAction.IsPressed();
             spinnerOff = webSpawnAction.WasReleasedThisFrame();
             cutWeb = cutWebAction.IsPressed();
             rewindString = rewindStringAction.IsPressed();
-   
+
         }
 
     }

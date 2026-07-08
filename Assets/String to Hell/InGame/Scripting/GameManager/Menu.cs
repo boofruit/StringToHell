@@ -4,24 +4,37 @@ namespace StringToHell.InGame.GameManager
 {
     public class Menu : MonoBehaviour
     {
-        [SerializeField] private GameObject map;
+        [SerializeField] private GameObject pauseMenu;
+        public GameObject player;
         [SerializeField] KeyCode select = KeyCode.Tab;
+        IUiInput input;
+        ISpiderInteractionContols interactionContols;
 
         void Start()
         {
-
+            if (player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
+            input = player.GetComponent<IUiInput>();
+            interactionContols = player.GetComponent<ISpiderInteractionContols>();
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(select))
+            if (input.IsOpenMenu)
             {
-                map.SetActive(!map.activeSelf);
+                pauseMenu.SetActive(!pauseMenu.activeSelf);
             }
         }
-        private void ToggleActive()
+        public void TooggleAutoCling()
         {
-            map.SetActive(!map.activeSelf);
+            
+            interactionContols.AutoCling = !interactionContols.AutoCling;
+        }
+        public void ToggleActive()
+        {
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
         }
     }
 }

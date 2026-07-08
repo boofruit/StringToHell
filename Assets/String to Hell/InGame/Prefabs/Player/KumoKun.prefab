@@ -455,10 +455,10 @@ GameObject:
   - component: {fileID: 1003941126892400896}
   - component: {fileID: 1051058023054791200}
   - component: {fileID: 1378942484816008247}
+  - component: {fileID: 5135185341662655789}
   - component: {fileID: 6909642864948464372}
   - component: {fileID: 2977294102036948814}
   - component: {fileID: 5226045692710587036}
-  - component: {fileID: 5135185341662655789}
   - component: {fileID: 2073218871170521594}
   - component: {fileID: 9068248765084498450}
   - component: {fileID: 7619617318510220542}
@@ -554,67 +554,6 @@ MonoBehaviour:
   - ReloadObj
   checkPoint: {x: 0, y: 0, z: 0}
   StartCheckpoint: {fileID: 0}
---- !u!114 &6909642864948464372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5153542357159673093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef129cbd4cc37c34099798767f62346a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpiderCon
-  WallStop: 0.5
-  WindStop: 0.75
-  antiGravity: 0
-  gripStrength: 15
-  clingDampening: 0
-  snapStrength: 15
-  rotationSpeed: 3
-  WallSwitchTimer: 0.5
-  GroundCheckRadius: 0.5
-  wallTags:
-  - Ground
-  - Platform
---- !u!114 &2977294102036948814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5153542357159673093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d4cb52b0c9f414daa4bc10ba117541, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.SpiderMovementController
-  moveSpeed: 5
-  airSpeed: 2
-  maxSpeed: 6
-  jumpPower: 15
-  divePower: 10
-  floatPower: 3
-  windResistanceMultiplier: 0.16
-  pullStrength: 0
-  slingForce: 30
-  minSlingTension: 5
-  maxSlingForce: 60
---- !u!114 &5226045692710587036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5153542357159673093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa57cd0ce776ee140861faad8858267f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MovementController
-  moveMode: 1
-  jumpingDuration: 0
 --- !u!114 &5135185341662655789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,6 +650,78 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 1781555164194001046, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  openMenuActionProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Open Menu Action Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 4371eb44-a4d3-4dde-b22a-51591f553202
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -3809140274228475686, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+--- !u!114 &6909642864948464372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153542357159673093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef129cbd4cc37c34099798767f62346a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpiderCon
+  WallStop: 0.5
+  WindStop: 0.75
+  antiGravity: 0
+  gripStrength: 15
+  clingDampening: 0
+  snapStrength: 15
+  rotationSpeed: 3
+  WallSwitchTimer: 0.5
+  GroundCheckRadius: 0.5
+  wallTags:
+  - Ground
+  - Platform
+--- !u!114 &2977294102036948814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153542357159673093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d4cb52b0c9f414daa4bc10ba117541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.SpiderMovementController
+  moveSpeed: 5
+  airSpeed: 2
+  jumpPower: 15
+  divePower: 10
+  floatPower: 3
+  diveWindResistanceMultiplier: 0.2
+  pullStrength: 0
+  slingForce: 30
+  minSlingTension: 5
+  maxSlingForce: 60
+--- !u!114 &5226045692710587036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153542357159673093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa57cd0ce776ee140861faad8858267f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementController
+  moveMode: 1
+  jumpingDuration: 0
 --- !u!114 &2073218871170521594
 MonoBehaviour:
   m_ObjectHideFlags: 0

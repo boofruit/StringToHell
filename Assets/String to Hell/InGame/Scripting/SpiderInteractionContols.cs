@@ -16,23 +16,26 @@ namespace StringToHell.InGame
 
         Rigidbody2D rb;
 
-        [SerializeField, Tooltip("")] float WallStop = .5f;
-         [SerializeField, Tooltip("")] float WindStop = .5f;
-        [SerializeField, Tooltip("")] float antiGravity = 0;
-        [SerializeField, Tooltip("")] float gripStrength = 10;
-        [SerializeField, Tooltip("")] float clingDampening = 10;
-        [SerializeField, Tooltip("")] float snapStrength = 10;
-        [SerializeField, Tooltip("")] float rotationSpeed = 2f;
-        [SerializeField, Tooltip("")] float WallSwitchTimer = 1f;
-        [SerializeField, Tooltip("")] float GroundCheckRadius = 0.5f;
+        [SerializeField, Tooltip("the percentage rate linear velocity is reduced when the spider hits a wall")] float WallStop = .5f;
+         [SerializeField, Tooltip("the percentage rate linear velocity is reduced when the spider hits wind")] float WindStop = .5f;
+        [SerializeField, Tooltip("the strength of the anti-gravity force while clinging")] float antiGravity = 0;
+        [SerializeField, Tooltip("the strength of the grip force while clingint to ground directly")] float gripStrength = 10;
+        [SerializeField, Tooltip("dampening when clinging to a surface while pulling thread or fighting wind")] float clingDampening = 10;
+        [SerializeField, Tooltip("the strength of the pulling force towards ground while clinging")] float snapStrength = 10;
+        [SerializeField, Tooltip("speed which spider sprite/collider rotates along a surface")] float rotationSpeed = 2f;
+        [SerializeField, Tooltip("time to automatically rotate spider sprite/collider towards a new surface")] float WallSwitchTimer = 1f;
+        [SerializeField, Tooltip("the radius of the ground check for jumping")] float GroundCheckRadius = 0.5f;
 
-        [SerializeField, Tooltip("")] string[] wallTags;
-
+        [SerializeField, Tooltip("an array of tags that represent ground surfaces")] string[] wallTags;
+        // represents the normal vector of the surface that the spider is currently in contact with.
+        // It is used to determine the orientation of the spider relative to the surface and to apply forces accordingly.
         Vector2 surfaceNormal = Vector2.up;
         public Vector2 SurfaceNormal => surfaceNormal;
         bool switchWalls = true;
+        // if the spider is in a wind zone, they are treated as a puffball
         bool puff;
         public bool Puff => puff;
+        // represents the direction of the greatest force acting on the player, such as wind or gravity. It is used to determine the direction in which the playeris being pushed or pulled.
         Vector2 forceDirection = new Vector2(0, -1);
         public Vector2 ForceDirection => forceDirection;
         static int MaxJumps = 1;
@@ -43,12 +46,19 @@ namespace StringToHell.InGame
         private float baseDampening;
         float gravity;
         Transform tf;
-       public bool Clinging { get; set; } = false;
+        /// <summary>
+        /// Indicates whether the spider can cling to a wall or surface. This is determined by the presence of a wall or surface within the spider's interaction range. 
+        /// When true, the spider is able to cling to the surface; when false, it cannot.
+        /// </summary>
         bool clingable;
         public bool Clingable => clingable;
+        public bool AutoCling { get; set; } = true;
+        // indicates if the spider is attempting to cling to a surface or string, and enables grabing behaviors when in a clingable state
+        public bool Clinging { get; set; } = false;
         // public bool Clinging => clinging;
         bool grounded;
         public bool Grounded => grounded;
+        //half the character height
         float legsLength;
         
         private void Awake()
@@ -107,6 +117,10 @@ namespace StringToHell.InGame
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
+                if (AutoCling)
+                {
+                    Clinging = true;
+                }
                 Vector3 closest = collision.ClosestPoint(transform.position);
 
                 // Compute the "normal" from that point to your object

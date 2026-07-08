@@ -11,6 +11,7 @@ namespace StringToHell.InGame
         Vector2 ForceDirection { get; }
         bool Grounded { get; }
         bool Clingable { get; }
+        bool AutoCling { get; set; }
 
         bool CheckifGrounded();
         void ClingSwitch();

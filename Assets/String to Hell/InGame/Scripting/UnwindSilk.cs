@@ -10,8 +10,8 @@ namespace StringToHell.InGame
         // Where rope starts
         GameObject spawner;
         Vector2 spawnPoint;             // Where rope starts
-        [SerializeField] GameObject segmentPrefab;         // Rope segment prefab
-        [SerializeField] LineRenderer line;                // Visual rope
+        [SerializeField, Tooltip("")] GameObject segmentPrefab;         // Rope segment prefab
+        [SerializeField, Tooltip("")] LineRenderer line;                // Visual rope
 
         private List<Transform> segments = new List<Transform>();
         SpringJoint2D BaseJoint;
