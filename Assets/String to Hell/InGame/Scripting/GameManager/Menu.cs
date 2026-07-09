@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 namespace StringToHell.InGame.GameManager
 {
@@ -9,9 +11,12 @@ namespace StringToHell.InGame.GameManager
         [SerializeField] KeyCode select = KeyCode.Tab;
         IUiInput input;
         ISpiderInteractionContols interactionContols;
+        bool start;
+        public float TimeLength = 2f;
 
         void Start()
         {
+           
             if (player == null)
             {
                 player = GameObject.FindGameObjectWithTag("Player");
@@ -24,7 +29,8 @@ namespace StringToHell.InGame.GameManager
         {
             if (input.IsOpenMenu)
             {
-                pauseMenu.SetActive(!pauseMenu.activeSelf);
+                TogglePause();
+                
             }
         }
         public void TooggleAutoCling()
@@ -35,6 +41,33 @@ namespace StringToHell.InGame.GameManager
         public void ToggleActive()
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
+        }
+
+        public bool IsPaused { get; private set; }
+
+        public void TogglePause()
+        {
+            if (IsPaused)
+                ResumeGame();
+            else
+                PauseGame();
+        }
+
+        public void PauseGame()
+        {
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+            IsPaused = true;
+        }
+
+        public void ResumeGame()
+        {
+         
+                pauseMenu.SetActive(false);
+            
+
+            Time.timeScale = 1f;
+            IsPaused = false;
         }
     }
 }
