@@ -12,6 +12,8 @@ TagManager:
   - Companion
   - Silk
   - SilkWind
+  - Spikes
+  - Ice
   layers:
   - Default
   - TransparentFX
@@ -54,6 +56,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1298097027
+    locked: 0
+  - name: masking
+    uniqueID: 2631527839
     locked: 0
   m_RenderingLayers:
   - Default

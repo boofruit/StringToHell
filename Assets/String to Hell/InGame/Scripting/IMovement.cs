@@ -13,7 +13,7 @@ namespace StringToHell.InGame
         Vector2 JumpDirection(Vector2 controllerInput);
         void WallMovement(Vector2 controllerInput, float moveSpeed, float pullStrength);
 
-        void Jump(Vector2 direction, float jumpPower);
+        void Jump(Vector2 direction, float jumpPower, float iceSlipperiness);
         void Float(Vector2 diveDirection, Vector2 inputDirection, float divePower);
         void Dive(Vector2 diveDirection, Vector2 inputDirection, float divePower, float windMultiplier);
         IEnumerator MidJump(float waitTime);

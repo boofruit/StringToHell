@@ -16,6 +16,7 @@ namespace StringToHell.InGame
         bool floating = false;
         bool jumping = false;
         public bool Jumping => jumping;
+       
         void Awake() => rb = GetComponent<Rigidbody2D>();
 
         void Start()
@@ -26,7 +27,7 @@ namespace StringToHell.InGame
         void Update()
         {
             if (spiderPosition.Clingable && !spiderPosition.Puff || spiderPosition.Clinging && spiderPosition.Clingable)
-            { 
+            {
                 canDive = true;
                 floating = false;
             }
@@ -54,7 +55,7 @@ namespace StringToHell.InGame
         //}
         public void Float(Vector2 diveDirection, Vector2 inputDirection, float divePower)
         {
-            
+
             if (spiderPosition.Puff && !floating && IsWithinAngle(diveDirection, inputDirection, 45f))
             {
                 rb.linearVelocity = inputDirection;
@@ -67,13 +68,13 @@ namespace StringToHell.InGame
         public void Dive(Vector2 diveDirection, Vector2 inputDirection, float divePower, float windMultiplier)
         {
             if (inputDirection != new Vector2(0, -1)) { inputDirection *= -1; }
-            if (canDive && IsWithinAngle(diveDirection,inputDirection, 45f))
+            if (canDive && IsWithinAngle(diveDirection, inputDirection, 45f))
             {
                 if (!spiderPosition.Puff)
                 {
-                rb.linearVelocity *= 0f;
+                    rb.linearVelocity *= 0f;
                 }
-                
+
                 rb.AddForce(diveDirection * divePower * (spiderPosition.Puff ? windMultiplier : 1), ForceMode2D.Impulse);
                 canDive = false;
                 floating = false;
@@ -96,27 +97,33 @@ namespace StringToHell.InGame
             return dot >= cosThreshold;
         }
 
-        public void Jump(Vector2 direction, float jumpPower)
+        public void Jump(Vector2 direction, float jumpPower,float iceSlipperiness)
         {
-            rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
+            if (spiderPosition.IsIce) { jumpPower *= iceSlipperiness; }
+            float dot = Vector2.Dot(rb.linearVelocity, direction);
+            rb.linearVelocity -= direction * dot; // Remove any velocity in the jump direction
+            rb.linearVelocity += direction * jumpPower; // Add the jump velocity
+
+            //rb.AddForce(direction * jumpPower, ForceMode2D.Impulse);
+
             spiderPosition.Jumpcalc(-1);
             spiderPosition.Clinging = false;
             jumping = true;
             StartCoroutine(MidJump(jumpingDuration));
         }
-       
-    public Vector2 JumpDirection(Vector2 controllerInput)
+
+        public Vector2 JumpDirection(Vector2 controllerInput)
         {
             // If no input, jump straight out from the surface; otherwise, average normal and input
             if (controllerInput == Vector2.zero)
                 return spiderPosition.SurfaceNormal;
             else
-                return (spiderPosition.SurfaceNormal + controllerInput).normalized ;
-        }       
-    
-    public IEnumerator MidJump(float waitTime)
+                return (spiderPosition.SurfaceNormal + controllerInput).normalized;
+        }
+
+        public IEnumerator MidJump(float waitTime)
         {
-            
+
             yield return new WaitForSeconds(waitTime);
             jumping = false;
             // Additional logic can be added here if needed after the wait

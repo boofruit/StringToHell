@@ -19,7 +19,7 @@ namespace StringToHell.InGame
         [SerializeField, Range(.0001f, 1f), Tooltip("determines how resistant diving is to wind")] float diveWindResistanceMultiplier = .2f;
 
         [SerializeField, Tooltip("the strength of the pull force")] float pullStrength = 10;
-
+        [SerializeField, Tooltip("ratio of jump power on ice")] float iceSlipperiness = .75f;
         [SerializeField, Tooltip("the force of the bungie jump")] float slingForce = 5f;
         [SerializeField, Tooltip("minimum tension that can applly bungie whip force")] float minSlingTension = .5f;
         [SerializeField, Tooltip("the maximum force from bungie jump")] float maxSlingForce = 100f;
@@ -57,7 +57,8 @@ namespace StringToHell.InGame
             // in FixedUpdate to ensure that it happens at the right time in the physics cycle.   
             if (jumpQueued)
             {
-                movement.Jump(movement.JumpDirection(input.Move).normalized, jumpPower);
+                Debug.Log("Jumping");
+                movement.Jump(movement.JumpDirection(input.Move).normalized, jumpPower, iceSlipperiness);
                 if (!spiderPosition.Clinging && silk.LineConnected)
                 {
                     slingjumpQueued = true;
@@ -80,37 +81,25 @@ namespace StringToHell.InGame
         {
 
 
-            if (!spiderPosition.Clinging)
+            if (!spiderPosition.Clingable)
             {
                 if (input.IsDiving.magnitude > .9f)
                 {
                     diveQueued = true;
                 }
 
-                if (!spiderPosition.Clingable)
-                {
-                    RotationControls.AirRotation();
-                    movement.AirMovement(input.Move, airSpeed);
-                }
+                RotationControls.AirRotation();
+                movement.AirMovement(input.Move, airSpeed);
             }
-            if (spiderPosition.Clingable)
+            if(spiderPosition.Clingable)
             {
                 movement.WallMovement(input.Move, moveSpeed,
                     silk.LineConnected && spiderPosition.Clinging ||
                     spiderPosition.Puff && spiderPosition.Clinging ? pullStrength : 0);
 
-                if (spiderPosition.Clinging && silk.LineConnected)
+                if (silk.LineConnected)
                 {
                     silk.CalculateStrech(slingForce, minSlingTension, maxSlingForce);
-                }
-
-                if (input.IsJump)
-                {
-                    //circlecast
-                    if (spiderPosition.CheckifGrounded())
-                    {
-                        jumpQueued = true;
-                    }
                 }
 
 
@@ -128,6 +117,16 @@ namespace StringToHell.InGame
                 RotationControls.ChangeDirection(input.Move);
 
             }
+
+            if (input.IsJump)
+            {
+                //circlecast
+                if (spiderPosition.CheckifGrounded())
+                {
+                    jumpQueued = true;
+                }
+            }
+
         }
     }
 }

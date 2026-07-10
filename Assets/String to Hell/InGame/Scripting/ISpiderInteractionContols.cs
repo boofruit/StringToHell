@@ -12,6 +12,7 @@ namespace StringToHell.InGame
         bool Grounded { get; }
         bool Clingable { get; }
         bool AutoCling { get; set; }
+        bool IsIce { get; }
 
         bool CheckifGrounded();
         void ClingSwitch();

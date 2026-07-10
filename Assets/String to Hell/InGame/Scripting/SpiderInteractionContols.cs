@@ -17,7 +17,7 @@ namespace StringToHell.InGame
         Rigidbody2D rb;
 
         [SerializeField, Tooltip("the percentage rate linear velocity is reduced when the spider hits a wall")] float WallStop = .5f;
-         [SerializeField, Tooltip("the percentage rate linear velocity is reduced when the spider hits wind")] float WindStop = .5f;
+        [SerializeField, Tooltip("the percentage rate linear velocity is reduced when the spider hits wind")] float WindStop = .5f;
         [SerializeField, Tooltip("the strength of the anti-gravity force while clinging")] float antiGravity = 0;
         [SerializeField, Tooltip("the strength of the grip force while clingint to ground directly")] float gripStrength = 10;
         [SerializeField, Tooltip("dampening when clinging to a surface while pulling thread or fighting wind")] float clingDampening = 10;
@@ -58,9 +58,11 @@ namespace StringToHell.InGame
         // public bool Clinging => clinging;
         bool grounded;
         public bool Grounded => grounded;
+        bool isIce;
+        public bool IsIce => isIce;
         //half the character height
         float legsLength;
-        
+
         private void Awake()
         {
             legsLength = GetComponentInChildren<SpriteRenderer>().bounds.extents.y + 0.1f;
@@ -95,7 +97,7 @@ namespace StringToHell.InGame
 
         public void ClingSwitch()
         {
-                Clinging = !Clinging;
+            Clinging = !Clinging;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -103,16 +105,16 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (entering.CompareTag("Wind"))
             {
-                puff = true; 
+                puff = true;
                 rb.linearVelocity *= WindStop;
-               var wind = entering.GetComponent<AreaEffector2D>();
+                var wind = entering.GetComponent<AreaEffector2D>();
 
                 if (wind.forceMagnitude > gravity)
                 {
                     //Takes the force direction from the wind
                     float angle = wind.forceAngle;
                     float rad = angle * Mathf.Deg2Rad;
-                    forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) ;
+                    forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
                 }
             }
             if (tagC.CheckTags(wallTags, entering.tag))
@@ -126,7 +128,7 @@ namespace StringToHell.InGame
                 // Compute the "normal" from that point to your object
                 Vector3 normal = (transform.position - closest).normalized;
 
-                if(WhenPlayerLeave(normal))
+                if (WhenPlayerLeave(normal))
                 {
                     Debug.Log("プレイヤーへの方向とプレイヤーの物理方向がだいたい一緒なので無視！");
                     return;
@@ -140,11 +142,11 @@ namespace StringToHell.InGame
                     //switchWalls = false;
                     StartCoroutine(WaitForSwitch());
                     Debug.Log("cling");
-                   // rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse); //problem child
+                    // rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Impulse); //problem child
                 }
                 clingable = true;
             }
-           
+
         }
 
         private bool WhenPlayerLeave(Vector2 toPlayerDir)
@@ -158,12 +160,12 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-                
+
                 if (Clinging)
                 {
-                   if (mC.Jumping) { return; }
+                    if (mC.Jumping) { return; }
                     rb.gravityScale = antiGravity;
-                    if (!grounded )
+                    if (!grounded)
                     {
                         Vector3 closest = collision.ClosestPoint(transform.position);
 
@@ -177,11 +179,12 @@ namespace StringToHell.InGame
                         rb.linearDamping = clingDampening;
                     }
                 }
-                else {
+                else
+                {
                     rb.gravityScale = baseGravityMultiplier;
                     rb.linearDamping = baseDampening;
                 }
-                
+
             }
         }
         private void OnTriggerExit2D(Collider2D collision)
@@ -193,32 +196,37 @@ namespace StringToHell.InGame
                 forceDirection = new Vector2(0, -1);
             }
             if (tagC.CheckTags(wallTags, entering.tag))
-            {  
-            
-                    clingable = false;
-                
+            {
+
+                clingable = false;
+
                 rb.gravityScale = baseGravityMultiplier;
                 currentWalls--;
             }
+            isIce = false;
 
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
             var touching = collision.gameObject;
 
-            if (tagC.CheckTags(wallTags, touching.tag))
+            if (touching.layer == LayerMask.NameToLayer("Ground"))
             {
-                grounded = true;
-                //Clinging = true;
-                jumpsLeft = MaxJumps;
-              rb.linearVelocity *= WallStop;
-                if(switchWalls)
+                float dot = Vector2.Dot(collision.GetContact(0).normal, rb.linearVelocity);
+                if (dot < 0)
                 {
-                    dR.RotateInstant(collision.GetContact(0).normal);
-                    switchWalls = false;
-                    StartCoroutine(WaitForSwitch());
+                    grounded = true;
+                    jumpsLeft = MaxJumps;
+                    rb.linearVelocity *= WallStop; // somtimes reduces velocity when trying to jump  thats why I added the dot check
+                    if (switchWalls)
+                    {
+                        dR.RotateInstant(collision.GetContact(0).normal);
+                        switchWalls = false;
+                        StartCoroutine(WaitForSwitch());
+                    }
                 }
             }
+          
         }
         IEnumerator WaitForSwitch()
         {
@@ -234,7 +242,7 @@ namespace StringToHell.InGame
             { sum += c.normal; }
 
             surfaceNormal = (sum / collision.contactCount).normalized;
-           
+
             //Debug.Log("Stay" + surfaceNormal);
 
             var touching = collision.gameObject;
@@ -248,20 +256,20 @@ namespace StringToHell.InGame
                 jumpsLeft = MaxJumps;
                 if (Clinging)
                 {
-                  rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
+                    rb.AddForce(-surfaceNormal * gripStrength, ForceMode2D.Force);
                 }
-               
+
             }
         }
 
-     
+
 
         private void OnCollisionExit2D(Collision2D collision)
         {
             var touching = collision.gameObject;
-            if (tagC.CheckTags(wallTags, touching.tag))
+            if (touching.layer == LayerMask.NameToLayer("Ground"))
             {
-               
+
                 grounded = false;
                 rb.linearDamping = baseDampening;
                 if (!switchWalls)
@@ -273,7 +281,11 @@ namespace StringToHell.InGame
         }
         public bool CheckifGrounded()
         {
-            bool isGrounded = Physics2D.CircleCast(transform.position, legsLength, -surfaceNormal,GroundCheckRadius, LayerMask.GetMask("Ground"));
+            var touching = Physics2D.CircleCast(transform.position, legsLength, -surfaceNormal, GroundCheckRadius, LayerMask.NameToLayer("Ground"));
+            bool isGrounded = touching;
+            isIce = touching.collider.CompareTag("Ice");
+            Debug.Log("Grounded: " + isGrounded);
+            grounded = isGrounded;
             //if (isGrounded)
             //{
             //    grounded = true;
