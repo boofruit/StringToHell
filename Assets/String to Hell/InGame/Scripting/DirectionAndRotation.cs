@@ -131,7 +131,7 @@ namespace StringToHell.InGame
 
                     else
                     {
-                    Debug.Log("normal input direction");
+                   // Debug.Log("normal input direction");
                         sr.localScale = new Vector2((currentInputDirection == Direction.Left) ? -1 : 1, 1);
 
                     }

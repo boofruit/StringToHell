@@ -281,11 +281,15 @@ namespace StringToHell.InGame
         }
         public bool CheckifGrounded()
         {
-            var touching = Physics2D.CircleCast(transform.position, legsLength, -surfaceNormal, GroundCheckRadius, LayerMask.NameToLayer("Ground"));
+            var touching = Physics2D.CircleCast(transform.position, legsLength, -surfaceNormal, GroundCheckRadius, LayerMask.GetMask("Ground"));
             bool isGrounded = touching;
-            isIce = touching.collider.CompareTag("Ice");
-            Debug.Log("Grounded: " + isGrounded);
-            grounded = isGrounded;
+            if (isGrounded)
+            {
+                isIce = touching.collider.CompareTag("Ice");
+                Debug.Log("Grounded: " + isGrounded);
+            }
+            else { isIce = false; }
+                grounded = isGrounded;
             //if (isGrounded)
             //{
             //    grounded = true;
