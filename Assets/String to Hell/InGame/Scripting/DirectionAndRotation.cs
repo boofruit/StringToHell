@@ -18,9 +18,12 @@ namespace StringToHell.InGame
             sr = GetComponentInChildren<SpriteRenderer>().transform;
             silk = GetComponentInChildren<IUnwindSilk>();
         }
-        bool IsReverse(Vector2 oldDirection, Vector2 newDirection)
+        bool IsReverse(Direction oldDirection, Direction newDirection)
         {
-            return Vector2.Dot(oldDirection, newDirection) < -0.9f;
+            return (oldDirection == Direction.Left && newDirection == Direction.Right) ||
+                   (oldDirection == Direction.Right && newDirection == Direction.Left) ||
+                   (oldDirection == Direction.Up && newDirection == Direction.Down) ||
+                   (oldDirection == Direction.Down && newDirection == Direction.Up);
         }
         public void AirRotation()
         {
@@ -31,7 +34,7 @@ namespace StringToHell.InGame
             if (velocity.magnitude > 1f)
             {
                 bool leftFacing = false;
-                if (currentInputDirection == Vector2.left) {leftFacing = true;}
+                if (currentInputDirection == Direction.Left) {leftFacing = true;}
                 rotationZ = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg + (leftFacing? 180f: 0f); 
             }
             sr.rotation = Quaternion.Euler(0, 0, rotationZ); // Keep only Z rotation
@@ -45,8 +48,8 @@ namespace StringToHell.InGame
             var oldDirection = SurafeceDirection(SpiderPositon.SurfaceNormal);
             if (IsReverse(oldDirection, newDirection))
             {
-                currentInputDirection = currentInputDirection == Vector2.left ? Vector2.right : Vector2.left;
-                sr.localScale = new Vector2((currentInputDirection == Vector2.left) ? -1 : 1, 1);
+                currentInputDirection = currentInputDirection == Direction.Left ? Direction.Right : Direction.Left;
+                sr.localScale = new Vector2((currentInputDirection == Direction.Left) ? -1 : 1, 1);
             }
         }
         public void RotateBody(float rotationSpeed)
@@ -55,69 +58,84 @@ namespace StringToHell.InGame
             Quaternion targetRot = Quaternion.Euler(0, 0, rotationZ); // Keep only Z rotation
             sr.rotation = Quaternion.Lerp(sr.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime);
         }
+        enum Direction
+        {
+            Up,
+            Down,
+            Left,
+            Right
+        }
 
-        Vector2 SurafeceDirection(Vector2 normal)
+        Direction SurafeceDirection(Vector2 normal)
         {
             bool isVertical = Mathf.Abs(normal.x) > Mathf.Abs(normal.y);
             if (isVertical)
             {
                 if (normal.x > 0)
                 {
-                    return Vector2.right;
+                    return Direction.Right;
                 }
                 else
                 {
-                    return Vector2.left;
+                    return Direction.Left;
                 }
             }
             else
             {
                 if (normal.y >= 0)
                 {
-                    return Vector2.up;
+                    return Direction.Up;
                 }
                 else
                 {
-                    return Vector2.down;
+                    return Direction.Down;
                 }
             }
         }
 
-        Vector2 currentInputDirection = Vector2.right;
-        Vector2 InputDirection(Vector2 controllerInput)
+        Direction currentInputDirection = Direction.Right;
+        Direction InputDirection(Vector2 controllerInput)
         {
             float InputX = controllerInput.x;
             float InputY = controllerInput.y;
-            Vector2 surfaceDirection = SurafeceDirection(SpiderPositon.SurfaceNormal);
-            
-            if(surfaceDirection == Vector2.up)
-                return InputX > 0 ? Vector2.right : InputX < 0 ? Vector2.left : currentInputDirection;
-            if(surfaceDirection == Vector2.down)
-                return InputX > 0 ? Vector2.left : InputX < 0 ? Vector2.right : currentInputDirection;
-            if(surfaceDirection != Vector2.left)
-                return InputY > 0 ? Vector2.right : InputY < 0 ? Vector2.left : currentInputDirection;
-            if(surfaceDirection == Vector2.right)
-                return InputY > 0 ? Vector2.left : InputY < 0 ? Vector2.right : currentInputDirection;
-
-            return currentInputDirection;
+            Direction surfaceDirection = SurafeceDirection(SpiderPositon.SurfaceNormal);
+            switch (surfaceDirection)
+            {
+                case Direction.Up:
+                    return InputX > 0 ? Direction.Right : InputX < 0 ? Direction.Left : currentInputDirection;
+                case Direction.Down:
+                    return InputX > 0 ? Direction.Left : InputX < 0 ? Direction.Right : currentInputDirection;
+                case Direction.Left:
+                    return InputY > 0 ? Direction.Right : InputY < 0 ? Direction.Left : currentInputDirection;
+                case Direction.Right:
+                    return InputY > 0 ? Direction.Left : InputY < 0 ? Direction.Right : currentInputDirection;
+                default:
+                    return currentInputDirection;
+            }
         }
-
         public void ChangeDirection(Vector2 newDirection)
-        {     
+        {
+            
+            
             currentInputDirection = InputDirection(newDirection);
             if (newDirection != Vector2.zero)
             {
-                Vector2 dir = InputDirection(-silk.SlingDirection);
+                Direction dir = InputDirection(-silk.SlingDirection);
                 if (silk.Tugging && SpiderPositon.Clinging && currentInputDirection == dir)
-                {      
-                    Debug.Log("Tugging");
-                    sr.localScale = new Vector2((currentInputDirection == Vector2.right) ? -1 : 1, 1);          
-                }
-                else
-                {
-                    // Debug.Log("normal input direction");
-                    sr.localScale = new Vector2((currentInputDirection == Vector2.left) ? -1 : 1, 1);
-                }       
+                    {
+                       
+                        Debug.Log("Tugging");
+                        sr.localScale = new Vector2((currentInputDirection == Direction.Right) ? -1 : 1, 1);
+                        
+                    }
+
+                    else
+                    {
+                   // Debug.Log("normal input direction");
+                        sr.localScale = new Vector2((currentInputDirection == Direction.Left) ? -1 : 1, 1);
+
+                    }
+                
             }
         }
     }
