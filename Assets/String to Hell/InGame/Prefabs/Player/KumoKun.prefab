@@ -1499,8 +1499,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0062555084, y: 7.457146e-10}
-  m_Size: {x: 1.8348391, y: 1.4800017}
+  m_Offset: {x: -0.0062555084, y: -0.1}
+  m_Size: {x: 1.8, y: 1.5}
   m_Direction: 1
 --- !u!331 &5018468356186674549
 SpriteMask:
@@ -1595,8 +1595,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.31, y: 1.9}
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 2.31, y: 1.75}
   m_Direction: 1
 --- !u!1 &7222159641033902003
 GameObject:
@@ -2277,7 +2277,7 @@ FixedJoint2D:
   m_BreakAction: 0
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -1.6726379, y: 0.112262726}
+  m_ConnectedAnchor: {x: -1.6726379, y: 0.11225891}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!4 &4506043546466511388 stripped
