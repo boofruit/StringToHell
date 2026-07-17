@@ -54,14 +54,14 @@ public class WindScroller : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = gizmosColor;
-        var sr = GetComponent<SpriteRenderer>();
-        var size = sr == null? Vector3.zero : sr.sprite.bounds.size;
-        size.x *= transform.localScale.x;
-        size.y *= transform.localScale.y;
-        size.z *= transform.localScale.z;
-        Gizmos.DrawWireCube(transform.position, size);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = gizmosColor;
+    //    var sr = GetComponentInChildren<SpriteRenderer>();
+    //    var size = sr == null? Vector3.zero : sr.sprite.bounds.size;
+    //    size.x *= transform.localScale.x;
+    //    size.y *= transform.localScale.y;
+    //    size.z *= transform.localScale.z;
+    //    Gizmos.DrawWireCube(transform.position, size);
+    //}
 }
