@@ -9,7 +9,7 @@ namespace StringToHell.InGame.GameManager
         [SerializeField, Tooltip("")] string[] ReloadTags;
         TagCheck tagC;
 
-
+       
         public Vector3 checkPoint;
         [SerializeField] GameObject StartCheckpoint;
         // Start is called once before the first execution of Update after the MonoBehaviour is created

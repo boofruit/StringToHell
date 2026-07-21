@@ -121,7 +121,7 @@ namespace StringToHell.InGame
                     float rad = angle * Mathf.Deg2Rad;
                     forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
                 }
-                lastWind = entering.GetComponent<Wind>();
+                lastWind = entering.GetComponentInChildren<Wind>();
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
