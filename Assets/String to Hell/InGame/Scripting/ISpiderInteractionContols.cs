@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using StringToHell.InGame.Scripting;
+using UnityEngine;
 
 namespace StringToHell.InGame
 {
@@ -13,6 +14,7 @@ namespace StringToHell.InGame
         bool Clingable { get; }
         bool AutoCling { get; set; }
         bool IsIce { get; }
+        ITerrain CurrentTerrain { get; }
 
         bool CheckifGrounded();
         void ClingSwitch();

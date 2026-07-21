@@ -10,7 +10,7 @@ namespace StringToHell.InGame
         Transform tf;
         Rigidbody2D rb;
         [SerializeField] Space moveMode = Space.Self;
-        [SerializeField, Tooltip("")] float jumpingDuration = .5f;
+        //[SerializeField, Tooltip("")] float jumpingDuration = .5f;
 
         ISpiderInteractionContols spiderPosition;
         bool canDive = true;
@@ -102,7 +102,7 @@ namespace StringToHell.InGame
             return dot >= cosThreshold;
         }
 
-        public void Jump(Vector2 direction, float jumpPower,float iceSlipperiness)
+        public void Jump(Vector2 direction, float jumpPower,float iceSlipperiness, float jumpCooldown)
         {
             if (spiderPosition.IsIce) { jumpPower *= iceSlipperiness; }
             float dot = Vector2.Dot(rb.linearVelocity, direction);
@@ -114,7 +114,7 @@ namespace StringToHell.InGame
             spiderPosition.Jumpcalc(-1);
             spiderPosition.Clinging = false;
             jumping = true;
-            StartCoroutine(MidJump(jumpingDuration));
+            StartCoroutine(MidJump(jumpCooldown));
         }
 
         public Vector2 JumpDirection(Vector2 controllerInput)

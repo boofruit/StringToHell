@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2369242242194453039}
   - component: {fileID: 6486051775869315483}
   - component: {fileID: 4914033148607600492}
+  - component: {fileID: 5969311721003308954}
   m_Layer: 10
   m_Name: Shaped Ground
   m_TagString: Ground
@@ -582,3 +583,17 @@ MonoBehaviour:
     - rid: 2828914039317856457
       type: {class: ShadowShape2DProvider_SpriteShape, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &5969311721003308954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240690224165780630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4389d190d7247649941f47db0eecede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Terrain
+  wallStop: 0.5
+  jumpCooldown: 0.5

@@ -58,7 +58,8 @@ namespace StringToHell.InGame
             if (jumpQueued)
             {
                 Debug.Log("Jumping");
-                movement.Jump(movement.JumpDirection(input.Move).normalized, jumpPower, iceSlipperiness);
+                float jumpCooldown = spiderPosition.CurrentTerrain.JumpCooldown;
+                movement.Jump(movement.JumpDirection(input.Move).normalized, jumpPower, iceSlipperiness, jumpCooldown);
                 if (!spiderPosition.Clinging && silk.LineConnected)
                 {
                     slingjumpQueued = true;
@@ -121,7 +122,7 @@ namespace StringToHell.InGame
             if (input.IsJump)
             {
                 //circlecast
-                if (spiderPosition.CheckifGrounded())
+                if (spiderPosition.CheckifGrounded() && !movement.Jumping)
                 {
                     jumpQueued = true;
                 }

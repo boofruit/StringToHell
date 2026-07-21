@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace StringToHell.InGame
@@ -30,16 +31,21 @@ namespace StringToHell.InGame
                 StartCoroutine(BlowWind());
             }
         }
-        private void OnCollisionExit2D(Collision2D collision)
-        {
-            var other = collision.gameObject;
-            if (other.CompareTag("Player"))
-            {
-                baseWindSpeed = wind.forceMagnitude;
 
-            }
+        //void OnTriggerEnter2D(Collider2D col)
+        //{
+        //    if (col.CompareTag("Player"))
+        //    {
+        //        gameObject.layer = LayerMask.NameToLayer("ActiveWind");
+        //        wind.colliderMask += LayerMask.Equals("Player")
+        //    }
+        //}
+        //void OnTriggerExit2D(Collider2D col)
+        //{
+        //    if (col.CompareTag("Player"))
+        //        gameObject.layer = LayerMask.NameToLayer("Wind");
+        //}
 
-        }
 
         IEnumerator BlowWind()
         {
@@ -70,7 +76,7 @@ namespace StringToHell.InGame
             while (elapsedTime < pauseDuration)
             {
                 elapsedTime += Time.deltaTime;
-                wind.forceMagnitude = 0;
+                wind.forceMagnitude = pauseWindSpeed;
                 yield return null;
             }
             StartCoroutine(BlowWind());

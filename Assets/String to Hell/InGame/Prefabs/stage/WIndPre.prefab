@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1511338561536500156}
   - component: {fileID: 9104036890802284840}
+  - component: {fileID: 1228723819050440797}
   - component: {fileID: 7566561506677746872}
   - component: {fileID: 1676934808633366838}
   - component: {fileID: 7109403646770883919}
   - component: {fileID: 4712963293162551679}
   - component: {fileID: 8407964398897608211}
-  - component: {fileID: 1228723819050440797}
   - component: {fileID: 5363940370072331690}
   m_Layer: 11
   m_Name: WIndPre
@@ -54,7 +54,7 @@ AreaEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 3967
+    m_Bits: 0
   m_UseGlobalAngle: 1
   m_ForceAngle: 0
   m_ForceMagnitude: 30
@@ -62,6 +62,24 @@ AreaEffector2D:
   m_ForceTarget: 0
   m_LinearDamping: 0
   m_AngularDamping: 0
+--- !u!114 &1228723819050440797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606100134514019595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb645e1c1ecfd4747a84b87078931eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.Wind
+  windSpeedVariation: 0
+  maxwindAngle: 0
+  minwindAngle: 0
+  blowDuration: 0
+  pauseDuration: 0
+  pauseWindSpeed: 0
 --- !u!114 &7566561506677746872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +223,7 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -296,7 +314,7 @@ SpriteShapeRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Color: {r: 0.78751576, g: 1, b: 0, a: 0.5529412}
   m_ShapeTexture: {fileID: 0}
@@ -416,24 +434,6 @@ MonoBehaviour:
   - {x: 2.4117594, y: -0.9179321}
   - {x: -0.43603876, y: -1.0630777}
   m_ShadowSegment: []
---- !u!114 &1228723819050440797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606100134514019595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb645e1c1ecfd4747a84b87078931eb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.Wind
-  windSpeedVariation: 0
-  maxwindAngle: 0
-  minwindAngle: 0
-  blowDuration: 0
-  pauseDuration: 0
-  pauseWindSpeed: 0
 --- !u!114 &5363940370072331690
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 
+using StringToHell.InGame.Scripting;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace StringToHell.InGame
 {
     public class SpiderInteractionContols : MonoBehaviour, ISpiderInteractionContols
     {
+        ITerrain terrain;
+        public ITerrain CurrentTerrain => terrain;
         IDirectionAndRotation dR;
         IUnwindSilk silk;
         IMovement mC;
@@ -16,7 +19,7 @@ namespace StringToHell.InGame
 
         Rigidbody2D rb;
 
-        [SerializeField, Range(-1, 1), Tooltip("the percentage rate linear velocity is reduced when the spider hits a wall")] float WallStop = .5f;
+        //[SerializeField, Range(-1, 1), Tooltip("the percentage rate linear velocity is reduced when the spider hits a wall")] float WallStop = .5f;
         [SerializeField, Range(-1, 1), Tooltip("the percentage rate linear velocity is reduced when the spider hits wind")] float WindStop = .5f;
         [SerializeField, Range(0, 1), Tooltip("the strength of the anti-gravity force while clinging")] float antiGravity = 0;
         [SerializeField, Range(0, 20), Tooltip("the strength of the grip force while clingint to ground directly")] float gripStrength = 10;
@@ -62,6 +65,7 @@ namespace StringToHell.InGame
         public bool IsIce => isIce;
         //half the character height
         float legsLength;
+        Wind lastWind;
 
         private void Awake()
         {
@@ -105,7 +109,8 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (entering.CompareTag("Wind"))
             {
-                puff = true;
+                if (lastWind != null) { lastWind.gameObject.layer = LayerMask.NameToLayer("Wind"); }
+                    puff = true;
                 rb.linearVelocity *= WindStop;
                 var wind = entering.GetComponent<AreaEffector2D>();
 
@@ -116,9 +121,11 @@ namespace StringToHell.InGame
                     float rad = angle * Mathf.Deg2Rad;
                     forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
                 }
+                lastWind = entering.GetComponent<Wind>();
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
+                terrain = entering.GetComponent<ITerrain>();
                 if (AutoCling)
                 {
                     Clinging = true;
@@ -163,7 +170,7 @@ namespace StringToHell.InGame
 
                 if (Clinging)
                 {
-                    if (mC.Jumping) { return; }
+                    //if (mC.Jumping) { return; }
                     rb.gravityScale = antiGravity;
                     if (!grounded)
                     {
@@ -215,9 +222,10 @@ namespace StringToHell.InGame
                 float dot = Vector2.Dot(collision.GetContact(0).normal, rb.linearVelocity);
                 if (dot < 0)
                 {
+                    terrain = touching.GetComponent<ITerrain>();
                     grounded = true;
                     jumpsLeft = MaxJumps;
-                    rb.linearVelocity *= WallStop; // somtimes reduces velocity when trying to jump  thats why I added the dot check
+                    rb.linearVelocity *= terrain.WallStopRate; // somtimes reduces velocity when trying to jump  thats why I added the dot check
                     if (switchWalls)
                     {
                         dR.RotateInstant(collision.GetContact(0).normal);
@@ -249,7 +257,7 @@ namespace StringToHell.InGame
 
             if (tagC.CheckTags(wallTags, touching.tag))
             {
-                if (mC.Jumping) { return; }
+                //if (mC.Jumping) { return; }
                 grounded = true;
                 clingable = true;
                 dR.RotateBody(rotationSpeed);
