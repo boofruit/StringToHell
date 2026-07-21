@@ -16,15 +16,15 @@ namespace StringToHell.InGame
 
         Rigidbody2D rb;
 
-        [SerializeField, Tooltip("the percentage rate linear velocity is reduced when the spider hits a wall")] float WallStop = .5f;
-        [SerializeField, Tooltip("the percentage rate linear velocity is reduced when the spider hits wind")] float WindStop = .5f;
-        [SerializeField, Tooltip("the strength of the anti-gravity force while clinging")] float antiGravity = 0;
-        [SerializeField, Tooltip("the strength of the grip force while clingint to ground directly")] float gripStrength = 10;
-        [SerializeField, Tooltip("dampening when clinging to a surface while pulling thread or fighting wind")] float clingDampening = 10;
-        [SerializeField, Tooltip("the strength of the pulling force towards ground while clinging")] float snapStrength = 10;
-        [SerializeField, Tooltip("speed which spider sprite/collider rotates along a surface")] float rotationSpeed = 2f;
-        [SerializeField, Tooltip("time to automatically rotate spider sprite/collider towards a new surface")] float WallSwitchTimer = 1f;
-        [SerializeField, Tooltip("the radius of the ground check for jumping")] float GroundCheckRadius = 0.5f;
+        [SerializeField, Range(-1, 1), Tooltip("the percentage rate linear velocity is reduced when the spider hits a wall")] float WallStop = .5f;
+        [SerializeField, Range(-1, 1), Tooltip("the percentage rate linear velocity is reduced when the spider hits wind")] float WindStop = .5f;
+        [SerializeField, Range(0, 1), Tooltip("the strength of the anti-gravity force while clinging")] float antiGravity = 0;
+        [SerializeField, Range(0, 20), Tooltip("the strength of the grip force while clingint to ground directly")] float gripStrength = 10;
+        [SerializeField, Range(0, 20), Tooltip("dampening when clinging to a surface while pulling thread or fighting wind")] float clingDampening = 10;
+        [SerializeField, Range(0, 20), Tooltip("the strength of the pulling force towards ground while clinging")] float snapStrength = 10;
+        [SerializeField, Range(0, 5), Tooltip("speed which spider sprite/collider rotates along a surface")] float rotationSpeed = 2f;
+        [SerializeField, Range(0, 1), Tooltip("time to automatically rotate spider sprite/collider towards a new surface")] float WallSwitchTimer = 1f;
+        [SerializeField, Range(0, 1), Tooltip("the radius of the ground check for jumping")] float GroundCheckRadius = 0.5f;
 
         [SerializeField, Tooltip("an array of tags that represent ground surfaces")] string[] wallTags;
         // represents the normal vector of the surface that the spider is currently in contact with.
