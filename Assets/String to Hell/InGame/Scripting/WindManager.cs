@@ -5,9 +5,10 @@ namespace StringToHell.InGame
 {
     public class WindManager : MonoBehaviour
     {
-        private List<Wind> zones = new List<Wind>();
-        private Wind current;
+        private List<IWind> zones = new List<IWind>();
+        private IWind current;
         private Rigidbody2D rb;
+        public float maxWindForce = 0;
 
         void Awake()
         {
@@ -16,7 +17,7 @@ namespace StringToHell.InGame
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            var zone = col.GetComponentInChildren<Wind>();
+            var zone = col.GetComponentInChildren<IWind>();
             if (zone != null)
             {
                 zones.Add(zone);
@@ -26,7 +27,7 @@ namespace StringToHell.InGame
 
         void OnTriggerExit2D(Collider2D col)
         {
-            var zone = col.GetComponentInChildren<Wind>();
+            var zone = col.GetComponentInChildren<IWind>();
             if (zone != null)
             {
                 zones.Remove(zone);
@@ -45,7 +46,7 @@ namespace StringToHell.InGame
             // Pick the strongest wind zone
             current = zones[0];
             foreach (var z in zones)
-                if (z.windForce > current.windForce)
+                if (z.WindForce > current.WindForce)
                     current = z;
         }
 
@@ -53,9 +54,9 @@ namespace StringToHell.InGame
         {
             if (current == null)
                 return;
-
+            float finalForce = maxWindForce == 0f ? current.WindForce : Mathf.Clamp(current.WindForce, 0f, maxWindForce);
             // Apply ONLY the strongest wind zone's force
-            rb.AddForce(current.Direction * current.windForce);
+            rb.AddForce(current.WindDirection * current.WindForce);
         }
     }
 }

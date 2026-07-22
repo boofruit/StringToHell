@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace StringToHell.InGame
 {
-    public class Wind : MonoBehaviour
+    public class Wind : MonoBehaviour, IWind
     {
-        [SerializeField,Tooltip("")]
+        [SerializeField, Tooltip("")]
         float windSpeedVariation = 0f;
-        [SerializeField,Range(0, 360), Tooltip("")]
+        [SerializeField, Range(0, 360), Tooltip("")]
         float maxwindAngle = 0f;
-        [SerializeField,Range(0, 360), Tooltip("")]
+        [SerializeField, Range(0, 360), Tooltip("")]
         float minwindAngle = 0f;
         [SerializeField, Tooltip("")]
         float blowDuration = 0f;
@@ -18,13 +18,18 @@ namespace StringToHell.InGame
         float pauseDuration = 0f;
         [SerializeField, Tooltip("")]
         float pauseWindSpeed = 0f;
-        AreaEffector2D wind;
+       
         private float baseWindSpeed;
 
-        public float windForce = 10f;
+        [SerializeField, Range(0, 100), Tooltip("")]
+        float windForce = 10f;
 
-        public Vector2 Direction => transform.up;
+        public float WindForce => windForce;
 
+        public Vector2 WindDirection => transform.up;
+        
+
+      
         void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
@@ -40,55 +45,57 @@ namespace StringToHell.InGame
             Gizmos.DrawLine(end, end + right * 0.4f);
             Gizmos.DrawLine(end, end + left * 0.4f);
         }
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-//        void Start()
-//        {
-//            wind = GetComponent<AreaEffector2D>();
-//            baseWindSpeed = wind.forceMagnitude;
-//            if (blowDuration > 0f)
-//            {
-//                StartCoroutine(BlowWind());
-//            }
-//        }
+       
+                void Start()
+        {
+           
+            baseWindSpeed = windForce;
+            if (blowDuration > 0f)
+            {
+                StartCoroutine(BlowWind());
+            }
+        }
 
 
 
-//        IEnumerator BlowWind()
-//        {
-//            float elapsedTime = 0f;
-//            float targetAngle = Random.Range(minwindAngle, maxwindAngle);
-//            float targetSpeed = Random.Range(baseWindSpeed - windSpeedVariation, baseWindSpeed + windSpeedVariation);
-//            while (elapsedTime < blowDuration)
-//            {
-//                elapsedTime += Time.deltaTime;
-//                float t = elapsedTime / blowDuration;
-//                // Lerp the wind angle and speed
-//                if(minwindAngle != 0f)
-//                {
-//                wind.forceAngle = targetAngle;
-//                wind.forceMagnitude = Mathf.Lerp(wind.forceMagnitude, targetSpeed, t);
+        IEnumerator BlowWind()
+        {
+            float elapsedTime = 0f;
+            float targetAngle = Random.Range(minwindAngle, maxwindAngle);
+            float targetSpeed = Random.Range(baseWindSpeed - windSpeedVariation, baseWindSpeed + windSpeedVariation);
+            while (elapsedTime < blowDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / blowDuration;
+                // Lerp the wind angle and speed
+                if (minwindAngle != 360f)
+                {
+                    float rotationYDegrees = transform.eulerAngles.y;
+                    float currentRotation = transform.rotation.z;
+                    float rad = targetAngle * Mathf.Deg2Rad;
+                    float rotation = Mathf.Lerp(currentRotation, targetAngle, t);
+                    transform.rotation = Quaternion.Euler(0, 0, rotation);
 
-//                }
-//                else { 
-//                wind.forceMagnitude = baseWindSpeed;
-//                }
-//                yield return null;
-//            }
-//            StartCoroutine(PauseWind());
-//        }
-//        IEnumerator PauseWind()
-//        {
-//            float elapsedTime = 0f;
-//            while (elapsedTime < pauseDuration)
-//            {
-//                elapsedTime += Time.deltaTime;
-//                wind.forceMagnitude = pauseWindSpeed;
-//                yield return null;
-//            }
-//            StartCoroutine(BlowWind());
-//        }
+                }
+                    windForce = Mathf.Lerp(windForce, targetSpeed, t);
+              
+                yield return null;
+            }
+            StartCoroutine(PauseWind());
+        }
+        IEnumerator PauseWind()
+        {
+            float elapsedTime = 0f;
+            while (elapsedTime < pauseDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                windForce = pauseWindSpeed;
+                yield return null;
+            }
+            StartCoroutine(BlowWind());
+        }
     }
-    
+
 
 
 

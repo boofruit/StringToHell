@@ -65,7 +65,7 @@ namespace StringToHell.InGame
         public bool IsIce => isIce;
         //half the character height
         float legsLength;
-        Wind lastWind;
+        IWind lastWind;
 
         private void Awake()
         {
@@ -109,19 +109,20 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (entering.CompareTag("Wind"))
             {
-                if (lastWind != null) { lastWind.gameObject.layer = LayerMask.NameToLayer("Wind"); }
+                
                     puff = true;
                 rb.linearVelocity *= WindStop;
-                var wind = entering.GetComponent<AreaEffector2D>();
+                var wind = entering.GetComponentInChildren<IWind>();
 
-                if (wind.forceMagnitude > gravity)
+                if (wind.WindForce > gravity)
                 {
                     //Takes the force direction from the wind
-                    float angle = wind.forceAngle;
-                    float rad = angle * Mathf.Deg2Rad;
-                    forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+                    //float angle = wind.forceAngle;
+                    //float rad = angle * Mathf.Deg2Rad;
+                    //forceDirection = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+                    forceDirection = wind.WindDirection;
                 }
-                lastWind = entering.GetComponentInChildren<Wind>();
+                lastWind = wind;
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
@@ -165,6 +166,14 @@ namespace StringToHell.InGame
         private void OnTriggerStay2D(Collider2D collision)
         {
             var entering = collision.gameObject;
+            if (entering.CompareTag("Wind"))
+            {
+                puff = true;
+                if (lastWind.WindForce > gravity)
+                {
+                    forceDirection = lastWind.WindDirection;
+                }
+            }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
 
@@ -197,6 +206,9 @@ namespace StringToHell.InGame
         private void OnTriggerExit2D(Collider2D collision)
         {
             var entering = collision.gameObject;
+
+            int ALayer = LayerMask.NameToLayer("ActiveWind");
+
             if (entering.CompareTag("Wind"))
             {
                 puff = false;
