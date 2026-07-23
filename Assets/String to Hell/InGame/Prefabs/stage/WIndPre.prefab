@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1511338561536500156}
-  - component: {fileID: 9104036890802284840}
   - component: {fileID: 7566561506677746872}
   - component: {fileID: 1676934808633366838}
   - component: {fileID: 7109403646770883919}
@@ -42,26 +41,6 @@ Transform:
   - {fileID: 5303603234944515702}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!249 &9104036890802284840
-AreaEffector2D:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606100134514019595}
-  m_Enabled: 0
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 0
-  m_UseGlobalAngle: 1
-  m_ForceAngle: 0
-  m_ForceMagnitude: 30
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_LinearDamping: 0
-  m_AngularDamping: 0
 --- !u!114 &7566561506677746872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,7 +64,7 @@ MonoBehaviour:
     moveRate: 0.35
     mat: {fileID: 0}
   gizmosColor: {r: 0, g: 1, b: 0, a: 1}
-  ratioSpeedToMagnitude: 0.02
+  ratioSpeedToMagnitude: 0.03
 --- !u!82 &1676934808633366838
 AudioSource:
   m_ObjectHideFlags: 0
@@ -223,7 +202,7 @@ PolygonCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -711,9 +690,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5303603234944515702}
   - component: {fileID: 8464081943147833923}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wind
-  m_TagString: Untagged
+  m_TagString: Wind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -726,13 +705,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7759639321781413389}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.12403626, y: -0.6186224, z: 0}
   m_LocalScale: {x: 0.19028929, y: 3.265306, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1511338561536500156}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &8464081943147833923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.Wind
   windSpeedVariation: -5
   maxwindAngle: 0
-  minwindAngle: 360
+  minwindAngle: -1
   blowDuration: 0
   pauseDuration: 0
   pauseWindSpeed: 0

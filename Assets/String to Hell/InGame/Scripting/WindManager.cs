@@ -10,28 +10,36 @@ namespace StringToHell.InGame
         private Rigidbody2D rb;
         public float maxWindForce = 0;
 
-        void Awake()
+        void Awake() 
         {
             rb = GetComponent<Rigidbody2D>();
         }
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            var zone = col.GetComponentInChildren<IWind>();
-            if (zone != null)
+            var entering = col.gameObject;
+            if (entering.CompareTag("Wind"))
             {
-                zones.Add(zone);
-                UpdateCurrent();
+                var zone = col.GetComponentInChildren<IWind>();
+                if (zone != null)
+                {
+                    zones.Add(zone);
+                    UpdateCurrent();
+                }
             }
         }
 
         void OnTriggerExit2D(Collider2D col)
         {
-            var zone = col.GetComponentInChildren<IWind>();
-            if (zone != null)
+            var entering = col.gameObject;
+            if (entering.CompareTag("Wind"))
             {
-                zones.Remove(zone);
-                UpdateCurrent();
+                var zone = col.GetComponentInChildren<IWind>();
+                if (zone != null)
+                {
+                    zones.Remove(zone);
+                    UpdateCurrent();
+                }
             }
         }
 
@@ -45,6 +53,7 @@ namespace StringToHell.InGame
 
             // Pick the strongest wind zone
             current = zones[0];
+           
             foreach (var z in zones)
                 if (z.WindForce > current.WindForce)
                     current = z;
@@ -56,7 +65,10 @@ namespace StringToHell.InGame
                 return;
             float finalForce = maxWindForce == 0f ? current.WindForce : Mathf.Clamp(current.WindForce, 0f, maxWindForce);
             // Apply ONLY the strongest wind zone's force
-            rb.AddForce(current.WindDirection * current.WindForce);
+            Vector2 effectorVelocity = current.WindDirection * finalForce * Time.fixedDeltaTime;
+            rb.linearVelocity += effectorVelocity;
+            //Debug.Log("風だよ");
+            //rb.AddForce(current.WindDirection * finalForce);
         }
     }
 }

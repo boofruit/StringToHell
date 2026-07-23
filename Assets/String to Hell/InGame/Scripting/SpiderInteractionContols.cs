@@ -206,9 +206,6 @@ namespace StringToHell.InGame
         private void OnTriggerExit2D(Collider2D collision)
         {
             var entering = collision.gameObject;
-
-            int ALayer = LayerMask.NameToLayer("ActiveWind");
-
             if (entering.CompareTag("Wind"))
             {
                 puff = false;
@@ -216,7 +213,6 @@ namespace StringToHell.InGame
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-
                 clingable = false;
 
                 rb.gravityScale = baseGravityMultiplier;
@@ -232,6 +228,11 @@ namespace StringToHell.InGame
             if (touching.layer == LayerMask.NameToLayer("Ground"))
             {
                 float dot = Vector2.Dot(collision.GetContact(0).normal, rb.linearVelocity);
+                if (WhenPlayerLeave(surfaceNormal))
+                {
+                    Debug.Log("プレイヤーへの方向とプレイヤーの物理方向がだいたい一緒なので無視！");
+                    return;
+                }
                 if (dot < 0)
                 {
                     terrain = touching.GetComponent<ITerrain>();
@@ -271,7 +272,7 @@ namespace StringToHell.InGame
             {
                 //if (mC.Jumping) { return; }
                 grounded = true;
-                clingable = true;
+              //  clingable = true;
                 dR.RotateBody(rotationSpeed);
                 jumpsLeft = MaxJumps;
                 if (Clinging)
@@ -289,7 +290,7 @@ namespace StringToHell.InGame
             var touching = collision.gameObject;
             if (touching.layer == LayerMask.NameToLayer("Ground"))
             {
-
+               // clingable = false;
                 grounded = false;
                 rb.linearDamping = baseDampening;
                 if (!switchWalls)

@@ -8,9 +8,9 @@ namespace StringToHell.InGame
     {
         [SerializeField, Tooltip("")]
         float windSpeedVariation = 0f;
-        [SerializeField, Range(0, 360), Tooltip("")]
+        [SerializeField, Range(-1, 360), Tooltip("")]
         float maxwindAngle = 0f;
-        [SerializeField, Range(0, 360), Tooltip("")]
+        [SerializeField, Range(-1, 360), Tooltip("")]
         float minwindAngle = 0f;
         [SerializeField, Tooltip("")]
         float blowDuration = 0f;
@@ -26,7 +26,7 @@ namespace StringToHell.InGame
 
         public float WindForce => windForce;
 
-        public Vector2 WindDirection => transform.up;
+        public Vector2 WindDirection => transform.right;
         
 
       
@@ -35,12 +35,12 @@ namespace StringToHell.InGame
             Gizmos.color = Color.yellow;
 
             Vector3 start = transform.position;
-            Vector3 end = start + transform.up * 1.5f;
+            Vector3 end = start + transform.right * 1.5f;
 
             Gizmos.DrawLine(start, end);
 
-            Vector3 right = Quaternion.Euler(0, 0, 20) * (-transform.up);
-            Vector3 left = Quaternion.Euler(0, 0, -20) * (-transform.up);
+            Vector3 right = Quaternion.Euler(0, 0, 20) * (-transform.right);
+            Vector3 left = Quaternion.Euler(0, 0, -20) * (-transform.right);
 
             Gizmos.DrawLine(end, end + right * 0.4f);
             Gizmos.DrawLine(end, end + left * 0.4f);
@@ -61,17 +61,19 @@ namespace StringToHell.InGame
         IEnumerator BlowWind()
         {
             float elapsedTime = 0f;
-            float targetAngle = Random.Range(minwindAngle, maxwindAngle);
+            float targetAngle = Random.Range(minwindAngle  ,maxwindAngle ) ;
             float targetSpeed = Random.Range(baseWindSpeed - windSpeedVariation, baseWindSpeed + windSpeedVariation);
+            float currentRotation = transform.eulerAngles.z;
+           
             while (elapsedTime < blowDuration)
             {
                 elapsedTime += Time.deltaTime;
                 float t = elapsedTime / blowDuration;
                 // Lerp the wind angle and speed
-                if (minwindAngle != 360f)
+                if (minwindAngle != -1f)
                 {
                     float rotationYDegrees = transform.eulerAngles.y;
-                    float currentRotation = transform.rotation.z;
+                   
                     float rad = targetAngle * Mathf.Deg2Rad;
                     float rotation = Mathf.Lerp(currentRotation, targetAngle, t);
                     transform.rotation = Quaternion.Euler(0, 0, rotation);
