@@ -63,5 +63,8 @@ TagManager:
   - name: masking
     uniqueID: 2631527839
     locked: 0
+  - name: see
+    uniqueID: 2601953043
+    locked: 0
   m_RenderingLayers:
   - Default

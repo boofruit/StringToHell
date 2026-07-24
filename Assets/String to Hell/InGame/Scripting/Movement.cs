@@ -63,6 +63,7 @@ namespace StringToHell.InGame
 
             if (spiderPosition.Puff && !floating && IsWithinAngle(diveDirection, inputDirection, 45f))
             {
+                Debug.Log("Float input");
                 rb.linearVelocity = inputDirection;
                 rb.AddForce(diveDirection * (divePower), ForceMode2D.Impulse);
                 canDive = true;
@@ -72,9 +73,10 @@ namespace StringToHell.InGame
 
         public void Dive(Vector2 diveDirection, Vector2 inputDirection, float divePower, float windMultiplier)
         {
-            if (inputDirection != new Vector2(0, -1)) { inputDirection *= -1; }
-            if (canDive && IsWithinAngle(diveDirection, inputDirection, 45f))
+            //if (inputDirection != new Vector2(0, -1)) { inputDirection *= -1; }
+            if (canDive && IsWithinAngle(diveDirection , inputDirection , 45f))
             {
+                Debug.Log("diving");
                 if (!spiderPosition.Puff)
                 {
                     rb.linearVelocity *= 0f;

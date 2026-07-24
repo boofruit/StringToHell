@@ -936,6 +936,7 @@ GameObject:
   - component: {fileID: 6623785238860500577}
   - component: {fileID: 1588696009022856765}
   - component: {fileID: 948601872238663074}
+  - component: {fileID: 756944173297297432}
   m_Layer: 3
   m_Name: KumoKun
   m_TagString: Player
@@ -971,10 +972,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef129cbd4cc37c34099798767f62346a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpiderCon
-  WindStop: 0.5
+  WindStop: 0.75
   antiGravity: 0
   gripStrength: 15
-  clingDampening: 0
+  clingDampening: 5
   snapStrength: 15
   rotationSpeed: 3
   WallSwitchTimer: 0.5
@@ -1016,7 +1017,7 @@ SpringJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: 75
+  m_BreakForce: 50
   m_BreakTorque: Infinity
   m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 0
@@ -1291,9 +1292,9 @@ MonoBehaviour:
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
   m_ShadowsEnabled: 1
-  m_ShadowIntensity: 0.75
-  m_ShadowSoftness: 0.3
-  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowIntensity: 0.5
+  m_ShadowSoftness: 1
+  m_ShadowSoftnessFalloffIntensity: 0.02
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
@@ -1367,6 +1368,19 @@ MonoBehaviour:
     showGizmo: 1
   - color: {r: 0, g: 1, b: 0, a: 1}
     showGizmo: 1
+--- !u!114 &756944173297297432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153542357159673093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e918872cc0b5a424e997bef66479ff70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.WindManager
+  maxWindForce: 0
 --- !u!1 &5920759894860704509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,7 +1512,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: -0.0062555084, y: -0.1}
-  m_Size: {x: 1.8, y: 1.5}
+  m_Size: {x: 2, y: 1.5}
   m_Direction: 1
 --- !u!331 &5018468356186674549
 SpriteMask:
@@ -1594,7 +1608,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.1}
-  m_Size: {x: 2.31, y: 1.75}
+  m_Size: {x: 2.5, y: 2}
   m_Direction: 1
 --- !u!1 &7222159641033902003
 GameObject:

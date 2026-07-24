@@ -74,7 +74,7 @@ namespace StringToHell.InGame
             if (diveQueued)
             {
                 movement.Dive(input.Move, spiderPosition.ForceDirection, divePower, diveWindResistanceMultiplier);
-                movement.Float(input.Move, spiderPosition.ForceDirection, floatPower);
+                movement.Float(input.Move, spiderPosition.ForceDirection *-1, floatPower);
                 diveQueued = false;
             }
         }

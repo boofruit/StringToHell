@@ -86,13 +86,7 @@ namespace StringToHell.InGame
             dR = GetComponent<IDirectionAndRotation>();
             silk = GetComponentInChildren<IUnwindSilk>();
         }
-        private void OnJointBreak2D(Joint2D joint)
-        {
-            //if( joint.enabled ) {return; }
-            joint.enabled = false;
-            joint.connectedBody = null;
-            silk.Extinguish();
-        }
+       
         public void Jumpcalc(int Jmp)
         {
             Jmp = Mathf.Abs(Jmp);
@@ -109,9 +103,12 @@ namespace StringToHell.InGame
             var entering = collision.gameObject;
             if (entering.CompareTag("Wind"))
             {
-                
+
+                if (!puff)
+                {
+                    rb.linearVelocity *= WindStop;
                     puff = true;
-                rb.linearVelocity *= WindStop;
+                }
                 var wind = entering.GetComponentInChildren<IWind>();
 
                 if (wind.WindForce > gravity)
@@ -214,6 +211,7 @@ namespace StringToHell.InGame
             if (tagC.CheckTags(wallTags, entering.tag))
             {
                 clingable = false;
+                Debug.Log($"{entering.name} / {entering.tag}");
 
                 rb.gravityScale = baseGravityMultiplier;
                 currentWalls--;
@@ -235,6 +233,7 @@ namespace StringToHell.InGame
                 }
                 if (dot < 0)
                 {
+                   
                     terrain = touching.GetComponent<ITerrain>();
                     grounded = true;
                     jumpsLeft = MaxJumps;

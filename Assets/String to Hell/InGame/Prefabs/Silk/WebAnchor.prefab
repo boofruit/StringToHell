@@ -150,7 +150,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 948c195d750d92d4b9a294994df300d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -278,7 +278,6 @@ MonoBehaviour:
   Segments: []
   textureTilingMultiplier: 1
   spacing: 0
-  windForce: 0
   maxWindForce: 19.62
 --- !u!68 &5591287513541311596
 EdgeCollider2D:
