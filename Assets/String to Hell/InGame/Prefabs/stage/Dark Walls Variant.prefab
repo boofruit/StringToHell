@@ -5713,15 +5713,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5003289272331326178, guid: 2aa447ca07f774846b8cda99d392cd53, type: 3}
       propertyPath: m_Color.b
-      value: 0.5188679
+      value: 0.6981132
       objectReference: {fileID: 0}
     - target: {fileID: 5003289272331326178, guid: 2aa447ca07f774846b8cda99d392cd53, type: 3}
       propertyPath: m_Color.g
-      value: 0.5188679
+      value: 0.6981132
       objectReference: {fileID: 0}
     - target: {fileID: 5003289272331326178, guid: 2aa447ca07f774846b8cda99d392cd53, type: 3}
       propertyPath: m_Color.r
-      value: 0.5188679
+      value: 0.6981132
       objectReference: {fileID: 0}
     - target: {fileID: 5003289272331326178, guid: 2aa447ca07f774846b8cda99d392cd53, type: 3}
       propertyPath: m_ShapeTexture

@@ -124,7 +124,7 @@ namespace StringToHell.InGame
                 if (silk.Tugging && SpiderPositon.Clinging && currentInputDirection == dir)
                     {
                        
-                        Debug.Log("Tugging");
+                        //Debug.Log("Tugging");
                         sr.localScale = new Vector2((currentInputDirection == Direction.Right) ? -1 : 1, 1);
                         
                     }

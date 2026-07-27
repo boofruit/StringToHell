@@ -6,7 +6,7 @@ namespace StringToHell.InGame
 {
     public class Movement : MonoBehaviour, IMovement
     {
-        public Animator spiderAnime;
+        
         Transform tf;
         Rigidbody2D rb;
         [SerializeField] Space moveMode = Space.Self;
@@ -35,10 +35,7 @@ namespace StringToHell.InGame
         }
         public void WallMovement(Vector2 controllerInput, float moveSpeed, float pullStrength)
         {
-            if (controllerInput != Vector2.zero)
-            {
-                spiderAnime.SetTrigger("Walk");
-            }
+           
             moveSpeed += pullStrength;
             // Project input onto the surface plane
             Vector2 move = controllerInput - Vector2.Dot(controllerInput, spiderPosition.SurfaceNormal) * spiderPosition.SurfaceNormal;
@@ -64,7 +61,7 @@ namespace StringToHell.InGame
             if (spiderPosition.Puff && !floating && IsWithinAngle(diveDirection, inputDirection, 45f))
             {
                 Debug.Log("Float input");
-                rb.linearVelocity = inputDirection;
+               // rb.linearVelocity = inputDirection;
                 rb.AddForce(diveDirection * (divePower), ForceMode2D.Impulse);
                 canDive = true;
                 floating = true;

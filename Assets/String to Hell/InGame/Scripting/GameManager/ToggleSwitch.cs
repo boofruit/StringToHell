@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //https://www.youtube.com/watch?v=E9AWlbPGi_4
 namespace StringToHell.InGame.GameManager
 {
-    public class ToggleSwitch : MonoBehaviour, IPointerClickHandler
+    public class ToggleSwitch : MonoBehaviour//, IPointerClickHandler
     {
         [Header("Slider setup")]
         [SerializeField, Range(0, 1f)]
@@ -76,7 +76,7 @@ namespace StringToHell.InGame.GameManager
             SetupSliderComponent();
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void Click()
         {
             Toggle();
         }
@@ -109,8 +109,8 @@ namespace StringToHell.InGame.GameManager
                     onToggleOff?.Invoke();
             }
 
-            if (_animateSliderCoroutine != null)
-                StopCoroutine(_animateSliderCoroutine);
+            //if (_animateSliderCoroutine != null)
+            //    StopCoroutine(_animateSliderCoroutine);
 
             _animateSliderCoroutine = StartCoroutine(AnimateSlider());
         }
@@ -126,7 +126,7 @@ namespace StringToHell.InGame.GameManager
             {
                 while (time < animationDuration)
                 {
-                    time += Time.deltaTime;
+                    time += Time.unscaledDeltaTime;
 
                     float lerpFactor = slideEase.Evaluate(time / animationDuration);
                     _slider.value = sliderValue = Mathf.Lerp(startValue, endValue, lerpFactor);

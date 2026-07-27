@@ -226,11 +226,11 @@ namespace StringToHell.InGame
             if (touching.layer == LayerMask.NameToLayer("Ground"))
             {
                 float dot = Vector2.Dot(collision.GetContact(0).normal, rb.linearVelocity);
-                if (WhenPlayerLeave(surfaceNormal))
-                {
-                    Debug.Log("プレイヤーへの方向とプレイヤーの物理方向がだいたい一緒なので無視！");
-                    return;
-                }
+                //if (WhenPlayerLeave(surfaceNormal))
+                //{
+                //   // Debug.Log("プレイヤーへの方向とプレイヤーの物理方向がだいたい一緒なので無視！");
+                //    return;
+                //}
                 if (dot < 0)
                 {
                    

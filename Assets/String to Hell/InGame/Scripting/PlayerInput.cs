@@ -1,9 +1,11 @@
+using StringToHell.InGame.GameManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 namespace StringToHell.InGame
 {
     public class PlayerInput : MonoBehaviour, IMovementInput, IUiInput
     {
+        public Menu Menu;
         Vector2 move;
         public Vector2 Move => move;
         public float MoveMagnitude => move.magnitude;
@@ -72,11 +74,13 @@ namespace StringToHell.InGame
 
         private void Update()
         {
+            openMenu = openMenuAction.WasPressedThisFrame();
+            if (Menu.TimePaused) { return; }
             jump = jumpAction.WasPressedThisFrame();
             move = moveAction.ReadValue<Vector2>();
             dive = diveAction.ReadValue<Vector2>();
             grab = grabAction.WasPressedThisFrame();
-            openMenu = openMenuAction.WasPressedThisFrame();
+            
 
             spinnerOn = webSpawnAction.WasPressedThisFrame();
             spinnerHold = webSpawnAction.IsPressed();

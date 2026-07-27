@@ -1,6 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
+using System;
+// come back to this its messy
 
 namespace StringToHell.InGame.GameManager
 {
@@ -13,7 +15,8 @@ namespace StringToHell.InGame.GameManager
         ISpiderInteractionContols interactionContols;
         bool start;
         public float TimeLength = 2f;
-
+        bool timePaused = false;
+        public bool TimePaused => timePaused;
         void Start()
         {
            
@@ -42,7 +45,18 @@ namespace StringToHell.InGame.GameManager
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
         }
-
+        public void PauseTime()
+        {
+            timePaused = !timePaused;
+            if (TimePaused)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+        }
         public bool IsPaused { get; private set; }
 
         public void TogglePause()
@@ -55,8 +69,9 @@ namespace StringToHell.InGame.GameManager
 
         public void PauseGame()
         {
-            Time.timeScale = 0f;
+            
             pauseMenu.SetActive(true);
+            PauseTime();
             IsPaused = true;
         }
 
@@ -64,9 +79,9 @@ namespace StringToHell.InGame.GameManager
         {
          
                 pauseMenu.SetActive(false);
-            
 
-            Time.timeScale = 1f;
+
+            PauseTime();
             IsPaused = false;
         }
     }
