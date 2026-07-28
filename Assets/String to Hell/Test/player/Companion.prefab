@@ -154,11 +154,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6291141533575230424}
   - component: {fileID: 1737459960818842990}
-  - component: {fileID: 2558100900171624300}
   - component: {fileID: 6874457622118393512}
-  m_Layer: 0
+  - component: {fileID: 2333723268404926805}
+  - component: {fileID: 2314908642989237603}
+  - component: {fileID: 6946369316019078974}
+  m_Layer: 9
   m_Name: Companion
-  m_TagString: Untagged
+  m_TagString: Companion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,20 +246,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2558100900171624300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509327326346226262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 580563cec901e664c8915cc7f373ec67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FollowVertical: 1
-  speed: 1
 --- !u!58 &6874457622118393512
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -294,6 +282,56 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.0030110679, y: 0.015029907}
   m_Radius: 0.6502838
+--- !u!114 &2333723268404926805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509327326346226262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004ed2a39780f564c88bcaad179c1f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatingObject
+  speedX: 0.5
+  speedY: 8
+  speedZ: 2
+  amplitudeX: 6
+  amplitudeY: 0.5
+  amplitudeZ: 0.5
+  movableX: 1
+  movableY: 1
+  movableZ: 0
+  isRandom: 0
+--- !u!114 &2314908642989237603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509327326346226262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c01166f700c8154199f04a79503a12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveFlipper
+  facingLeftImage: 1
+  coolTime: 0.2
+--- !u!114 &6946369316019078974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509327326346226262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c72c1acdf44774b8c3801b96a7361d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetChaser
+  target: {fileID: 0}
+  speed: 1
 --- !u!1 &851867610279300760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,7 +2250,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.5377358, g: 0, b: 0, a: 0.98039216}
+  m_Color: {r: 0.5377358, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
