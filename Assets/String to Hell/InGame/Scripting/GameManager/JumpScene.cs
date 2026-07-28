@@ -2,7 +2,7 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
+
 
 public class JumpScene : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class JumpScene : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Time.timeScale = 1.0f;
         //Turn.text = "Turn " + GameManager.Turn.ToString("D2");
         if (target == null)
         {
@@ -25,6 +25,7 @@ public class JumpScene : MonoBehaviour
     public void jumpScene(string jumpSceneName)
     {
         SceneManager.LoadScene(jumpSceneName);
+        
     }
     public void ToggleActive()
     {

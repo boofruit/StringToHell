@@ -19,7 +19,8 @@ namespace StringToHell.InGame.GameManager
         public bool TimePaused => timePaused;
         void Start()
         {
-           
+            timePaused = false;
+            Time.timeScale = 1f;
             if (player == null)
             {
                 player = GameObject.FindGameObjectWithTag("Player");
