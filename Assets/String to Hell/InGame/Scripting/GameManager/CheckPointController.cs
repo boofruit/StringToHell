@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace StringToHell.InGame.GameManager
 {
@@ -41,9 +42,13 @@ namespace StringToHell.InGame.GameManager
 
             // Wait for the animation to end
             yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Death"));
+            
             menu.PauseTime();
             transform.position = checkPoint;
+            Vector3 pos =  new Vector3 (transform.position.x, transform.position.y, -10);
             velocityController.SpiderReset();
+            Camera.main.transform.position = pos;
+
             Debug.Log("Reloading to Checkpoint: " + checkPoint);
            
         }
