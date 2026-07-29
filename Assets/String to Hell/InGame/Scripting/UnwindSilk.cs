@@ -100,6 +100,10 @@ namespace StringToHell.InGame
             dist.distance = segmentSpacing;
             dist.frequency = frequency;
             dist.dampingRatio = dampingRatio;
+            BaseJoint.autoConfigureDistance = false;
+            BaseJoint.distance = segmentSpacing;
+            BaseJoint.frequency = frequency;
+            BaseJoint.dampingRatio = dampingRatio;
             lastSpawnPoint = spawnPoint;
 
         }

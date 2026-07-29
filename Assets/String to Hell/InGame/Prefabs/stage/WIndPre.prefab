@@ -217,15 +217,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.43603876, y: -1.0630777}
-      - {x: -2.88281, y: -0.6425273}
-      - {x: -3.8615317, y: 0.08859767}
-      - {x: -1.7384593, y: 0.9146211}
-      - {x: 1.0000153, y: 1.0000024}
-      - {x: 3.2391715, y: 0.64546615}
-      - {x: 4.2714324, y: -0.29319108}
-      - {x: 2.4117594, y: -0.9179321}
-      - {x: -0.43603876, y: -1.0630777}
+    - - {x: -0.43730047, y: -1.0628597}
+      - {x: 3.2391715, y: 0.64546484}
+      - {x: 4.2703934, y: -0.29292238}
+      - {x: -0.43730047, y: -1.0628597}
   m_UseDelaunayMesh: 1
 --- !u!1971053207 &4712963293162551679
 SpriteShapeRenderer:
@@ -277,12 +272,21 @@ SpriteShapeRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_MaskInteraction: 0
-  m_Color: {r: 0.78751576, g: 1, b: 0, a: 0.5529412}
-  m_ShapeTexture: {fileID: 0}
-  m_Sprites: []
+  m_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 0.043137256}
+  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprites:
+  - {fileID: 21300000, guid: 5d658d1a9cdcfd4438588e6361e9c09a, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0.20495033, y: -0.031537652, z: 0}
-    m_Extent: {x: 4.066482, y: 1.03154, z: 0}
+    m_Center: {x: 0.44605136, y: -0.03154111, z: 0}
+    m_Extent: {x: 4.308479, y: 1.0322757, z: 0}
   m_SpriteSortPoint: 0
 --- !u!114 &8407964398897608211
 MonoBehaviour:
@@ -363,14 +367,14 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 0}
-  m_FillPixelPerUnit: 100
+  m_SpriteShape: {fileID: 11400000, guid: 054c7a49874f7c14bad9d7bd637a5a03, type: 2}
+  m_FillPixelPerUnit: 161.32
   m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
   m_StretchUV: 0
   m_WorldSpaceUV: 0
-  m_CornerAngleThreshold: 30
+  m_CornerAngleThreshold: 0
   m_ColliderDetail: 16
   m_ColliderOffset: 0
   m_UpdateCollider: 1
@@ -385,15 +389,10 @@ MonoBehaviour:
   m_Creator: {fileID: 0}
   m_Modifiers: []
   m_ColliderSegment:
-  - {x: -0.43603876, y: -1.0630777}
-  - {x: -2.88281, y: -0.6425273}
-  - {x: -3.8615317, y: 0.08859767}
-  - {x: -1.7384593, y: 0.9146211}
-  - {x: 1.0000153, y: 1.0000024}
-  - {x: 3.2391715, y: 0.64546615}
-  - {x: 4.2714324, y: -0.29319108}
-  - {x: 2.4117594, y: -0.9179321}
-  - {x: -0.43603876, y: -1.0630777}
+  - {x: -0.43730047, y: -1.0628597}
+  - {x: 3.2391715, y: 0.64546484}
+  - {x: 4.2703934, y: -0.29292238}
+  - {x: -0.43730047, y: -1.0628597}
   m_ShadowSegment: []
 --- !u!114 &5363940370072331690
 MonoBehaviour:
@@ -402,7 +401,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606100134514019595}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2801750306c5a354eb5ff9e72e7bc765, type: 3}
   m_Name: 
