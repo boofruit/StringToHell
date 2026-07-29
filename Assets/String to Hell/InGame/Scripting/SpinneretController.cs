@@ -25,7 +25,7 @@ namespace StringToHell.InGame
 
         private void Awake()
         {
-            BaseSpring = GetComponentInParent<SpringJoint2D>();
+            BaseSpring = GetComponent<SpringJoint2D>();
             BaseSpring.distance = segmentSpacing;
             BaseSpring.frequency = frequency;
             BaseSpring.dampingRatio = dampingRatio;

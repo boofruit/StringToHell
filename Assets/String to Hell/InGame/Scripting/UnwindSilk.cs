@@ -32,7 +32,7 @@ namespace StringToHell.InGame
         {
             tf = transform;
             spawner = this.gameObject;
-            BaseJoint = GetComponentInParent<SpringJoint2D>();
+            BaseJoint = GetComponent<SpringJoint2D>();
         }
         public void Extinguish()
         {
@@ -152,6 +152,7 @@ namespace StringToHell.InGame
                 return; // No tension, no force
             rb.linearDamping = 1;
             //rb.linearVelocity *= 0f;
+            Debug.Log("bungie"+ bungieForce);
             rb.AddForce(slingDirection * bungieForce, ForceMode2D.Impulse);
             bungieForce = 0;
             slingDirection = Vector2.zero;

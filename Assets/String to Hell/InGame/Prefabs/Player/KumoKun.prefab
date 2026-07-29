@@ -790,6 +790,10 @@ GameObject:
   - component: {fileID: 9081457593511733779}
   - component: {fileID: 2540144789293616905}
   - component: {fileID: 1941679202362806241}
+  - component: {fileID: 1339294699521739364}
+  - component: {fileID: 2298366187932748542}
+  - component: {fileID: 5904723829130710327}
+  - component: {fileID: 8740350009188435204}
   m_Layer: 0
   m_Name: Spinneret
   m_TagString: Player
@@ -805,12 +809,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2514759795621056409}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05543744, y: -0.99846214, z: -0, w: 0}
-  m_LocalPosition: {x: -0.044, y: -0.005, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0000000037252899, w: 1}
+  m_LocalPosition: {x: -1.6294556, y: -0.06758118, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6029447597256048385}
+  m_Father: {fileID: 6721505925330374437}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9081457593511733779
 MonoBehaviour:
@@ -857,6 +861,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.UnwindSilk
   segmentPrefab: {fileID: 8276223906079929710, guid: c29b3fa61e112d748a4c53411d07df39, type: 3}
   line: {fileID: 0}
+--- !u!50 &1339294699521739364
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514759795621056409}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.01
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &2298366187932748542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514759795621056409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ac0e67b859a3f458ea07fd88930bb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.JointManager
+--- !u!231 &5904723829130710327
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514759795621056409}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: 75
+  m_BreakTorque: Infinity
+  m_BreakAction: 2
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: -0.56999993}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 0.25
+  m_DampingRatio: 0.8
+  m_Frequency: 5
+--- !u!255 &8740350009188435204
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514759795621056409}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 1003941126892400896}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 0
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: -1.6294556, y: -0.06758118}
+  m_DampingRatio: 0
+  m_Frequency: 0
 --- !u!1 &2661488810408089363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,6 +1827,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6201589775702029216}
   - {fileID: 2261337115786877681}
   - {fileID: 298698299091107943}
   - {fileID: 1088178318326703248}
@@ -2977,9 +3061,6 @@ PrefabInstance:
       addedObject: {fileID: 2469788145498391394}
     - targetCorrespondingSourceObject: {fileID: -4564960988414851400, guid: b36101f7b01ad3f43a9c427bded8e612, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6201589775702029216}
-    - targetCorrespondingSourceObject: {fileID: -4564960988414851400, guid: b36101f7b01ad3f43a9c427bded8e612, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7618648059245270436}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -5863008256843691878, guid: b36101f7b01ad3f43a9c427bded8e612, type: 3}
@@ -2991,9 +3072,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -5863008256843691878, guid: b36101f7b01ad3f43a9c427bded8e612, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4844112254424566077}
-    - targetCorrespondingSourceObject: {fileID: -5863008256843691878, guid: b36101f7b01ad3f43a9c427bded8e612, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 512091252720295292}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: b36101f7b01ad3f43a9c427bded8e612, type: 3}
 --- !u!4 &218488164021877776 stripped
 Transform:
@@ -3137,18 +3215,6 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: -1.6726379, y: -0.057739258}
   m_DampingRatio: 0
   m_Frequency: 0
---- !u!114 &512091252720295292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4442958829195718947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ac0e67b859a3f458ea07fd88930bb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.JointManager
 --- !u!4 &4506043546466511388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3279262872824239013, guid: b36101f7b01ad3f43a9c427bded8e612, type: 3}
