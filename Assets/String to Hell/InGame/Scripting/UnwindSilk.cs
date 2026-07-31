@@ -5,6 +5,7 @@ namespace StringToHell.InGame
 {
     public class UnwindSilk : MonoBehaviour, IUnwindSilk
     {
+        ISpiderInteractionContols spiderPostion;
         Transform tf;
         Rigidbody2D anchor;
         // Where rope starts
@@ -30,6 +31,7 @@ namespace StringToHell.InGame
 
         void Start()
         {
+            spiderPostion = GetComponentInParent<ISpiderInteractionContols>();
             tf = transform;
             spawner = this.gameObject;
             BaseJoint = GetComponent<SpringJoint2D>();
@@ -48,7 +50,9 @@ namespace StringToHell.InGame
 
         public void StartThread(Rigidbody2D newAnchor, float spacing)
         {
-            if(lineConnnected) { return; }
+            if(lineConnnected) {
+                if (!spiderPostion.Clingable) { isUnwinding = true; }
+                return; }
             segmentSpacing = spacing;
             lineConnnected = true;
             anchor = newAnchor;
