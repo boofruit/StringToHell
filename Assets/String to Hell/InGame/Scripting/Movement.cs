@@ -1,5 +1,3 @@
-using NUnit.Framework.Internal;
-using StringToHell.InGame;
 using UnityEngine;
 using System.Collections;
 namespace StringToHell.InGame

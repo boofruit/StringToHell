@@ -1,16 +1,17 @@
 using UnityEngine;
-
-public class Wait : MonoBehaviour
+using System.Collections;
+using System;
+namespace StringToHell.InGame
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static class Wait
     {
-        
-    }
+        public static IEnumerator DoWait(float waitTime, Action ToDo)
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            yield return new WaitForSeconds(waitTime);
+           
+            // Additional logic can be added here if needed after the wait
+            ToDo?.Invoke();
+        }
     }
 }

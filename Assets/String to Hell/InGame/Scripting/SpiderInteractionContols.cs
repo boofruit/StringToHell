@@ -86,6 +86,17 @@ namespace StringToHell.InGame
             dR = GetComponent<IDirectionAndRotation>();
             silk = GetComponentInChildren<IUnwindSilk>();
         }
+        void Update()
+        {
+            if (puff && clingable && Clinging || silk.LineConnected && Clinging)
+            {
+                rb.linearDamping = clingDampening;
+            }
+            else
+            {
+                rb.linearDamping = baseDampening;
+            }
+        }
        
         public void Jumpcalc(int Jmp)
         {
@@ -173,7 +184,7 @@ namespace StringToHell.InGame
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
-
+                clingable = true;
                 if (Clinging)
                 {
                     //if (mC.Jumping) { return; }
@@ -187,15 +198,11 @@ namespace StringToHell.InGame
                         surfaceNormal = normal;
                         rb.AddForce(-surfaceNormal * snapStrength, ForceMode2D.Force);
                     }
-                    if (puff || silk.LineConnected)
-                    {
-                        rb.linearDamping = clingDampening;
-                    }
+                   
                 }
                 else
                 {
                     rb.gravityScale = baseGravityMultiplier;
-                    rb.linearDamping = baseDampening;
                 }
 
             }
@@ -292,7 +299,7 @@ namespace StringToHell.InGame
                // clingable = false;
                 grounded = false;
                 rb.linearDamping = baseDampening;
-                if (!switchWalls)
+                if (!switchWalls && gameObject.activeSelf)
                 {
                     StartCoroutine(WaitForSwitch());
                 }

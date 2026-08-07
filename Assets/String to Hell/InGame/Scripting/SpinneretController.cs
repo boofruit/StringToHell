@@ -22,7 +22,7 @@ namespace StringToHell.InGame
         [SerializeField] float spacingMultiplier = 1.5f;
         SpringJoint2D BaseSpring;
         Transform tf;
-
+        bool stringCooldown = false;
         private void Awake()
         {
             BaseSpring = GetComponent<SpringJoint2D>();
@@ -46,17 +46,24 @@ namespace StringToHell.InGame
             if (spiderPosition.Clingable)
             {
                 
-                if (input.IsSpinnerOn)
+                if (input.IsSpinnerOn && !stringCooldown)
                 {
+                    stringCooldown = true;
+                    StartCoroutine(Wait.DoWait(0f, () =>
+                    {
+                        stringCooldown = false;
+                    }));
                     spiderPosition.Clinging = true;
                     var anchorObj = web.PlaceAnchor(tf.position);
-                    silk.ConnectLine(anchorObj);
+                    silk.ConnectLine(anchorObj, frequency, dampingRatio);
                     silk.StartThread(anchorObj.GetComponent<Rigidbody2D>(), segmentSpacing) ;
-                   
-                   
                     web.LastString = anchorObj;
                     
                 }
+            }
+            else if (input.IsSpinnerOn && web.LastString != null)
+            {
+                silk.StartThread(web.LastString.GetComponent<Rigidbody2D>(), segmentSpacing);
             }
 
             if (input.IsSpinnerHold)

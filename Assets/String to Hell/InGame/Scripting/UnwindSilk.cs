@@ -19,10 +19,12 @@ namespace StringToHell.InGame
 
         StringManager stringManager;
         bool isUnwinding = false;
+        public bool IsUnwinding => isUnwinding;
         bool lineConnnected = false;
         public bool LineConnected => lineConnnected;
         Vector2 lastSpawnPoint;
         float segmentSpacing;
+        float maxSegLength;
         bool tugging = false;
         public bool Tugging => tugging;
         Vector2 slingDirection;
@@ -40,7 +42,8 @@ namespace StringToHell.InGame
         {
             //segments.Remove(spawner.transform);
             stringManager.Segments.Remove(spawner.transform);
-            
+            BaseJoint.connectedBody = null;
+            BaseJoint.enabled = false;
             segments.Clear();
             tugging = false;
             isUnwinding = false;
@@ -50,9 +53,11 @@ namespace StringToHell.InGame
 
         public void StartThread(Rigidbody2D newAnchor, float spacing)
         {
-            if(lineConnnected) {
-                if (!spiderPostion.Clingable) { isUnwinding = true; }
-                return; }
+            if(lineConnnected || !spiderPostion.Clingable) {
+                if (!spiderPostion.Clingable && lineConnnected)
+                { isUnwinding = true; }
+                return; 
+            }
             segmentSpacing = spacing;
             lineConnnected = true;
             anchor = newAnchor;
@@ -69,9 +74,13 @@ namespace StringToHell.InGame
         }
         public void StopThread()
         {
-            if(segments.Count == 0|| !lineConnnected || !isUnwinding) return;
-           // segments.Add(spawner.transform);
-            stringManager.Segments.Add(spawner.transform);
+            if (segments.Count == 0 || !lineConnnected || !isUnwinding) return;
+         
+            if (!stringManager.Segments.Contains(spawner.transform))
+            {
+               // segments.Add(spawner.transform);
+                stringManager.Segments.Add(spawner.transform); 
+            }
             BaseJoint.enabled = true;
             isUnwinding = false;
            // Debug.Log("Holding Thread");
@@ -80,10 +89,34 @@ namespace StringToHell.InGame
 
         public void AddSegment( int maxSegementsLength, float frequency, float dampingRatio, float spacingMultiplier)
         {
-            if (!isUnwinding || segments.Count >= maxSegementsLength || segments.Count == 0) return;
+            if (!isUnwinding || segments.Count == 0 || !lineConnnected) return;
+            if (segments.Count >= maxSegementsLength)
+            {
+                StopThread();
+                return;
+            }
             spawnPoint = tf.position;
             if ((spawnPoint - lastSpawnPoint).magnitude < segmentSpacing * spacingMultiplier) return;
-           
+
+            if (stringManager.Segments.Contains(spawner.transform))
+            {
+                //segments.Remove(spawner.transform);
+               // Debug.Log("Removing spawner from segments");
+                stringManager.Segments.Remove(spawner.transform);
+            }
+
+            SilkSpawn(frequency, dampingRatio);
+            stringManager.Segments.Add(spawner.transform);
+            BaseJoint.connectedBody = segments.LastOrDefault()?.GetComponent<Rigidbody2D>();
+            BaseJoint.enabled = true;
+            BaseJoint.autoConfigureDistance = false;
+            BaseJoint.distance = segmentSpacing;
+            BaseJoint.frequency = frequency;
+            BaseJoint.dampingRatio = dampingRatio;
+        }
+
+        public void SilkSpawn(float frequency, float dampingRatio)
+        {
             Transform last = segments.LastOrDefault();
 
             Vector2 newPos = last.position - last.up * segmentSpacing;
@@ -97,20 +130,18 @@ namespace StringToHell.InGame
             SpringJoint2D dist = seg.GetComponent<SpringJoint2D>();
 
             dist.connectedBody = last.GetComponent<Rigidbody2D>();
-            BaseJoint.connectedBody = segments.LastOrDefault()?.GetComponent<Rigidbody2D>();
-            BaseJoint.enabled = true;
+           
+            //segments.Add(spawner.transform);
+            
             //// Distance joint for elasticity
             dist.autoConfigureDistance = false;
             dist.distance = segmentSpacing;
             dist.frequency = frequency;
             dist.dampingRatio = dampingRatio;
-            BaseJoint.autoConfigureDistance = false;
-            BaseJoint.distance = segmentSpacing;
-            BaseJoint.frequency = frequency;
-            BaseJoint.dampingRatio = dampingRatio;
+          
             lastSpawnPoint = spawnPoint;
-
         }
+      
 
         //public void BungieSling(float slingForce)
         //{
@@ -154,7 +185,7 @@ namespace StringToHell.InGame
 
             if (!tugging)
                 return; // No tension, no force
-            rb.linearDamping = 1;
+           
             //rb.linearVelocity *= 0f;
             Debug.Log("bungie"+ bungieForce);
             rb.AddForce(slingDirection * bungieForce, ForceMode2D.Impulse);
@@ -169,10 +200,13 @@ namespace StringToHell.InGame
             BaseJoint.enabled = false;
             Extinguish();
         }
-        public void ConnectLine(GameObject WebJoint)
+        public void ConnectLine(GameObject WebJoint, float frequency, float dampingRatio)
         {
             if (!lineConnnected || segments.Count == 0 || isUnwinding) return;
-            
+            if (segments.Count < 2)
+            {
+                SilkSpawn(frequency, dampingRatio);
+            }
             var lastSegment = segments.LastOrDefault()?.GetComponent<Rigidbody2D>();
             if (lastSegment != null)
             {
@@ -183,20 +217,20 @@ namespace StringToHell.InGame
             }
             Extinguish();
         }
-
-        public void UpdateLineRenderer()
-        {
-            if (segments.Count == 0) return;
-            line.positionCount = segments.Count;
-            int index = 0;
-            foreach (var seg in segments)
-            {
-                line.SetPosition(index++, seg.position);
-            }
-            // Optional: tile texture based on rope length
-            float totalLength = (line.positionCount) * segmentSpacing;
-            line.material.mainTextureScale = new Vector2(totalLength, 1);
-        }
+       
+        //public void UpdateLineRenderer()
+        //{
+        //    if (segments.Count == 0) return;
+        //    line.positionCount = segments.Count;
+        //    int index = 0;
+        //    foreach (var seg in segments)
+        //    {
+        //        line.SetPosition(index++, seg.position);
+        //    }
+        //    // Optional: tile texture based on rope length
+        //    float totalLength = (line.positionCount) * segmentSpacing;
+        //    line.material.mainTextureScale = new Vector2(totalLength, 1);
+        //}
     }
 }
 
