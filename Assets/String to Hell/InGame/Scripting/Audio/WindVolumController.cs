@@ -1,6 +1,7 @@
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using StringToHell.InGame;
 
 public class WindVolumeController : MonoBehaviour
 {
@@ -16,10 +17,13 @@ public class WindVolumeController : MonoBehaviour
     [Header("Fade")]
     [SerializeField] private float fadeDistance = 10f;
 
+    Wind wind;
+
     private EventInstance instance;
 
     private void Start()
     {
+        wind = GetComponent<Wind>();
         instance = RuntimeManager.CreateInstance(audioEvent);
         instance.start();
     }
@@ -38,7 +42,7 @@ public class WindVolumeController : MonoBehaviour
         bool inside = zone.OverlapPoint(listenerPosition);
 
         float volume;
-
+        float windSpeed = wind.WindForce;
         if (inside)
         {
             volume = 1f;
