@@ -331,8 +331,8 @@ MonoBehaviour:
       Data4: -1771671723
     Path: "event:/\u98A8\u304C\u5439\u304F1"
   Event: 
-  EventPlayTrigger: 5
-  EventStopTrigger: 6
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0

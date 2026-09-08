@@ -25,7 +25,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 812366110971583162}
   cacheVersion: 131860
-  cacheTime: 639243892928310513
+  cacheTime: 639244591473558224
   SerializableEventsDict:
   - key: "event:/\u98A8\u304C\u5439\u304F1"
     index: 0
@@ -86,10 +86,10 @@ MonoBehaviour:
   Path: ../../Audio/STH/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639243892928310513
+  lastModified: 639244591473558224
   FileSizes:
   - Name: Desktop
-    Value: 2220288
+    Value: 2220896
   Exists: 1
 --- !u!114 &5901746523362968427
 MonoBehaviour:
@@ -139,7 +139,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 4970719375276082050}
   IsStream: 1
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
