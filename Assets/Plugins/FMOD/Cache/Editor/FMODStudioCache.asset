@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1669997574899965603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/\u98A8\u304C\u5439\u304F1/WindZoneFade"
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: WindZoneFade
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4293037765
+    data2: 158374481
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25,7 +49,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 812366110971583162}
   cacheVersion: 131860
-  cacheTime: 639244591473558224
+  cacheTime: 639245669653448637
   SerializableEventsDict:
   - key: "event:/\u98A8\u304C\u5439\u304F1"
     index: 0
@@ -46,10 +70,10 @@ MonoBehaviour:
   Path: ../../Audio/STH/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639243789259598459
+  lastModified: 639245669651977166
   FileSizes:
   - Name: Desktop
-    Value: 864
+    Value: 918
   Exists: 1
 --- !u!114 &3263293035934865980
 MonoBehaviour:
@@ -66,7 +90,7 @@ MonoBehaviour:
   Path: ../../Audio/STH/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639243789259482690
+  lastModified: 639245669651927038
   FileSizes:
   - Name: Desktop
     Value: 1074
@@ -86,10 +110,10 @@ MonoBehaviour:
   Path: ../../Audio/STH/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639244591473558224
+  lastModified: 639245669653448637
   FileSizes:
   - Name: Desktop
-    Value: 2220896
+    Value: 2220992
   Exists: 1
 --- !u!114 &5901746523362968427
 MonoBehaviour:
@@ -139,9 +163,10 @@ MonoBehaviour:
   Banks:
   - {fileID: 4970719375276082050}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -1669997574899965603}
   MinDistance: 1
   MaxDistance: 20
   Length: 104829

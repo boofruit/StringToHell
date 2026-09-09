@@ -1,64 +1,67 @@
-using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using UnityEngine;
 using StringToHell.InGame;
 
-public class WindVolumeController : MonoBehaviour
+public class PolygonZoneAudio : MonoBehaviour
 {
-    [Header("Zone")]
+    [SerializeField] private EventReference eventRef;
     [SerializeField] private PolygonCollider2D zone;
-
-    [Header("Listener")]
     [SerializeField] private Transform listener;
 
-    [Header("Audio")]
-    [SerializeField] private EventReference audioEvent;
-
-    [Header("Fade")]
     [SerializeField] private float fadeDistance = 10f;
 
     Wind wind;
 
     private EventInstance instance;
 
-    private void Start()
+    // Your gameplay volume
+    private float baseVolume = 1f;
+
+    void Start()
     {
-        wind = GetComponent<Wind>();
-        instance = RuntimeManager.CreateInstance(audioEvent);
+        wind = GetComponentInChildren<Wind>();
+        instance = RuntimeManager.CreateInstance(eventRef);
         instance.start();
     }
 
-    private void Update()
+    void Update()
     {
-        Vector2 listenerPosition = listener.position;
-
-        // Closest point on/in the polygon
-        Vector2 closestPoint = zone.ClosestPoint(listenerPosition);
-
-        // Distance to polygon boundary
-        float distance = Vector2.Distance(listenerPosition, closestPoint);
-
-        // Inside the polygon = full volume
-        bool inside = zone.OverlapPoint(listenerPosition);
-
-        float volume;
-        float windSpeed = wind.WindForce;
-        if (inside)
-        {
-            volume = 1f;
-        }
-        else
-        {
-            // Fade from 1 -> 0 as we move away
-            volume = 1f - Mathf.Clamp01(distance / fadeDistance);
-        }
-
-        instance.setParameterByName("ZoneVolume", volume);
+        SetGameplayVolume();
+        UpdateZoneFade();
+        UpdateBaseVolume();
     }
 
-    private void OnDestroy()
+    void UpdateZoneFade()
     {
-       // instance.stop(STOP_MODE.IMMEDIATE);
+        Vector2 closest = zone.ClosestPoint(listener.position);
+
+        float distance = zone.OverlapPoint(listener.position)
+            ? 0f
+            : Vector2.Distance(listener.position, closest);
+
+        float zoneFade =
+            Mathf.Clamp01(distance / fadeDistance);
+
+        instance.setParameterByName("WindZoneFade", zoneFade);
+    }
+
+    void UpdateBaseVolume()
+    {
+        instance.setVolume(baseVolume);
+    }
+
+    public void SetGameplayVolume()
+    {
+        float volume = (wind.WindForce ) / 100; ;
+        
+        baseVolume = Mathf.Clamp01(volume);
+    }
+
+    void OnDestroy()
+    {
+        instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         instance.release();
     }
 }
+

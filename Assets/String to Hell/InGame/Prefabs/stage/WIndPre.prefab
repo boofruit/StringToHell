@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8407964398897608211}
   - component: {fileID: 5363940370072331690}
   - component: {fileID: 5683133471030491236}
+  - component: {fileID: 3003080039996664824}
   m_Layer: 11
   m_Name: WIndPre
   m_TagString: Wind
@@ -317,7 +318,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606100134514019595}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
@@ -341,6 +342,28 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &3003080039996664824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606100134514019595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840e562c13e6c70439282332dd9458f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WindVolumeController
+  eventRef:
+    Guid:
+      Data1: 100299915
+      Data2: 1323393784
+      Data3: -1605060180
+      Data4: -1771671723
+    Path: "event:/\u98A8\u304C\u5439\u304F1"
+  zone: {fileID: 7109403646770883919}
+  listener: {fileID: 0}
+  fadeDistance: 5
 --- !u!1 &2670690225043661880
 GameObject:
   m_ObjectHideFlags: 0
