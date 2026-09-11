@@ -30,11 +30,18 @@ namespace StringToHell.InGame
             {
                 spiderAnime.SetTrigger("Walk");
             }
-            if (spiderPosition.Clinging)
+            if (spiderPosition.Clinging && spiderPosition.Clingable)
             {
                 spiderAnime.SetBool("Cling", true);
             }
             else { spiderAnime.SetBool("Cling", false); }
+            if (spiderPosition.Clingable)
+            {
+                if (input.IsJump) {
+                    spiderAnime.SetBool("Cling", false);
+                    spiderAnime.Play("Idle");
+                    spiderAnime.Play("Jump"); }
+            }
         }
     }
 }

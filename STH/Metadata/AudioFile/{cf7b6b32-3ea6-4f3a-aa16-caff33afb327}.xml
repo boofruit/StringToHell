@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{cf7b6b32-3ea6-4f3a-aa16-caff33afb327}">
+		<property name="assetPath">
+			<value>風が吹く1.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>104.82938775510205</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{1b52c614-34e0-48c2-b550-f2f602f33f60}</destination>
+		</relationship>
+	</object>
+</objects>

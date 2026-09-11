@@ -363,7 +363,7 @@ MonoBehaviour:
     Path: "event:/\u98A8\u304C\u5439\u304F1"
   zone: {fileID: 7109403646770883919}
   listener: {fileID: 0}
-  fadeDistance: 5
+  fadeDistance: 10
 --- !u!1 &2670690225043661880
 GameObject:
   m_ObjectHideFlags: 0

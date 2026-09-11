@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{d1af5200-318f-439a-8015-78d1cbd3d457}">
+		<property name="name">
+			<value>WindZoneFade</value>
+		</property>
+		<relationship name="folder">
+			<destination>{3eb9600a-64fb-4c59-8028-ec44492de1e5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{de82e02b-dc7c-4d96-991c-e7089c859f81}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{de82e02b-dc7c-4d96-991c-e7089c859f81}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

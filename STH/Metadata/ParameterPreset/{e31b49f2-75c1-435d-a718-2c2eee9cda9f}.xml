@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{e31b49f2-75c1-435d-a718-2c2eee9cda9f}">
+		<property name="name">
+			<value>WindZoneVolume</value>
+		</property>
+		<relationship name="folder">
+			<destination>{3eb9600a-64fb-4c59-8028-ec44492de1e5}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{4c3aaca1-9889-448f-b402-104b4e45382e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{4c3aaca1-9889-448f-b402-104b4e45382e}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

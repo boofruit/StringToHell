@@ -242,7 +242,7 @@ Transform:
   m_GameObject: {fileID: 270846847886214258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.7, z: 0}
+  m_LocalPosition: {x: 0.39, y: 1.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -846,7 +846,7 @@ MonoBehaviour:
   frequency: 5
   dampingRatio: 0.8
   maxSegementsLength: 40
-  spacingMultiplier: 2
+  spacingMultiplier: 4
 --- !u!114 &1941679202362806241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1357,6 +1357,7 @@ GameObject:
   - component: {fileID: 948601872238663074}
   - component: {fileID: 756944173297297432}
   - component: {fileID: -5284251191680961632}
+  - component: {fileID: 3833911788575549233}
   m_Layer: 3
   m_Name: KumoKun
   m_TagString: Player
@@ -1420,8 +1421,8 @@ MonoBehaviour:
   airSpeed: 2
   jumpPower: 15
   divePower: 10
-  floatPower: 3
-  diveWindResistanceMultiplier: 0.2
+  floatPower: 10
+  diveWindResistanceMultiplier: 0.75
   pullStrength: 0
   iceSlipperiness: 0.5
   slingForce: 30
@@ -1787,6 +1788,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StringToHell.InGame.WindManager
   maxWindForce: 0
 --- !u!114 &-5284251191680961632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153542357159673093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
+--- !u!114 &3833911788575549233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3196,7 +3211,7 @@ SpringJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: 75
+  m_BreakForce: 100
   m_BreakTorque: Infinity
   m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 0
