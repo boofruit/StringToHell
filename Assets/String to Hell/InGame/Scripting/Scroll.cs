@@ -11,6 +11,7 @@ namespace StringToHell.InGame
         Vector2 dir;
         Transform camMove;
         [SerializeField] bool FollowVertical;
+        [SerializeField] bool FollowHorizontal;
         [SerializeField] float speed;
         bool onPlayer = false;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,7 +37,9 @@ namespace StringToHell.InGame
                 //camMove.Translate(dir.normalized * speed);
                 var dit = playerTf.position - tf.position;
                 var dity = FollowVertical ? dit.y : 0;
+                var horizontal = FollowHorizontal ? dit.x : 0;
                 dit.z = 0;
+                dit.x = horizontal;
                 dit.y = dity;
                 tf.Translate(dit * speed * Time.deltaTime);
             }

@@ -10,6 +10,8 @@ namespace StringToHell.InGame.GameManager
         Transform tf;
         Transform camTf;
         [SerializeField] bool FollowVertical = false;
+        [SerializeField] bool FollowHorizontal = false;
+        Vector3 LastPos = Vector3.zero;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -22,17 +24,33 @@ namespace StringToHell.InGame.GameManager
         void Update()
         {
             var pos = camTf.position;
-            pos.x = pos.x * Xrate;
-            if (FollowVertical)
+            if (LastPos == Vector3.zero)
             {
-                pos.y = pos.y * Yrate;
+                LastPos = pos;
+                return;
+            }
+            Vector2 dir = pos - LastPos;
+            if (!FollowHorizontal)
+            {
+                dir.x = 0;
             }
             else
             {
-                pos.y = 0;
+                dir.x = dir.x * Xrate;
             }
-            pos.z = 0;
-            tf.position = pos;
+           
+            if (FollowVertical)
+            {
+                dir.y = dir.y * Yrate;
+            }
+            else
+            {
+                dir.y = 0;
+            }
+           
+          
+            tf.Translate(dir);
+            LastPos = pos;
         }
     }
 }
