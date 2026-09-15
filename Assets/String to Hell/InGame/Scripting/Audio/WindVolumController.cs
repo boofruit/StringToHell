@@ -32,7 +32,6 @@ public class WindVolumeController : MonoBehaviour
        // if (listener == null) { listener = Camera.main.transform; }
     }
 
-
     public float GetStrength(Vector2 listenerPosition)
     {
         // Fully inside the polygon.
