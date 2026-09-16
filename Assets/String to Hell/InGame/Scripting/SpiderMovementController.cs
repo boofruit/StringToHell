@@ -10,6 +10,7 @@ namespace StringToHell.InGame
         IMovement movement;
         IMovementInput input;
         IVelocityController velocityController;
+        IAudioPlayer audioPlayer;
         //  [SerializeField, Tooltip("")]float rotationSpeedChangeRate = 10f;
         [SerializeField, Tooltip("how fast the spider moves on the ground")] float moveSpeed = 10f;
         [SerializeField, Tooltip("how fast the spider moves in the air")] public float airSpeed = 5f;
@@ -39,6 +40,7 @@ namespace StringToHell.InGame
             movement = GetComponent<IMovement>();
             input = GetComponent<IMovementInput>();
             velocityController = GetComponent<IVelocityController>();
+            audioPlayer = GetComponent<IAudioPlayer>();
             //CreateParameter();
         }
         // onValidate is a Unity-specific method that is called when the script is loaded or a value is changed in the Inspector,
@@ -60,6 +62,7 @@ namespace StringToHell.InGame
                 Debug.Log("Jumping");
                 float jumpCooldown = spiderPosition.CurrentTerrain.JumpCooldown;
                 movement.Jump(movement.JumpDirection(input.Move).normalized, jumpPower, iceSlipperiness, jumpCooldown);
+                audioPlayer.PlayJump();
                 if (!spiderPosition.Clinging && silk.LineConnected)
                 {
                     slingjumpQueued = true;
@@ -101,6 +104,7 @@ namespace StringToHell.InGame
                 if (silk.LineConnected)
                 {
                     silk.CalculateStrech(slingForce, minSlingTension, maxSlingForce);
+                   // audioPlayer.PlayStringStretch(silk.BungieForce);
                 }
 
 

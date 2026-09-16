@@ -7,6 +7,7 @@ namespace StringToHell.InGame.GameManager
 {
     public class CheckPointController : MonoBehaviour
     {
+        IAudioPlayer audioPlayer;
         IVelocityController velocityController;
         [SerializeField, Tooltip("")] string[] CheckpointTags;
         [SerializeField, Tooltip("")] string[] ReloadTags;
@@ -20,6 +21,7 @@ namespace StringToHell.InGame.GameManager
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            audioPlayer = GetComponent<IAudioPlayer>();
             animator = GetComponent<Animator>();
             tagC = GetComponent<TagCheck>();
             velocityController = GetComponent<IVelocityController>();
@@ -38,6 +40,7 @@ namespace StringToHell.InGame.GameManager
          IEnumerator Teleport()
         {
             animator.Play("Death");
+            audioPlayer.PlayDeath();
             // Wait for the transition to end
             yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
 

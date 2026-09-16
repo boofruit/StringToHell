@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 namespace StringToHell.InGame
@@ -12,6 +13,7 @@ namespace StringToHell.InGame
         IMovementInput input;
         IDirectionAndRotation RotationControls;
         IMovement movement;
+        IAudioPlayer audioPlayer;
         
         IVelocityController velocityController;
         
@@ -25,6 +27,7 @@ namespace StringToHell.InGame
         bool stringCooldown = false;
         private void Awake()
         {
+            audioPlayer = GetComponent<IAudioPlayer>();
             BaseSpring = GetComponent<SpringJoint2D>();
             BaseSpring.distance = segmentSpacing;
             BaseSpring.frequency = frequency;

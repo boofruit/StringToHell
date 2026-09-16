@@ -8,6 +8,7 @@ namespace StringToHell.InGame
         bool Tugging { get; }
         Vector2 SlingDirection { get; }
         bool IsUnwinding { get; }
+        float BungieForce { get; }
 
         void AddSegment(int maxSegementsLength, float frequency, float dampingRatio, float spacingMultiplier);
         void BungieSling();

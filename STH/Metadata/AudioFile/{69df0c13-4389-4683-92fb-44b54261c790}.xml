@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{69df0c13-4389-4683-92fb-44b54261c790}">
+		<property name="assetPath">
+			<value>吹雪.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>23.823673469387757</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{1b52c614-34e0-48c2-b550-f2f602f33f60}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -15,6 +15,7 @@ namespace StringToHell.InGame
         IDirectionAndRotation dR;
         IUnwindSilk silk;
         IMovement mC;
+        IAudioPlayer audioPlayer;
         TagCheck tagC;
 
         Rigidbody2D rb;
@@ -85,6 +86,7 @@ namespace StringToHell.InGame
             mC = GetComponent<IMovement>();
             dR = GetComponent<IDirectionAndRotation>();
             silk = GetComponentInChildren<IUnwindSilk>();
+            audioPlayer = GetComponent<IAudioPlayer>();
         }
         void Update()
         {
@@ -134,6 +136,10 @@ namespace StringToHell.InGame
             }
             if (tagC.CheckTags(wallTags, entering.tag))
             {
+                if (!Grounded)
+                {
+                    audioPlayer.PlayLand();
+                }
                 terrain = entering.GetComponent<ITerrain>();
                 if (AutoCling)
                 {
@@ -232,6 +238,7 @@ namespace StringToHell.InGame
 
             if (touching.layer == LayerMask.NameToLayer("Ground"))
             {
+                
                 float dot = Vector2.Dot(collision.GetContact(0).normal, rb.linearVelocity);
                 //if (WhenPlayerLeave(surfaceNormal))
                 //{
@@ -273,6 +280,7 @@ namespace StringToHell.InGame
             //Debug.Log("Stay" + surfaceNormal);
 
             var touching = collision.gameObject;
+           
 
             if (tagC.CheckTags(wallTags, touching.tag))
             {

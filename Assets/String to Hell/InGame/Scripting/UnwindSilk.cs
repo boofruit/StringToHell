@@ -30,6 +30,7 @@ namespace StringToHell.InGame
         Vector2 slingDirection;
         public Vector2 SlingDirection => slingDirection;
         float bungieForce;
+        public float BungieForce => bungieForce;    
 
         void Start()
         {
