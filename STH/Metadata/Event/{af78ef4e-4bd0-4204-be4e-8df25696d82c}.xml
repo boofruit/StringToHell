@@ -42,7 +42,6 @@
 	</object>
 	<object class="MasterTrack" id="{ac24b4d8-7fe3-4ef5-b510-44f937c98f59}">
 		<relationship name="modules">
-			<destination>{fddfddd9-af1e-4cf8-a54e-f750a2ed63a1}</destination>
 			<destination>{d0e0e551-8283-4d38-ad33-d79d383b29d4}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
@@ -63,9 +62,9 @@
 	<object class="EventAutomatableProperties" id="{e1b57eeb-3e90-484e-b06e-16f99b57888b}" />
 	<object class="MarkerTrack" id="{7a976d2b-2f92-4d8a-b711-d997641c1e3c}" />
 	<object class="Timeline" id="{97ba1819-d708-49bc-bca5-2a893d699bdb}">
-		<relationship name="modules">
-			<destination>{fddfddd9-af1e-4cf8-a54e-f750a2ed63a1}</destination>
-		</relationship>
+		<property name="isProxyEnabled">
+			<value>false</value>
+		</property>
 	</object>
 	<object class="ActionSheet" id="{5ad1b321-bfc9-4117-a77a-c7efc598ad9c}">
 		<relationship name="modules">
@@ -81,14 +80,6 @@
 		</relationship>
 		<relationship name="mixer">
 			<destination>{58b5b206-316a-4761-b156-e160e346b1d1}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{fddfddd9-af1e-4cf8-a54e-f750a2ed63a1}">
-		<property name="length">
-			<value>0.32031746031746033</value>
-		</property>
-		<relationship name="audioFile">
-			<destination>{039cde5e-9f3c-4c69-913d-461b3ea11cf0}</destination>
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{d0e0e551-8283-4d38-ad33-d79d383b29d4}">
