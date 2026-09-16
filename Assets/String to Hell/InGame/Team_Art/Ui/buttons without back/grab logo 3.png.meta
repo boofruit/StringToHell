@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1c8891e2ddb4c4243beff02af7183ac0
+guid: 1c2bb03f35bd67e4388b594ab75cabe1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4881460760840674789
-    second: mori_jungle_0
+      213: 8139251014874432816
+    second: grab logo 3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 38
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mori_jungle_0
+      name: grab logo 3_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 8
-        width: 383
-        height: 384
+        x: 51
+        y: 59
+        width: 297
+        height: 297
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b1265151d41914cb0800000000000000
-      internalID: -4881460760840674789
+      spriteID: 0350457acad64f070800000000000000
+      internalID: 8139251014874432816
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mori_jungle_0: -4881460760840674789
+      grab logo 3_0: 8139251014874432816
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

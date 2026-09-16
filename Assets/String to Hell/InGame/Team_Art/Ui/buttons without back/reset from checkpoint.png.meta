@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: 644eee38a39eea64690595d828eda2be
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 595296606008320140
+    second: reset from checkpoint_0
+  - first:
+      213: -4437443406981851641
+    second: reset from checkpoint_1
+  - first:
+      213: 7782628208756954935
+    second: reset from checkpoint_2
+  - first:
+      213: 287221841208057693
+    second: reset from checkpoint_3
+  - first:
+      213: -3991322688187095044
+    second: reset from checkpoint_4
+  - first:
+      213: -2486789051133701535
+    second: reset from checkpoint_5
+  - first:
+      213: -7190446607149149865
+    second: reset from checkpoint_6
+  - first:
+      213: 8555674568930227490
+    second: reset from checkpoint_7
+  - first:
+      213: -2611883084377524577
+    second: reset from checkpoint_8
+  - first:
+      213: 6320671421355244199
+    second: reset from checkpoint_9
+  - first:
+      213: 7523202081292606373
+    second: reset from checkpoint_10
+  - first:
+      213: -3462995166091891108
+    second: reset from checkpoint_11
+  - first:
+      213: -1408735034770932279
+    second: reset from checkpoint_12
+  - first:
+      213: -4437150587851727164
+    second: reset from checkpoint_13
+  - first:
+      213: 8431196452609289943
+    second: reset from checkpoint_14
+  - first:
+      213: -7869948162373067974
+    second: reset from checkpoint_15
+  - first:
+      213: -9053837612445686059
+    second: reset from checkpoint_16
+  - first:
+      213: 925409324425914437
+    second: reset from checkpoint_17
+  - first:
+      213: 3836675496677290627
+    second: reset from checkpoint_18
+  - first:
+      213: 7982885885078233104
+    second: reset from checkpoint_19
+  - first:
+      213: 8271325113472699781
+    second: reset from checkpoint_20
+  - first:
+      213: 7962200088366602642
+    second: reset from checkpoint_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: reset from checkpoint_0
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 76
+        width: 76
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c802f11fb1be24800800000000000000
+      internalID: 595296606008320140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_1
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 113
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70692ff5bb80b62c0800000000000000
+      internalID: -4437443406981851641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_2
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 113
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73794e92f13710c60800000000000000
+      internalID: 7782628208756954935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_3
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 113
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5f90f82eba6cf300800000000000000
+      internalID: 287221841208057693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_4
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 113
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf7a6aa7929fb98c0800000000000000
+      internalID: -3991322688187095044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_5
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 113
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16258d798862d7dd0800000000000000
+      internalID: -2486789051133701535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_6
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 76
+        width: 76
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 751567c48e6663c90800000000000000
+      internalID: -7190446607149149865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_7
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 64
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 225fde6c0bcdbb670800000000000000
+      internalID: 8555674568930227490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_8
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 64
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9673d05c2ab0cbd0800000000000000
+      internalID: -2611883084377524577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_9
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 64
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7aab7db5b2987b750800000000000000
+      internalID: 6320671421355244199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_10
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 64
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5abdcecee68c76860800000000000000
+      internalID: 7523202081292606373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_11
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 92
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ea2328e38f0ffc0800000000000000
+      internalID: -3462995166091891108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_12
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 64
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cdb4dd13fa237ce0800000000000000
+      internalID: -1408735034770932279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_13
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 64
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ce9e24ac031c62c0800000000000000
+      internalID: -4437150587851727164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_14
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 64
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7de6f45d080a10570800000000000000
+      internalID: 8431196452609289943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_15
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 64
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3bd305d7d358c290800000000000000
+      internalID: -7869948162373067974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_16
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 64
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d6aa1829ae4a5280800000000000000
+      internalID: -9053837612445686059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_17
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 64
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 548ad36a0e6b7dc00800000000000000
+      internalID: 925409324425914437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_18
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 56
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38235e1690c9e3530800000000000000
+      internalID: 3836675496677290627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_19
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 64
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0106196da68e8ce60800000000000000
+      internalID: 7982885885078233104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_20
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 64
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58dce4a0e56a9c270800000000000000
+      internalID: 8271325113472699781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reset from checkpoint_21
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 64
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 299dca97bca6f7e60800000000000000
+      internalID: 7962200088366602642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      reset from checkpoint_0: 595296606008320140
+      reset from checkpoint_1: -4437443406981851641
+      reset from checkpoint_10: 7523202081292606373
+      reset from checkpoint_11: -3462995166091891108
+      reset from checkpoint_12: -1408735034770932279
+      reset from checkpoint_13: -4437150587851727164
+      reset from checkpoint_14: 8431196452609289943
+      reset from checkpoint_15: -7869948162373067974
+      reset from checkpoint_16: -9053837612445686059
+      reset from checkpoint_17: 925409324425914437
+      reset from checkpoint_18: 3836675496677290627
+      reset from checkpoint_19: 7982885885078233104
+      reset from checkpoint_2: 7782628208756954935
+      reset from checkpoint_20: 8271325113472699781
+      reset from checkpoint_21: 7962200088366602642
+      reset from checkpoint_3: 287221841208057693
+      reset from checkpoint_4: -3991322688187095044
+      reset from checkpoint_5: -2486789051133701535
+      reset from checkpoint_6: -7190446607149149865
+      reset from checkpoint_7: 8555674568930227490
+      reset from checkpoint_8: -2611883084377524577
+      reset from checkpoint_9: 6320671421355244199
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

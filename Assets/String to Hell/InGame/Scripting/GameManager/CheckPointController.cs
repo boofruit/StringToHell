@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 namespace StringToHell.InGame.GameManager
@@ -15,6 +16,7 @@ namespace StringToHell.InGame.GameManager
        
         public Vector3 checkPoint;
         [SerializeField] GameObject StartCheckpoint;
+        GameObject LastCheck;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -24,6 +26,8 @@ namespace StringToHell.InGame.GameManager
             if (checkPoint == Vector3.zero)
             {
                 checkPoint = StartCheckpoint.transform.position;
+                StartCheckpoint.GetComponentInChildren<Light2D>().enabled = true;
+                LastCheck = StartCheckpoint;
             }
         }
 
@@ -72,7 +76,12 @@ namespace StringToHell.InGame.GameManager
             {
                 checkPoint = onEnter.transform.position;
                 Debug.Log("Checkpoint Reached: " + checkPoint);
-
+                if(onEnter != LastCheck)
+                {
+                    onEnter.GetComponentInChildren<Light2D>().enabled = true;
+                    LastCheck.GetComponentInChildren<Light2D>().enabled = false;
+                    LastCheck = onEnter;
+                }
                 //var reloads = FindObjectsByType<Reload>(FindObjectsSortMode.None); foreach (var r in reloads) { r.checkPoint = gameObject; }
             }
             if (tagC.CheckTags( ReloadTags, onEnter.tag))

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 40514ed0997565d40bedc7215b05649c
+guid: 064ae7454779bf149a1de148aaf4c418
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3325931428025640989
-    second: koori_ice_0
+      213: 3614232840825984050
+    second: arrow ui 2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: koori_ice_0
+      name: arrow ui 2_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 18
-        width: 388
-        height: 296
+        x: 48
+        y: 0
+        width: 98
+        height: 116
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d18a6c22305182e20800000000000000
-      internalID: 3325931428025640989
+      spriteID: 234dbf4ae95582230800000000000000
+      internalID: 3614232840825984050
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      koori_ice_0: 3325931428025640989
+      arrow ui 2_0: 3614232840825984050
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
