@@ -137,7 +137,7 @@ MonoBehaviour:
   - {fileID: 5466649565325351066}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -157,7 +157,7 @@ MonoBehaviour:
   Path: STH/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639251727171892308
+  lastModified: 639265488961141766
   FileSizes:
   - Name: Desktop
     Value: 1386
@@ -283,7 +283,7 @@ MonoBehaviour:
   - {fileID: 5466649565325351066}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -451,7 +451,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -3370880642314839418}
   cacheVersion: 131860
-  cacheTime: 639251727171892308
+  cacheTime: 639265488961141766
   SerializableEventsDict:
   - key: event:/Player/StringStretch
     index: 0
@@ -624,10 +624,10 @@ MonoBehaviour:
   Path: STH/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639251727171846203
+  lastModified: 639265488961084584
   FileSizes:
   - Name: Desktop
-    Value: 7022240
+    Value: 7022496
   Exists: 1
 --- !u!114 &5539909643006355751
 MonoBehaviour:

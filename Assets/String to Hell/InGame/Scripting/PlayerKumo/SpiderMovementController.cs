@@ -55,6 +55,12 @@ namespace StringToHell.InGame
         //}
         private void FixedUpdate()
         {
+            //if (spiderPosition.Clingable)
+            //{
+            //    movement.WallMovement(input.Move, moveSpeed,
+            //        silk.LineConnected && spiderPosition.Clinging ||
+            //        spiderPosition.Puff && spiderPosition.Clinging ? pullStrength : 0);
+            //}
             // this took a lot of trial and error to get right, but it works now. The jump is queued in the Update method, and then executed
             // in FixedUpdate to ensure that it happens at the right time in the physics cycle.   
             if (jumpQueued)
@@ -77,7 +83,7 @@ namespace StringToHell.InGame
             if (diveQueued)
             {
                 movement.Dive(input.Move, spiderPosition.ForceDirection, divePower, diveWindResistanceMultiplier);
-                movement.Float(input.Move, spiderPosition.ForceDirection *-1, floatPower);
+                movement.Float(input.Move, spiderPosition.ForceDirection * -1, floatPower);
                 diveQueued = false;
             }
         }
@@ -95,7 +101,7 @@ namespace StringToHell.InGame
                 RotationControls.AirRotation();
                 movement.AirMovement(input.Move, airSpeed);
             }
-            if(spiderPosition.Clingable)
+            if (spiderPosition.Clingable)
             {
                 movement.WallMovement(input.Move, moveSpeed,
                     silk.LineConnected && spiderPosition.Clinging ||
@@ -104,7 +110,7 @@ namespace StringToHell.InGame
                 if (silk.LineConnected)
                 {
                     silk.CalculateStrech(slingForce, minSlingTension, maxSlingForce);
-                   // audioPlayer.PlayStringStretch(silk.BungieForce);
+                    // audioPlayer.PlayStringStretch(silk.BungieForce);
                 }
 
 

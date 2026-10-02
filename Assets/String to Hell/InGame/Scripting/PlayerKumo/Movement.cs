@@ -38,12 +38,15 @@ namespace StringToHell.InGame
             // Project input onto the surface plane
             Vector2 move = controllerInput - Vector2.Dot(controllerInput, spiderPosition.SurfaceNormal) * spiderPosition.SurfaceNormal;
             tf.Translate(move * moveSpeed * Time.deltaTime, moveMode);
+            //rb.MovePosition(rb.position + (move * moveSpeed * Time.fixedDeltaTime));
+          
         }
 
         public void AirMovement(Vector2 controllerInput, float airSpeed)
         {
             // Apply force only from input
             tf.Translate(controllerInput * airSpeed * Time.deltaTime, moveMode);
+            //rb.AddForce(controllerInput * airSpeed * Time.deltaTime, ForceMode2D.Force);
         }
 
         //public void AirDrag(float windResistanceMultiplier)
